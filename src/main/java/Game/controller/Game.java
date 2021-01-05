@@ -1,13 +1,13 @@
 package Game.controller;
 
 import Game.Model.*;
-import Game.View.JuniorGui;
+import Game.View.MatadorGui;
 
 
 
 public class Game {
 
-    private final Player[] player = new Player[4];
+    private final Player[] player = new Player[6];
     boolean isWinnerWinnerChickenDinner = false;
     private int temporary;
     private int balanceid;
@@ -27,32 +27,32 @@ public class Game {
 
 
         Cards cards = new Cards();
-        JuniorGui juniorGui = new JuniorGui();
-        Die die = new Die(6);
+        MatadorGui matadorGUI = new MatadorGui();
+        Dices dices = new Dices();
 
 
         Menu menu = new Menu();
-        juniorGui.createGui();
-        menu.startGame(juniorGui);
+        matadorGUI.createGui();
+        menu.startGame(matadorGUI);
         Fieldproperties properties = new Fieldproperties();
 
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
             player[i] = new Player(menu.playernamesToString()[i]);
             player[i].starterScore(menu.getPlayerAmount());
-            juniorGui.guiPlayers(player[i].playerString(), player[i].playerBalance(), i);
+            matadorGUI.guiPlayers(player[i].playerString(), player[i].playerBalance(), i);
         }
 
         while (!isWinnerWinnerChickenDinner) {
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
-                juniorGui.gui.getUserButtonPressed("Det er " + player[i].playerString() + "'s tur","Slå terning");
-                die.roll();
-                juniorGui.ShowDie(die.getValue());
+                matadorGUI.gui.getUserButtonPressed("Det er " + player[i].playerString() + "'s tur","Slå terning");
+                dices.roll();
+                matadorGUI.ShowDie(dices.Die1(), dices.Die2());
 
                 //checks if the player is in prison and releases him if he is.
                 player[i].releaseFromPrison(player[i].isInPrison());
                 //Moves the car on the GUI and checks if player is over start.
-                juniorGui.moveCars(i, player[i].currentPosition(), player[i].updatePosition(die.getValue()));
+                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
 
                 //Checks if player has landed on a chancecard field.
                 if(player[i].currentPosition()==3 ||player[i].currentPosition()==9||player[i].currentPosition()==15||player[i].currentPosition()==21){
@@ -60,41 +60,41 @@ public class Game {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
                         cards.CardPick();
-                        juniorGui.displayCard(cards.cardToString());
-                        juniorGui.gui.getUserButtonPressed(cards.cardToString(),"ok");
+                        matadorGUI.displayCard(cards.cardToString());
+                        matadorGUI.gui.getUserButtonPressed(cards.cardToString(),"ok");
 
                         if (cards.isHasExtraMoves()) {
-                            juniorGui.moveCars(i, player[i].currentPosition(), player[i].updatePosition(cards.move()));
-                            juniorGui.updateGuiBalance(i, player[i].playerBalance());
+                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(cards.move()));
+                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
                         }
 
                         if (cards.isHasintOptions()) {
-                            juniorGui.moveCars(i, player[i].currentPosition(), player[i].updatePosition(juniorGui.getIntSelection(cards.cardToString(), cards.min(), cards.max())));
+                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(matadorGUI.getIntSelection(cards.cardToString(), cards.min(), cards.max())));
                         }
                         player[i].playerBalanceUpdate(cards.extraMoney());
-                        juniorGui.updateGuiBalance(i, player[i].playerBalance());
+                        matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         if (cards.isHasPrisonCard()) {
                             player[i].updatePrisonCard(true);
                         }
                         if (cards.isHasBirthday()) {
                             for (int y = 0; y <= menu.getPlayerAmount() - 1; y++) {
                                 player[y].playerBalanceUpdate(-1);
-                                juniorGui.updateGuiBalance(y, player[y].playerBalance());
+                                matadorGUI.updateGuiBalance(y, player[y].playerBalance());
                             }
                             player[i].playerBalanceUpdate(menu.getPlayerAmount());
-                            juniorGui.updateGuiBalance(i, player[i].playerBalance());
+                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
                         if (cards.isHasStringOptions()) {
-                            juniorGui.moveCars(i, player[i].currentPosition(), player[i].setPosition(juniorGui.getStringSelection(cards.getPossibleFields())));
-                            juniorGui.updateGuiBalance(i, player[i].playerBalance());
+                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].setPosition(matadorGUI.getStringSelection(cards.getPossibleFields())));
+                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
                         if (cards.isMoveOrCard()) {
-                            if (juniorGui.getMoveOrCard() == 1)
+                            if (matadorGUI.getMoveOrCard() == 1)
                                 cards.setDrawAnother(true);
                             else {
                                 cards.setDrawAnother(false);
-                                juniorGui.moveCars(i,player[i].currentPosition(),player[i].setPosition(player[i].updatePosition(1)));
+                                matadorGUI.moveCars(i,player[i].currentPosition(),player[i].setPosition(player[i].updatePosition(1)));
                             }
                             cards.resetStats();
                         }
@@ -124,18 +124,18 @@ public class Game {
                         //Pays rent if a field is owned
                         if (properties.getOwnedFields()[player[i].currentPosition()] != 0) {
                             player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(properties.getValue());
-                            juniorGui.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
+                            matadorGUI.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
                         }
                     }
-                    juniorGui.updateGuiBalance(i, player[i].playerBalance());
+                    matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
-                    juniorGui.landOnField(i, player[i].currentPosition(), player[i].playerString(), properties.getOwningStatus(), properties.getOwnedFields());
+                    matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), properties.getOwningStatus(), properties.getOwnedFields());
 
                     properties.setOwnedFields(properties.getOwnedFields(), player[i].currentPosition(), i);
 
 
                 if (properties.isInPrison()) {
-                    juniorGui.moveToPrison(i,player[i].currentPosition());
+                    matadorGUI.moveToPrison(i,player[i].currentPosition());
                     player[i].setInPrison();
                     properties.resetPrisonStatus();
                 }
@@ -160,7 +160,7 @@ public class Game {
                             }
                                 balanceid+=1;
                         }
-                            juniorGui.showMessage("Vinderen er: " + player[finalbalanceid].playerString() + " med " + player[finalbalanceid].playerBalance() + " penge");
+                            matadorGUI.showMessage("Vinderen er: " + player[finalbalanceid].playerString() + " med " + player[finalbalanceid].playerBalance() + " penge");
                         isWinnerWinnerChickenDinner = true;
                         break;
                 }

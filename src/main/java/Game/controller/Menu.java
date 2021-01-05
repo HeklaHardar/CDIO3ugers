@@ -1,20 +1,20 @@
-package Game.Model;
+package Game.controller;
 
-import Game.View.JuniorGui;
+import Game.View.MatadorGui;
 
 public class Menu {
 
     // Defines variables and scanner
-    private final String[] Players = new String[4];
+    private final String[] Players = new String[6];
 
     private int playerNumber;
 
-    public void startGame(JuniorGui juniorGui) {
+    public void startGame(MatadorGui juniorGui) {
         while (true) {
             // Input number of players
                playerNumber = juniorGui.gui.getUserInteger("Velkommen til spillet! \n" +
                     "Indtast antallet af spillere");
-            if (playerNumber <= 4 && playerNumber >= 2)
+            if (playerNumber <= 6 && playerNumber >= 2)
                 break;
             else
                 juniorGui.gui.showMessage("ugyldig antal spillere");

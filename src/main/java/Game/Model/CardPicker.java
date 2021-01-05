@@ -1,6 +1,6 @@
 package Game.Model;
 
-import Game.View.JuniorGui;
+import Game.View.MatadorGui;
 
 public class CardPicker {
 

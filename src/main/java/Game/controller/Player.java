@@ -1,4 +1,6 @@
-package Game.Model;
+package Game.controller;
+
+import Game.Model.Account;
 
 public class Player {
 

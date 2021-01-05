@@ -5,25 +5,26 @@ import gui_main.GUI;
 
 import java.awt.*;
 
-public class JuniorGui {
+public class MatadorGui {
    // private static JuniorGui instance;
     //private int playerNumber = 0;
     private int temp = 0;
     private int playerCount = 0;
     public GUI gui;
     private GUI_Field[] fields = new GUI_Field[24];
-    private GUI_Player[] player = new GUI_Player[4];
-    private GUI_Car[] car = new GUI_Car[4];
+    private GUI_Player[] player = new GUI_Player[6];
+    private GUI_Car[] car = new GUI_Car[6];
     private int moves;
-    private Color[] colors = {Color.black, new Color(175, 4, 182),new Color(255, 255, 255),new Color(139, 33, 33)};
-    private GUI_Car.Type[] type = {GUI_Car.Type.CAR, GUI_Car.Type.RACECAR, GUI_Car.Type.UFO, GUI_Car.Type.TRACTOR};
+    private Color[] colors = {Color.black, new Color(175, 4, 182),new Color(255, 255, 255),new Color(139, 33, 33),new Color(0, 255, 0),new Color(0, 255, 225)};
+    private GUI_Car.Type[] type = {GUI_Car.Type.CAR, GUI_Car.Type.RACECAR, GUI_Car.Type.UFO, GUI_Car.Type.TRACTOR,GUI_Car.Type.CAR,GUI_Car.Type.RACECAR};
     GUI_Ownable o = (GUI_Ownable) fields[5];
     private String stringChoice;
     private String[] fieldTitles = {"Burgerbaren","Pizzariaet","","Slikbutikken","Iskiosken","","Museet","Biblioteket","","Skaterparken",
             "Svømmingpoolen","", "Spillehallen", "Biografen","","Legetøjsbutikken","Dyrehandlen","","Bowlinghallen","Zoo","","Vandlandet","Strandpromenaden",""};
 
 
-    public JuniorGui(){
+    public MatadorGui(){
+
             // Laver array
             //GUI_Field[] fields = new GUI_Field[24];
             Color[] fieldColors = {Color.GREEN,Color.BLUE,Color.PINK,Color.YELLOW,Color.RED, Color.cyan, new Color(34,139,34), Color.ORANGE};
@@ -127,8 +128,8 @@ public class JuniorGui {
 
         }
 
-    public void ShowDie(int DieGui){
-        gui.setDie(DieGui);
+    public void ShowDie(int DieGui, int Die2Gui){
+        gui.setDice(DieGui, Die2Gui);
     }
 
     public void moveCars(int currentPlayer,int currentPosition, int newPosition){
