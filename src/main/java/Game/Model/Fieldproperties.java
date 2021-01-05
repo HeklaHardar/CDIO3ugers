@@ -109,7 +109,7 @@ public class Fieldproperties {
         return owningStatus;
     }
 
-    /* hej */
+
 
     public boolean isInPrison() {
         return inPrison;
