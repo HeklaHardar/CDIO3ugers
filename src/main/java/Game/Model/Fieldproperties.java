@@ -3,8 +3,10 @@ package Game.Model;
 public class Fieldproperties {
     private int value;
     private int owningStatus = 1;
-    private int[] ownedFields = new int[24];
+    private int[] ownedFields = new int[39];
     private String[] fieldColors = {"","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
+            "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
+            "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
             "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue"};
     private String color;
     private boolean inPrison = false;
@@ -17,7 +19,7 @@ public class Fieldproperties {
             case 1:
             case 2:
                 this.value = 1;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Green";
 
                 break;
@@ -32,7 +34,7 @@ public class Fieldproperties {
             case 4:
             case 5:
                 this.value = 1;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Cyan";
                 break;
             case 6:
@@ -44,25 +46,25 @@ public class Fieldproperties {
             case 7:
             case 8:
                 this.value = 2;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Pink";
                 break;
             case 10:
             case 11:
                 this.value = 2;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Orange";
                 break;
             case 13:
             case 14:
                 this.value = 3;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Red";
                 break;
             case 16:
             case 17:
                 this.value = 3;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Yellow";
                 break;
             case 18:
@@ -73,16 +75,17 @@ public class Fieldproperties {
             case 19:
             case 20:
                 this.value = 4;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "DarkGreen";
                 break;
             case 22:
             case 23:
                 this.value = 5;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Blue";
                 break;
-
+            default:
+                this.owningStatus=3;
 
         }
 
@@ -90,7 +93,7 @@ public class Fieldproperties {
 
     }
     public int calculateValue(int position) {
-        for (int i=0 ; i <= 23; i++){
+        for (int i=0 ; i <= 38; i++){
             if((i!=position) && fieldColors[i] == fieldColors[position] && (ownedFields[i] == ownedFields[position] && ownedFields[i]!=0)){
                     value = value*2;
             }
