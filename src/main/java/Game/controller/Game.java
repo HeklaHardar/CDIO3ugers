@@ -2,6 +2,7 @@ package Game.controller;
 
 import Game.Model.*;
 import Game.View.MatadorGui;
+import gui_main.*;
 
 
 
@@ -13,8 +14,9 @@ public class Game {
     private int balanceid;
     private int finalbalanceid;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //Instantiating game object
+
         Game game = new Game();
 
         //plays the game
@@ -23,7 +25,7 @@ public class Game {
     }
 
 
-    public void Game() {
+    public void Game() throws InterruptedException {
 
 
         Cards cards = new Cards();
@@ -45,7 +47,7 @@ public class Game {
 
         while (!isWinnerWinnerChickenDinner) {
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
-                matadorGUI.gui.getUserButtonPressed("Det er " + player[i].playerString() + "'s tur","Slå terning");
+                matadorGUI.gui.getUserButtonPressed("Det er " + player[i].playerString() + "'s tur", "Slå terning");
                 dices.roll();
                 matadorGUI.ShowDie(dices.Die1(), dices.Die2());
 
@@ -55,13 +57,13 @@ public class Game {
                 matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
 
                 //Checks if player has landed on a chancecard field.
-                if(player[i].currentPosition()==3 ||player[i].currentPosition()==9||player[i].currentPosition()==15||player[i].currentPosition()==21){
-                    while(true) {
+                if (player[i].currentPosition() == 2000 /* Change this value */) {
+                    while (true) {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
                         cards.CardPick();
                         matadorGUI.displayCard(cards.cardToString());
-                        matadorGUI.gui.getUserButtonPressed(cards.cardToString(),"ok");
+                        matadorGUI.gui.getUserButtonPressed(cards.cardToString(), "ok");
 
                         if (cards.isHasExtraMoves()) {
                             matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(cards.move()));
@@ -69,9 +71,7 @@ public class Game {
 
                         }
 
-                        if (cards.isHasintOptions()) {
-                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(matadorGUI.getIntSelection(cards.cardToString(), cards.min(), cards.max())));
-                        }
+
                         player[i].playerBalanceUpdate(cards.extraMoney());
                         matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         if (cards.isHasPrisonCard()) {
@@ -85,30 +85,17 @@ public class Game {
                             player[i].playerBalanceUpdate(menu.getPlayerAmount());
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
-                        if (cards.isHasStringOptions()) {
-                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].setPosition(matadorGUI.getStringSelection(cards.getPossibleFields())));
-                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                        }
-                        if (cards.isMoveOrCard()) {
-                            if (matadorGUI.getMoveOrCard() == 1)
-                                cards.setDrawAnother(true);
-                            else {
-                                cards.setDrawAnother(false);
-                                matadorGUI.moveCars(i,player[i].currentPosition(),player[i].setPosition(player[i].updatePosition(1)));
-                            }
-                            cards.resetStats();
-                        }
-                        //Checks if player has chosen to draw another card, if so reruns the loop
-                        if(cards.isDrawAnother()) {
 
-                            cards.setDrawAnother(false);
-                        }
-                        else
-                            break;
 
+                        cards.resetStats();
                     }
-                    cards.resetStats();
+
+
+
+
                 }
+                cards.resetStats();
+
 
 
                     //Checks the properties of the field that the player landed on
