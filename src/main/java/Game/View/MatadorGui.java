@@ -11,7 +11,7 @@ public class MatadorGui {
     private int temp = 0;
     private int playerCount = 0;
     public GUI gui;
-    private GUI_Field[] fields = new GUI_Field[24];
+    private GUI_Field[] fields = new GUI_Field[40];
     private GUI_Player[] player = new GUI_Player[6];
     private GUI_Car[] car = new GUI_Car[6];
     private int moves;
@@ -19,8 +19,9 @@ public class MatadorGui {
     private GUI_Car.Type[] type = {GUI_Car.Type.CAR, GUI_Car.Type.RACECAR, GUI_Car.Type.UFO, GUI_Car.Type.TRACTOR,GUI_Car.Type.CAR,GUI_Car.Type.RACECAR};
     GUI_Ownable o = (GUI_Ownable) fields[5];
     private String stringChoice;
-    private String[] fieldTitles = {"Burgerbaren","Pizzariaet","","Slikbutikken","Iskiosken","","Museet","Biblioteket","","Skaterparken",
-            "Svømmingpoolen","", "Spillehallen", "Biografen","","Legetøjsbutikken","Dyrehandlen","","Bowlinghallen","Zoo","","Vandlandet","Strandpromenaden",""};
+    private String[] fieldTitles = {"Rødovrevej","","Hvidovre","","Øresund A/S","Roskildevej","","Valby \n Langgade","Allégade","", "Frederiksberg \n Allé", "Tuborg",
+            "Bülowsvej", "Gl. Kongevej", "D. F. D. S.", "Bernstoffsvej", "", "Hellerupvej", "Strandvej", "Helle", "Trianglen", "", "Østerbrogade", "Grønningen", "Y. K.",
+            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S \n Bornholm 1866", "", "Frederiksberggade", "", "Rådhuspladsen"};
 
 
     public MatadorGui(){
@@ -34,26 +35,61 @@ public class MatadorGui {
 
 
         // Fylder resten af feltenre ud med veje
-            for( int i=1; i<24; i++) {
-                if (i == 3 || i == 9 || i == 15 || i == 21) {
+            for( int i=1; i<40; i++) {
+                if (i == 2 || i == 7 || i == 17 || i == 22 || i == 33 || i == 36) {
                     fields[i] = new GUI_Chance();
                     fields[i].setDescription("Træk et chancekort");
                 }
-                else if(i==6){
+                else if(i==4){
+                    fields[i] = new GUI_Tax();
+                    fields[i].setTitle("Betal indkomstskat \n 10% eller 200 kr.");
+                    fields[i].setDescription("Betal indkomstskat \n 10% eller 200 kr.");
+                }
+                else if(i==5){
+                    fields[i] = new GUI_Shipping();
+                    fields[i].setTitle(fieldTitles[i - 1]);
+                    fields[i].setSubText("");
+                    fields[i].setDescription(fieldTitles[i-1]);
+                }
+                else if(i==10){
                     fields[i] = new GUI_Jail();
-                    fields[i].setSubText("På besøg");
-                    fields[i].setDescription("På besøg");
+                    fields[i].setSubText("Fængsel");
+                    fields[i].setDescription("Fængsel");
                 }
-                else if(i==12) {
+                else if(i==20) {
                     fields[i] = new GUI_Refuge();
-                    fields[i].setTitle("Gratis parkering");
-                    fields[i].setSubText("Gratis parkering");
-                    fields[i].setDescription("Slap af for en tur");
+                    fields[i].setTitle(fieldTitles[i - 1]);
+                    fields[i].setSubText(fieldTitles[i - 1]);
+                    fields[i].setDescription(fieldTitles[i - 1]);
                 }
-                else if(i==18){
+                else if(i==15) {
+                    fields[i] = new GUI_Shipping();
+                    fields[i].setTitle(fieldTitles[i - 1]);
+                    fields[i].setSubText("");
+                    fields[i].setDescription(fieldTitles[i - 1]);
+                }
+                else if(i==25) {
+                    fields[i] = new GUI_Shipping();
+                    fields[i].setTitle(fieldTitles[i - 1]);
+                    fields[i].setSubText("");
+                    fields[i].setDescription(fieldTitles[i - 1]);
+                }
+                else if(i==30){
                     fields[i] = new GUI_Jail();
                     fields[i].setSubText("Gå i fængsel");
                     fields[i].setDescription("Ryk i fængsel");
+                }
+                else if(i==35) {
+                    fields[i] = new GUI_Shipping();
+                    fields[i].setTitle(fieldTitles[i - 1]);
+                    fields[i].setSubText("");
+                    fields[i].setDescription(fieldTitles[i - 1]);
+                }
+                else if(i==38) {
+                    fields[i] = new GUI_Tax();
+                    fields[i].setTitle("Extraordinær \n statsskat \n betal 100 kr.");
+                    fields[i].setSubText("");
+                    fields[i].setDescription("Extraordinær \n statsskat \n betal 100 kr.");
                 }
                 else {
                     fields[i] = new GUI_Street(
@@ -65,17 +101,17 @@ public class MatadorGui {
                             Color.BLACK
                     );
                     fields[i].setTitle(fieldTitles[i-1]);
-                    if(3>i){
+                    if(i == 1 ||i == 3){
                         fields[i].setBackGroundColor(fieldColors[0]);
                         fields[i].setDescription(fieldTitles[i-1]);
                         fields[i].setSubText("Price: 1M");
                     }
-                    else if(3<i&i<6){
+                    else if(i == 6 || i == 8 || i == 9){
                         fields[i].setBackGroundColor(fieldColors[5]);
                         fields[i].setDescription(fieldTitles[i-1]);
                         fields[i].setSubText("Price: 1M");
                     }
-                    else if(6<i&i<9){
+                    else if(11<i&i<14){
                         fields[i].setBackGroundColor(fieldColors[2]);
                         fields[i].setDescription(fieldTitles[i-1]);
                         fields[i].setSubText("Price: 2M");
