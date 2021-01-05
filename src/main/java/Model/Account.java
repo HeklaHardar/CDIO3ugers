@@ -1,4 +1,4 @@
-package Game.Model;
+package Model;
 
 public class Account {
 

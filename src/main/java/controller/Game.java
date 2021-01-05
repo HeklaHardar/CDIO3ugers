@@ -1,4 +1,4 @@
-package Game.Controller;
+package controller;
 
 import Game.Model.*;
 import Game.View.JuniorGui;

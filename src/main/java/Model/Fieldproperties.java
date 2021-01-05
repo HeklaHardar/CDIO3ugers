@@ -1,4 +1,4 @@
-package Game.Model;
+package Model;
 
 public class Fieldproperties {
     private int value;
