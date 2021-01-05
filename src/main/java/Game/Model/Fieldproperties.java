@@ -17,7 +17,7 @@ public class Fieldproperties {
             case 1:
             case 2:
                 this.value = 1;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Green";
 
                 break;
@@ -32,7 +32,7 @@ public class Fieldproperties {
             case 4:
             case 5:
                 this.value = 1;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Cyan";
                 break;
             case 6:
@@ -44,25 +44,25 @@ public class Fieldproperties {
             case 7:
             case 8:
                 this.value = 2;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Pink";
                 break;
             case 10:
             case 11:
                 this.value = 2;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Orange";
                 break;
             case 13:
             case 14:
                 this.value = 3;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Red";
                 break;
             case 16:
             case 17:
                 this.value = 3;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Yellow";
                 break;
             case 18:
@@ -73,13 +73,13 @@ public class Fieldproperties {
             case 19:
             case 20:
                 this.value = 4;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "DarkGreen";
                 break;
             case 22:
             case 23:
                 this.value = 5;
-                this.owningStatus = 1;
+                this.owningStatus = 3;
                 this.color = "Blue";
                 break;
 
