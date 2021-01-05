@@ -1,5 +1,6 @@
 package Game.View;
 
+import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -20,15 +21,16 @@ public class MatadorGui {
     GUI_Ownable o = (GUI_Ownable) fields[5];
     private String stringChoice;
     private String[] fieldTitles = {"Rødovrevej","","Hvidovre","","Øresund A/S","Roskildevej","","Valby \n Langgade","Allégade","", "Frederiksberg \n Allé", "Tuborg",
-            "Bülowsvej", "Gl. Kongevej", "D. F. D. S.", "Bernstoffsvej", "", "Hellerupvej", "Strandvej", "Helle", "Trianglen", "", "Østerbrogade", "Grønningen", "Y. K.",
-            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S \n Bornholm 1866", "", "Frederiksberggade", "", "Rådhuspladsen"};
+            "Bülowsvej", "Gl. Kongevej", "D. F. D. S.", "Bernstoffsvej", "", "Hellerupvej", "Strandvej", "Helle", "Trianglen", "", "Østerbro-\ngade \n", "Grønningen", "Y. K.",
+            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S Bornholm 1866 \n", "", "Frederiks-\nberggade \n", "", "Rådhus-\npladsen \n"};
 
 
     public MatadorGui(){
 
             // Laver array
             //GUI_Field[] fields = new GUI_Field[24];
-            Color[] fieldColors = {Color.GREEN,Color.BLUE,Color.PINK,Color.YELLOW,Color.RED, Color.cyan, new Color(34,139,34), Color.ORANGE};
+            Color[] fieldColors = {new Color(0, 95, 167),new Color(159,59,23),new Color(130,111,4),
+                    new Color(104,105,91),new Color(145,49,43),new Color(176,156,135),new Color(252, 184, 27),new Color(109, 50, 144)};
 
             // Laver orange startfelt
             fields[0] = new GUI_Start("Start", "", "Her starter du", Color.ORANGE, Color.WHITE);
@@ -42,19 +44,25 @@ public class MatadorGui {
                 }
                 else if(i==4){
                     fields[i] = new GUI_Tax();
-                    fields[i].setTitle("Betal indkomstskat \n 10% eller 200 kr.");
+                    fields[i].setTitle("Betal indkomstskat");
+                    fields[i].setSubText("10% eller 200 kr.");
                     fields[i].setDescription("Betal indkomstskat \n 10% eller 200 kr.");
                 }
                 else if(i==5){
                     fields[i] = new GUI_Shipping();
                     fields[i].setTitle(fieldTitles[i - 1]);
-                    fields[i].setSubText("");
-                    fields[i].setDescription(fieldTitles[i-1]);
+                    fields[i].setSubText("Pris: 200 kr.");
+                    fields[i].setDescription(fieldTitles[i - 1] + "\n Pris: 200 kr.");
                 }
                 else if(i==10){
                     fields[i] = new GUI_Jail();
                     fields[i].setSubText("Fængsel");
                     fields[i].setDescription("Fængsel");
+                }
+                else if(i==12){
+                    fields[i] = new GUI_Brewery();
+                    fields[i].setTitle(fieldTitles[i - 1]);
+                    fields[i].setSubText("Pris: 150 kr.");
                 }
                 else if(i==20) {
                     fields[i] = new GUI_Refuge();
@@ -65,14 +73,19 @@ public class MatadorGui {
                 else if(i==15) {
                     fields[i] = new GUI_Shipping();
                     fields[i].setTitle(fieldTitles[i - 1]);
-                    fields[i].setSubText("");
-                    fields[i].setDescription(fieldTitles[i - 1]);
+                    fields[i].setSubText("Pris: 200 kr.");
+                    fields[i].setDescription(fieldTitles[i - 1] + "\n Pris: 200 kr.");
                 }
                 else if(i==25) {
                     fields[i] = new GUI_Shipping();
                     fields[i].setTitle(fieldTitles[i - 1]);
-                    fields[i].setSubText("");
-                    fields[i].setDescription(fieldTitles[i - 1]);
+                    fields[i].setSubText("Pris: 200 kr.");
+                    fields[i].setDescription(fieldTitles[i - 1] + "\n Pris: 200 kr.");
+                }
+                else if(i==28) {
+                    fields[i] = new GUI_Brewery();
+                    fields[i].setTitle(fieldTitles[i - 1]);
+                    fields[i].setSubText("Pris: 150 kr.");
                 }
                 else if(i==30){
                     fields[i] = new GUI_Jail();
@@ -82,13 +95,13 @@ public class MatadorGui {
                 else if(i==35) {
                     fields[i] = new GUI_Shipping();
                     fields[i].setTitle(fieldTitles[i - 1]);
-                    fields[i].setSubText("");
-                    fields[i].setDescription(fieldTitles[i - 1]);
+                    fields[i].setSubText("Pris: 200 kr.");
+                    fields[i].setDescription(fieldTitles[i - 1] + "\n Pris: 200 kr.");
                 }
                 else if(i==38) {
                     fields[i] = new GUI_Tax();
-                    fields[i].setTitle("Extraordinær \n statsskat \n betal 100 kr.");
-                    fields[i].setSubText("");
+                    fields[i].setTitle("Extraordinær \n statsskat");
+                    fields[i].setSubText("betal 100 kr.");
                     fields[i].setDescription("Extraordinær \n statsskat \n betal 100 kr.");
                 }
                 else {
@@ -97,52 +110,85 @@ public class MatadorGui {
                             "Price: " + (i * 50),
                             "This is a street",
                             "100",
-                            Color.PINK,
+                            Color.RED,
                             Color.BLACK
                     );
                     fields[i].setTitle(fieldTitles[i-1]);
                     if(i == 1 ||i == 3){
-                        fields[i].setBackGroundColor(fieldColors[0]);
+                    fields[i].setBackGroundColor(fieldColors[0]);
                         fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 1M");
+                        fields[i].setSubText("Pris: 60 kr.");
                     }
-                    else if(i == 6 || i == 8 || i == 9){
-                        fields[i].setBackGroundColor(fieldColors[5]);
-                        fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 1M");
-                    }
-                    else if(11<i&i<14){
-                        fields[i].setBackGroundColor(fieldColors[2]);
-                        fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 2M");
-                    }
-                    else if(9<i&i<12){
-                        fields[i].setBackGroundColor(fieldColors[7]);
-                        fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 2M");
-                    }
-                    else if(12<i&i<15){
-                        fields[i].setBackGroundColor(fieldColors[4]);
-                        fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 3M");
-                    }
-                    else if(15<i&i<18){
-                        fields[i].setBackGroundColor(fieldColors[3]);
-                        fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 3M");
-                    }
-                    else if(18<i&i<21){
-                        fields[i].setBackGroundColor(fieldColors[6]);
-                        fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 4M");
-                    }
-                    else if(21<i&i<24){
+                    else if(i == 6 || i == 8){
                         fields[i].setBackGroundColor(fieldColors[1]);
                         fields[i].setDescription(fieldTitles[i-1]);
-                        fields[i].setSubText("Price: 5M");
+                        fields[i].setSubText("Pris: 100 kr.");
+                    }
+                    else if(i == 9){
+                        fields[i].setBackGroundColor(fieldColors[1]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 120 kr.");
+                    }
+                    else if(i == 11 || i == 13){
+                        fields[i].setBackGroundColor(fieldColors[2]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 140 kr.");
+                    }
+                    else if(i == 14){
+                        fields[i].setBackGroundColor(fieldColors[2]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 160 kr.");
+                    }
+                    else if(i == 16 || i == 18){
+                        fields[i].setBackGroundColor(fieldColors[3]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 180 kr.");
+                    }
+                    else if(i == 19){
+                        fields[i].setBackGroundColor(fieldColors[3]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 200 kr.");
+                    }
+                    else if(i == 21 || i == 23){
+                        fields[i].setBackGroundColor(fieldColors[4]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 220 kr.");
+                    }
+                    else if(i == 24){
+                        fields[i].setBackGroundColor(fieldColors[4]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 240 kr.");
+                    }
+                    else if(i == 26 || i == 27){
+                        fields[i].setBackGroundColor(fieldColors[5]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 260 kr.");
+                    }
+                    else if(i == 29){
+                        fields[i].setBackGroundColor(fieldColors[5]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 280 kr.");
+                    }
+                    else if(i == 31 || i == 32){
+                        fields[i].setBackGroundColor(fieldColors[6]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 300 kr.");
+                    }
+                    else if(i == 34){
+                        fields[i].setBackGroundColor(fieldColors[6]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 320 kr.");
+                    }
+                    else if(i == 37){
+                        fields[i].setBackGroundColor(fieldColors[7]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 350 kr.");
+                    }
+                    else if(i == 39){
+                        fields[i].setBackGroundColor(fieldColors[7]);
+                        fields[i].setDescription(fieldTitles[i-1]);
+                        fields[i].setSubText("Pris: 400 kr.");
                         //ownable.setRent("20000");
-
-
                     }
 
                 }
@@ -152,8 +198,10 @@ public class MatadorGui {
     }
 
     public void createGui(){
-        this.gui = new GUI(fields);
+        this.gui = new GUI(fields, new Color(233, 253, 131));
         GUI.setNull_fields_allowed(true);
+        // GUI_Center.getInstance().setBGColor(new Color(233, 253, 131));
+
     }
 
     public void guiPlayers(String name, int balance, int i){
