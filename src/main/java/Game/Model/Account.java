@@ -14,7 +14,7 @@ public class Account {
 
     public void initializeScore(int players){
 
-        points = 24 - 2 * players;
+        points = 1500;
 
     }
 }

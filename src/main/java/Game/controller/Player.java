@@ -66,7 +66,7 @@ public class Player {
     //Easy way to move the player without having to count the die value
     public int setPosition(int newPosition){
         if(currentPosition() > newPosition) {
-            account.updateScore(2);
+            account.updateScore(200);
         }
         position = newPosition;
         return position;
@@ -77,19 +77,19 @@ public class Player {
         position += die;
         if(die == 900) {
             position = 0;
-            account.updateScore(2);
+            account.updateScore(200);
         }
         else if(die == 800){
             position = 23;
         }
         else if(die == 700){
             if (oldPosition > 10)
-                account.updateScore(2);
+                account.updateScore(200);
             position = 10;
         }
-        else if(position > 23){
-            position = position - 24;
-            account.updateScore(2);
+        else if(position > 39){
+            position = position - 40;
+            account.updateScore(200);
         }
         return position;
     }
