@@ -1,4 +1,4 @@
-package View;
+package Game.View;
 
 import gui_fields.*;
 import gui_main.GUI;
