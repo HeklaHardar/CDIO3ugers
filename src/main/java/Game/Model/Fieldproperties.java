@@ -3,8 +3,10 @@ package Game.Model;
 public class Fieldproperties {
     private int value;
     private int owningStatus = 1;
-    private int[] ownedFields = new int[24];
+    private int[] ownedFields = new int[39];
     private String[] fieldColors = {"","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
+            "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
+            "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
             "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue"};
     private String color;
     private boolean inPrison = false;
@@ -82,7 +84,8 @@ public class Fieldproperties {
                 this.owningStatus = 3;
                 this.color = "Blue";
                 break;
-
+            default:
+                this.owningStatus=3;
 
         }
 
@@ -90,7 +93,7 @@ public class Fieldproperties {
 
     }
     public int calculateValue(int position) {
-        for (int i=0 ; i <= 23; i++){
+        for (int i=0 ; i <= 38; i++){
             if((i!=position) && fieldColors[i] == fieldColors[position] && (ownedFields[i] == ownedFields[position] && ownedFields[i]!=0)){
                     value = value*2;
             }
