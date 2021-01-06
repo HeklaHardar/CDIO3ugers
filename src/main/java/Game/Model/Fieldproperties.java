@@ -4,10 +4,9 @@ public class Fieldproperties {
     private int value;
     private int owningStatus = 1;
     private int[] ownedFields = new int[39];
-    private String[] fieldColors = {"","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
-            "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
-            "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
-            "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue"};
+    private String[] fieldColors = {"","Blue","","Blue","","Rederi","Orange","","Orange","Orange","","Brown",
+            "Bryggeri","Brown","Brown","Rederi","Grey","","Grey","Grey","","Red","","Red","Red","Rederi","Sand","Sand","Bryggeri","Sand","","Yellow","Yellow","","Yellow","Rederi","","Purple","","Purple"};
+
     private String color;
     private boolean inPrison = false;
     private boolean drawCard = false;
@@ -17,73 +16,237 @@ public class Fieldproperties {
     public void Fieldproperties(int position){
         switch (position){
             case 1:
-            case 2:
-                this.value = 1;
-                this.owningStatus = 3;
-                this.color = "Green";
-
+                // Rødovrevej
+                this.value = 60;
+                this.owningStatus = 1;
+                this.color = "Blue";
                 break;
-            case 3:
-            case 9:
-            case 15:
-            case 21:
+            case 2:
+            case 7:
+            case 17:
+            case 22:
+            case 33:
+            case 36:
+                // Prøv lykken
                 this.value = 0;
                 this.owningStatus = 3;
                 this.drawCard = true;
                 break;
+            case 3:
+                // Hvidovre
+                this.value = 60;
+                this.owningStatus = 1;
+                this.color = "Blue";
+                break;
             case 4:
+                // Indkomsskat
+                this.owningStatus = 3;
+                break;
+
             case 5:
-                this.value = 1;
-                this.owningStatus = 3;
-                this.color = "Cyan";
+                // Øresund rederi
+                this.value = 200;
+                this.owningStatus = 1;
+                this.color = "Rederi";
                 break;
+
             case 6:
-            case 12:
-            case 0:
-                this.value = 0;
-                this.owningStatus = 3;
-                break;
-            case 7:
-            case 8:
-                this.value = 2;
-                this.owningStatus = 3;
-                this.color = "Pink";
-                break;
-            case 10:
-            case 11:
-                this.value = 2;
-                this.owningStatus = 3;
+            // Roskildevej
+                this.value = 100;
+                this.owningStatus = 1;
                 this.color = "Orange";
                 break;
-            case 13:
-            case 14:
-                this.value = 3;
+
+            case 8:
+             // Valby Langgade
+                this.value = 100;
+                this.owningStatus = 1;
+                this.color = "Orange";
+                break;
+
+            case 9:
+                // Allégade
+                this.value = 120;
+                this.owningStatus = 1;
+                this.color = "Orange";
+                break;
+
+            case 10:
+                // Fængsel
                 this.owningStatus = 3;
+
+                break;
+
+            case 11:
+                //Frederiksberg Allé
+                this.value = 140;
+                this.owningStatus = 1;
+                this.color = "Brown";
+                break;
+
+            case 12:
+                // Tuborg Bryggeri
+                this.value = 150;
+                this.owningStatus = 1;
+                this.color = "Bryggeri";
+                break;
+
+            case 13:
+                //Bülowsvej
+                this.value = 140;
+                this.owningStatus = 1;
+                this.color = "Brown";
+                break;
+
+            case 14:
+                //Gl. Kongevej
+                this.value = 160;
+                this.owningStatus = 1;
+                this.color = "Brown";
+                break;
+
+            case 15:
+                // D.F.D.s. rederi
+                this.value = 200;
+                this.owningStatus = 1;
+                this.color = "Rederi";
+                break;
+
+            case 16:
+                //Bernstoffsvej
+                this.value = 180;
+                this.owningStatus = 1;
+                this.color = "Grey";
+                break;
+
+            case 18:
+                //Hellerupvej
+                this.value = 180;
+                this.owningStatus = 1;
+                this.color = "Grey";
+                break;
+
+            case 19:
+                //Strandvej
+                this.value = 200;
+                this.owningStatus = 1;
+                this.color = "Grey";
+                break;
+
+            case 20:
+                //Helle
+                this.owningStatus = 3;
+                break;
+
+            case 21:
+                //Trianglen
+                this.value = 220;
+                this.owningStatus = 1;
                 this.color = "Red";
                 break;
-            case 16:
-            case 17:
-                this.value = 3;
-                this.owningStatus = 3;
-                this.color = "Yellow";
+
+            case 23:
+                //Østerbrogade
+                this.value = 220;
+                this.owningStatus = 1;
+                this.color = "Red";
                 break;
-            case 18:
+
+            case 24:
+                //Grønningen
+                this.value = 240;
+                this.owningStatus = 1;
+                this.color = "Red";
+                break;
+
+            case 25:
+                // Y.K rederi
+                this.value = 200;
+                this.owningStatus = 1;
+                this.color = "Rederi";
+                break;
+
+            case 26:
+                //Bredgade
+                this.value = 260;
+                this.owningStatus = 1;
+                this.color = "Sand";
+                break;
+
+            case 27:
+                //Kg. Nytorv
+                this.value = 260;
+                this.owningStatus = 1;
+                this.color = "Sand";
+                break;
+
+            case 28:
+                // Carlsberg Bryggeri
+                this.value = 150;
+                this.owningStatus = 1;
+                this.color = "Bryggeri";
+                break;
+
+            case 29:
+                //Østergade
+                this.value = 280;
+                this.owningStatus = 1;
+                this.color = "Sand";
+                break;
+
+            case 30:
+                // Gå i fængsel
                 this.owningStatus = 3;
                 this.inPrison = true;
                 this.value = 0;
                 break;
-            case 19:
-            case 20:
-                this.value = 4;
-                this.owningStatus = 3;
-                this.color = "DarkGreen";
+
+            case 31:
+                //Amagertorv
+                this.value = 300;
+                this.owningStatus = 1;
+                this.color = "Yellow";
                 break;
-            case 22:
-            case 23:
-                this.value = 5;
-                this.owningStatus = 3;
-                this.color = "Blue";
+
+            case 32:
+                //Vimmelskaftet
+                this.value = 300;
+                this.owningStatus = 1;
+                this.color = "Yellow";
                 break;
+
+            case 34:
+                //Nygade
+                this.value = 320;
+                this.owningStatus = 1;
+                this.color = "Yellow";
+                break;
+
+            case 35:
+                // Bornholm rederi
+                this.value = 200;
+                this.owningStatus = 1;
+                this.color = "Rederi";
+                break;
+
+            case 37:
+                //Frederiksberggade
+                this.value = 350;
+                this.owningStatus = 1;
+                this.color = "Purple";
+                break;
+
+            case 38:
+                //Ekstraordinær statsskat
+                this.owningStatus = 3;
+                break;
+            case 39:
+                //Rådhuspladsen
+                this.value = 400;
+                this.owningStatus = 1;
+                this.color = "Purple";
+                break;
+
             default:
                 this.owningStatus=3;
 
