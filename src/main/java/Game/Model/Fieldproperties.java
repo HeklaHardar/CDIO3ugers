@@ -110,6 +110,7 @@ public class Fieldproperties {
     }
 
 
+
     public boolean isInPrison() {
         return inPrison;
     }
