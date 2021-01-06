@@ -8,6 +8,7 @@ public class Player {
     private int position = 0;
     private boolean inPrison = false;
     private int oldPosition;
+    public int TotalFields = 40;
 
 
     // Determines variables
@@ -19,16 +20,16 @@ public class Player {
         Player = s;
     }
 
-    public String playerString() {
+    public String getPlayerString() {
         return Player;
     }
 
     //Keeps track of the currentplayers score
-    public int playerBalance(){return account.score();}
+    public int getBalance(){return account.getScore();}
     //Updates the currentplayers score
     public void playerBalanceUpdate(int update){account.updateScore(update);}
 
-    public void starterScore(int players){account.initializeScore(players);}
+//    public void starterScore(){account.initializeScore();}
 
     // put player in prison
     public void setInPrison(){
@@ -59,36 +60,26 @@ public class Player {
 
 
     // Check where player is currently
-    public int currentPosition(){
+    public int getCurrentPosition(){
         return position;
     }
 
     //Easy way to move the player without having to count the die value
     public int setPosition(int newPosition){
-        if(currentPosition() > newPosition) {
+        if(getCurrentPosition() > newPosition) {
             account.updateScore(200);
         }
         position = newPosition;
         return position;
     }
+
     // Move player with die
     public int updatePosition(int die){
-        oldPosition = currentPosition();
+        oldPosition = getCurrentPosition();
         position += die;
-        if(die == 900) {
-            position = 0;
-            account.updateScore(200);
-        }
-        else if(die == 800){
-            position = 23;
-        }
-        else if(die == 700){
-            if (oldPosition > 10)
-                account.updateScore(200);
-            position = 10;
-        }
-        else if(position > 39){
-            position = position - 40;
+
+        if(position > TotalFields - 1){
+            position = position - TotalFields;
             account.updateScore(200);
         }
         return position;
