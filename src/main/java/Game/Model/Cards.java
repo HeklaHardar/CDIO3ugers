@@ -1,6 +1,7 @@
 package Game.Model;
 
 
+import java.lang.reflect.Field;
 
 public class Cards {
 
@@ -10,10 +11,11 @@ public class Cards {
     private String cardText;
     private boolean hasExtraMoves = false;
     private int money;
-    private int max;
-    private int min;
     private boolean hasPrisonCard;
-    private boolean isBirthday = false;
+    private boolean PrisonChance = false;
+    private boolean isSammenskudsgilde = false;
+    private int PositionChange;
+    private boolean hasPositionChange = false;
 
     private String[] possibleFields = new String[2];
     private String[] possibleFields2 = new String[4];
@@ -27,18 +29,18 @@ public class Cards {
     }
 
     //Resets booleans for all the cards, so that they dont interfeer with one another
-    public void resetStats(){
+    public void resetStats() {
         hasExtraMoves = false;
 
         money = 0;
         hasPrisonCard = false;
-        isBirthday = false;
-
+        isSammenskudsgilde = false;
+        hasPositionChange= false;
 
     }
 
     //Resets the freefield boolean, if a card with that value has been drawn
-    public void resetfreeField(){
+    public void resetfreeField() {
         freeField = false;
     }
 
@@ -46,85 +48,67 @@ public class Cards {
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (cardPicker.DrawCard()) {
+        switch (13/*cardPicker.DrawCard()*/) {
             case 1:
+                cardText = "Tag ind på \n Rådhuspladsen.";
+                PositionChange = 39;
+                hasPositionChange= true;
                 break;
             case 2:
-                cardText = "Ryk frem til start!";
-                move = 900;
-                hasExtraMoves = true;
-                //Ryk frem til start
+                cardText = "Ryk frem til Grønningen. \n Hvis De passerer start, indkasserer Da kr. 200,00.";
+                PositionChange = 24;
+                hasPositionChange= true;
                 break;
             case 3:
-                cardText = "Ryk op til \n 5 felter frem.\n Indtast antal felter du vil rykke, 1 til 5: ";
-                max = 5;
-                min = 1;
+                cardText = "Tag med Øresundsbåden --- \n Flyt brikken frem, og hvis De.\n Passerer start, indkasser \n kr. 200,00.";
+                PositionChange = 5;
+                hasPositionChange= true;
                 break;
             case 4:
-                //Ryk frem til et orange felt, få det gratis, eller betal husleje hvis det allerede ejes
-                cardText = "GRATIS FELT! \n ryk frem til et orange felt.\n Hvis det er ledigt, får du det GRATIS!\n Ellers skal du betale leje til ejeren.";
-                possibleFields[0] = "Skaterparken";
-                possibleFields[1] = "Swimmingpoolen";
-                freeField = true;
+            case 6:
+            case 9:
+                //Gå i fængsel
+                cardText = "Gå i fængsel. Ryk direkte til \n fængsel. Selv om De passerer\n start, indkasserer De ikke \n kr. 200,00.";
+                PrisonChance = true;
                 break;
             case 5:
-                //Ryk 1 felt frem, eller tag et chancekort mere.
-                cardText = "Ryk 1 \n felt frem, eller\n tag et \n chancekort mere.";
-                move = 1;
-
-                break;
-            case 6:
+                //Parkeringsbøde
+                cardText = "De har måttet vedtage en \n parkeringsbøde.\n Betal kr. 20,00 til banken.";
+                money = -20;
                 break;
             case 7:
-                cardText = "Du har spist for meget slik! \n Betal 2 monopoly penge til banken";
-                money = -2;
-                //Betal 2 penge til banken
-                break;
             case 8:
-                //Samme som case 4 men med orange eller mørkegrønt
-                cardText = "GRATIS FELT! \n ryk frem til et orange eller mørkegrønt felt.\n Hvis det er ledigt, får du det GRATIS!\n Ellers skal du betale leje til ejeren.";
+                cardText = "Ryk tre felter tilbage";
+                move = -3;
+                hasExtraMoves = true;
+                //Ryk tre felter tilbage
+                break;
 
-                possibleFields2[0] = "Skaterparken";
-                possibleFields2[1] = "Swimmingpoolen";
-                possibleFields2[2] = "Bowlinghallen";
-                possibleFields2[3] = "Zoo";
-                freeField = true;
-                break;
-            case 9:
-                //Gratis lyseblåt felt
-                cardText = "GRATIS FELT! \n ryk frem til et lyseblåt felt.\n Hvis det er ledigt, får du det GRATIS!\n Ellers skal du betale leje til ejeren.";
-                possibleFields[0] = "Slikbutikken";
-                possibleFields[1] = "Iskiosken";
-                freeField = true;
-                break;
             case 10:
-                cardText = "Du løslades uden omkostninger. \n Behold dette kort, indtil du får brug for det.";
-                hasPrisonCard = true;
-                //Løslades gratis. behold kortet til det skal bruges.
+                //Ryk frem til start
+                cardText = "Ryk frem til start.";
+                PositionChange = 0;
+                hasPositionChange= true;
                 break;
             case 11:
-                cardText = "Ryk frem til \n Strandpromenaden.";
-                move = 800;
-                hasExtraMoves = true;
+                // HUSE OG HOTELLER SKAL LAVE FØRST
+                cardText = "Kul- og kokspriserne er steget, \n og De skal betale: \n kr. 25,00 pr. hus og \n kr. 125,00 pr. hotel.";
                 break;
             case 12:
+                // HUSE OG HOTELLER SKAL LAVE FØRST
+                cardText = "Ejendomsskatterne er steget, \n ekstraudgifterne er: \n kr. 50,00 pr. hus og \n kr. 125,00 pr. hotel.";
                 break;
             case 13:
+                cardText = "De har lagt penge ud til sammen- \n skudsgilde. Mærkværdigvis \n betaler alle straks. Modtag fra \n hver medspiller kr. 25,00.";
+                isSammenskudsgilde = true;
                 break;
             case 14:
-                cardText = "Det er din fødselsdag! \n Alle giver dig 1 monopoly penge \n TILLYKE MED\n FØDSELSDAGEN";
-                isBirthday = true;
+                cardText = "Værdien af egen avl fra nyttehaven \n udgør kr. 200,00, \n som De modtager af banken.";
+                money = 200;
                 break;
             case 15:
-                //Gratis pink eller mørkeblåt felt
-                cardText = "GRATIS FELT! \n ryk frem til et pink eller mørkeblåt felt.\n Hvis det er ledigt, får du det GRATIS!\n Ellers skal du betale leje til ejeren.";
-
-                possibleFields2[0] = "Museet";
-                possibleFields2[1] = "Biblioteket";
-                possibleFields2[2] = "Vandlandet";
-                possibleFields2[3] = "Strandpromenaden";
-                freeField = true;
-
+                cardText = "Ryk brikken fremtil  det nærmeste \n dampskibselskab og betal ejeren to\n gange den leje, han eller er beret-\n " +
+                        "tiget til. Hvis selskabet ikke ejes af \n nogen, kan De købe det af banken.";
                 break;
             case 16:
                 cardText = "Du har lavet\n alle dine lektier!\nMODTAG 2 MONOPOLY PENGE\n fra banken";
@@ -169,38 +153,51 @@ public class Cards {
     public int extraFields() {
         return move;
     }
+
     public String cardToString() {
         return cardText;
     }
+
     public boolean isHasExtraMoves() {
         return hasExtraMoves;
     }
-    public int extraMoney(){
+
+    public boolean HasPrisonChance() {
+        return PrisonChance;
+    }
+
+    public boolean isHasPositionChange() {
+        return hasPositionChange;
+    }
+
+    public int getPositionChange() {
+        return PositionChange;
+    }
+
+    public int extraMoney() {
         return money;
     }
+
     public boolean isHasPrisonCard() {
         return hasPrisonCard;
     }
-    public boolean isHasBirthday(){
-        return isBirthday;
+
+    public boolean isHasSammenskudsgilde() {
+        return isSammenskudsgilde;
     }
 
     public void setHasExtraMoves(boolean hasExtraMoves) {
         this.hasExtraMoves = hasExtraMoves;
     }
-    public boolean isFreeField(){return freeField;}
-    public int move(){
-        if(hasExtraMoves)
+
+    public boolean isFreeField() {
+        return freeField;
+    }
+
+    public int move() {
+        if (hasExtraMoves)
             return move;
         else
             return 0;
     }
-    public int max(){
-        return max;
-    }
-    public int min(){
-        return min;
-    }
-
-
 }
