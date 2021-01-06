@@ -1,20 +1,29 @@
 package Game.Model;
 
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class CardText {
 
     private String[] Cards;
+    private String filePath;
 
-    public CardText() {
+    public CardText()  {
+
+        try {
+            Path path = Paths.get("", "src", "Assets", "TextFiles", "CardText.txt");
+            filePath = String.valueOf(path.toAbsolutePath());
+        }catch(FileSystemNotFoundException e){
+            e.printStackTrace();
+        }
+
         BufferedReader reader;
         int counter = 1;
         String[] cardNames = new String[32];
         try {
-            reader = new BufferedReader(new FileReader("/Users/Lucas/IdeaProjects/CDIO3ugers/src/Assets/TextFiles/CardText.txt"));
+            reader = new BufferedReader(new FileReader(String.valueOf(filePath)));
             String card  = reader.readLine();
             cardNames[0] = card;
             while (card != null) {
