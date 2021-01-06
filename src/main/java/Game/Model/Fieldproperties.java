@@ -3,7 +3,7 @@ package Game.Model;
 public class Fieldproperties {
     private int value;
     private int owningStatus = 1;
-    private int[] ownedFields = new int[39];
+    private int[] ownedFields = new int[40];
     private String[] fieldColors = {"","Blue","","Blue","","Rederi","Orange","","Orange","Orange","","Brown",
             "Bryggeri","Brown","Brown","Rederi","Grey","","Grey","Grey","","Red","","Red","Red","Rederi","Sand","Sand","Bryggeri","Sand","","Yellow","Yellow","","Yellow","Rederi","","Purple","","Purple"};
 

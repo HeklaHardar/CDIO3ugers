@@ -1,7 +1,6 @@
 package Game.Model;
 
 
-import java.lang.reflect.Field;
 
 public class Cards {
 
@@ -22,6 +21,7 @@ public class Cards {
     private boolean freeField = false;
 
     CardPicker cardPicker = new CardPicker();
+    CardText TextforCards = new CardText();
 
     //Calls for cardPicker to scramble the cards.
     public Cards() {
@@ -48,9 +48,9 @@ public class Cards {
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (13/*cardPicker.DrawCard()*/) {
+        switch (9/*cardPicker.DrawCard()*/) {
             case 1:
-                cardText = "Tag ind på \n Rådhuspladsen.";
+                cardText = TextforCards.getCards()[0];
                 PositionChange = 39;
                 hasPositionChange= true;
                 break;
@@ -60,7 +60,7 @@ public class Cards {
                 hasPositionChange= true;
                 break;
             case 3:
-                cardText = "Tag med Øresundsbåden --- \n Flyt brikken frem, og hvis De.\n Passerer start, indkasser \n kr. 200,00.";
+                cardText = TextforCards.getCards()[2];
                 PositionChange = 5;
                 hasPositionChange= true;
                 break;
@@ -68,7 +68,7 @@ public class Cards {
             case 6:
             case 9:
                 //Gå i fængsel
-                cardText = "Gå i fængsel. Ryk direkte til \n fængsel. Selv om De passerer\n start, indkasserer De ikke \n kr. 200,00.";
+                cardText = TextforCards.getCards()[8];
                 PrisonChance = true;
                 break;
             case 5:
