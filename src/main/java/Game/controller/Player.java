@@ -35,7 +35,7 @@ public class Player {
     // put player in prison
     public void setInPrison(){
             inPrison = true;
-            position = 6;
+            position = 10;
     }
     // is player in prison?
     public boolean isInPrison(){

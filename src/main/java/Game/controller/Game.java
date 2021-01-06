@@ -54,7 +54,7 @@ public class Game {
                 //checks if the player is in prison and releases him if he is.
                 player[i].releaseFromPrison(player[i].isInPrison());
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
+                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(2/*dices.getValue()*/));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
                 //Checks if player has landed on a chancecard field.
@@ -80,6 +80,7 @@ public class Game {
                         if (cards.HasPrisonChance()) {
                             if (!player[i].getPrisonCard()){
                                 matadorGUI.moveToPrison(i, player[i].currentPosition());
+                                player[i].setInPrison();
                                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                             }
                             else if (player[i].getPrisonCard()){
@@ -94,6 +95,14 @@ public class Game {
                             player[i].updatePrisonCard(true);
                         }
                         if (cards.isHasSammenskudsgilde()) {
+                            for (int y = 0; y < menu.getPlayerAmount(); y++) {
+                                player[y].playerBalanceUpdate(-25);
+                                matadorGUI.updateGuiBalance(y, player[y].playerBalance());
+                            }
+                            player[i].playerBalanceUpdate(menu.getPlayerAmount()*25);
+                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                        }
+                        if (cards.isHasMatadorlegat()) {
                             for (int y = 0; y < menu.getPlayerAmount(); y++) {
                                 player[y].playerBalanceUpdate(-25);
                                 matadorGUI.updateGuiBalance(y, player[y].playerBalance());

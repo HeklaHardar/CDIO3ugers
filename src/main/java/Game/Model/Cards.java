@@ -1,7 +1,6 @@
 package Game.Model;
 
 
-
 public class Cards {
 
 
@@ -15,6 +14,7 @@ public class Cards {
     private boolean isSammenskudsgilde = false;
     private int PositionChange;
     private boolean hasPositionChange = false;
+    private boolean Matadorlegat = false;
 
     private String[] possibleFields = new String[2];
     private String[] possibleFields2 = new String[4];
@@ -35,7 +35,7 @@ public class Cards {
         money = 0;
         hasPrisonCard = false;
         isSammenskudsgilde = false;
-        hasPositionChange= false;
+        hasPositionChange = false;
 
     }
 
@@ -48,21 +48,21 @@ public class Cards {
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (9/*cardPicker.DrawCard()*/) {
+        switch (cardPicker.DrawCard()) {
             case 1:
                 cardText = TextforCards.getCards()[0];
                 PositionChange = 39;
-                hasPositionChange= true;
+                hasPositionChange = true;
                 break;
             case 2:
                 cardText = "Ryk frem til Grønningen. \n Hvis De passerer start, indkasserer Da kr. 200,00.";
                 PositionChange = 24;
-                hasPositionChange= true;
+                hasPositionChange = true;
                 break;
             case 3:
                 cardText = TextforCards.getCards()[2];
                 PositionChange = 5;
-                hasPositionChange= true;
+                hasPositionChange = true;
                 break;
             case 4:
             case 6:
@@ -83,12 +83,11 @@ public class Cards {
                 hasExtraMoves = true;
                 //Ryk tre felter tilbage
                 break;
-
             case 10:
                 //Ryk frem til start
                 cardText = "Ryk frem til start.";
                 PositionChange = 0;
-                hasPositionChange= true;
+                hasPositionChange = true;
                 break;
             case 11:
                 // HUSE OG HOTELLER SKAL LAVE FØRST
@@ -107,45 +106,67 @@ public class Cards {
                 money = 200;
                 break;
             case 15:
-                cardText = "Ryk brikken fremtil  det nærmeste \n dampskibselskab og betal ejeren to\n gange den leje, han eller er beret-\n " +
-                        "tiget til. Hvis selskabet ikke ejes af \n nogen, kan De købe det af banken.";
+            case 25:
+                cardText = TextforCards.getCards()[24];
                 break;
             case 16:
-                cardText = "Du har lavet\n alle dine lektier!\nMODTAG 2 MONOPOLY PENGE\n fra banken";
-                money = 2;
+                cardText = "De har anskaffet et nyt dæk til\n Deres vogn.\n Indbetal kr. 100,00.";
+                money = -100;
                 break;
             case 17:
-                //Gratis rødt felt
-                cardText = "GRATIS FELT! \n ryk frem til et rødt felt.\n Hvis det er ledigt, får du det GRATIS!\n Ellers skal du betale leje til ejeren.";
-                possibleFields[0] = "Spillehallen";
-                possibleFields[1] = "Biografen";
-                freeField = true;
+                cardText = "De har kørt frem for >> Fuld Stop<<\n Betal kr. 100,00 i bøde.";
+                money = -100;
                 break;
             case 18:
-                cardText = "GRATIS FELT! \n Ryk frem til skaterparken\n for at lave det perfekte grind! \nHvis ingen ejer den \n får du den GRATIS! \n Ellers skal du BETALE  leje til ejeren.";
-                hasExtraMoves = true;
-                freeField = true;
-                move = 700;
+            case 23:
+                cardText = "Betal for vognvask og smøring \n kr. 10,00.";
+                money = -10;
                 break;
             case 19:
-                //gratis lyseblåt eller rødt
-                cardText = "GRATIS FELT! \n ryk frem til et lyseblåt eller rødt felt.\n Hvis det er ledigt, får du det GRATIS!\n Ellers skal du betale leje til ejeren.";
-
-                possibleFields2[0] = "Slikbutikken";
-                possibleFields2[1] = "Iskiosken";
-                possibleFields2[2] = "Spillehallen";
-                possibleFields2[3] = "Biografen";
-                freeField = true;
+                cardText = "De har været en tur i udlandet\n og haft for mange cigaretter med\nhjem. - Betal told kr. 20,00.";
+                money = -20;
                 break;
             case 20:
-                //gratis lysegrønt eller gult
-                cardText = "GRATIS FELT! \n ryk frem til et lysegrønt eller gult felt.\n Hvis det er ledigt, får du det GRATIS!\n Ellers skal du betale leje til ejeren.";
-
-                possibleFields2[1] = "Pizzariaet";
-                possibleFields2[0] = "Burgerbaren";
-                possibleFields2[2] = "Legetøjsbutikken";
-                possibleFields2[3] = "Dyrehandlen";
-                freeField = true;
+                cardText = "De har måttet vedtage en par-\nkeringsbøde.\n Betal kr. 20,00 til banken.";
+                money = -20;
+                break;
+            case 21:
+                cardText = "Grundet på dyrtiden har De fået\n gageforhøjelse. \n Modtag kr. 25,00.";
+                money = 25;
+                break;
+            case 22:
+            case 24:
+                cardText = "I anledning af Kongens fødsels-\n dag benådes De herved for fængsel.\n Dette kort kan opbevares, indtil \n " +
+                        "De får brug for det, eller De \n kan sælge det.";
+                hasPrisonCard = true;
+                break;
+            case 26:
+                cardText = "De har solgt Deres gamle klude.\n Modtag kr. 20,00.";
+                money = 20;
+                break;
+            case 27:
+                cardText = "De har rettidigt afleveret Deres\n abonnementskort. \n Depositum kr. 1,00 \n udbetales Dem af banken.";
+                money = 1;
+                break;
+            case 28:
+                cardText = "Manufakturvarerne er blevet bil-\n ligere og bedre, herved sparer De \n kr. 50,00. \n som De modtager af banken.";
+                money = 50;
+                break;
+            case 29:
+                cardText = "Efter auktionen på Assistens- \n huset, hvor De havde pantsat Deres tøj, modtager De ekstra \n kr. 108,00.";
+                money = 108;
+                break;
+            case 30:
+                cardText = "Deres præmieobligation er kom- \n met ud. De motager kr. 100,00 \n af banken.";
+                money = 100;
+                break;
+            case 31:
+                cardText = TextforCards.getCards()[30];
+                money = 50;
+                break;
+            case 32:
+                cardText = TextforCards.getCards()[31];
+                //money = 50;
                 break;
         }
     }
@@ -184,6 +205,10 @@ public class Cards {
 
     public boolean isHasSammenskudsgilde() {
         return isSammenskudsgilde;
+    }
+
+    public boolean isHasMatadorlegat() {
+        return Matadorlegat;
     }
 
     public void setHasExtraMoves(boolean hasExtraMoves) {
