@@ -119,16 +119,15 @@ public class Game {
                     properties.Fieldproperties(player[i].currentPosition());
                     if (properties.getOwnedFields()[player[i].currentPosition()] != i + 1) {
 
-                        if(cards.isFreeField() && properties.getOwnedFields()[player[i].currentPosition()] == 0)
-                            player[i].playerBalanceUpdate(0);
-                        else
-                            player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
-                        cards.resetfreeField();
 
                         //Pays rent if a field is owned
                         if (properties.getOwnedFields()[player[i].currentPosition()] != 0) {
-                            player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(properties.getValue());
+                            player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(properties.getRent());
+                            player[i].playerBalanceUpdate(-properties.calculateRent(player[i].currentPosition()));
                             matadorGUI.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
+                        }else{
+                            // KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
+                            player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
                         }
                     }
                     matadorGUI.updateGuiBalance(i, player[i].playerBalance());
