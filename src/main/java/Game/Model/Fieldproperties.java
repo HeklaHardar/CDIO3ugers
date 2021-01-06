@@ -3,7 +3,7 @@ package Game.Model;
 public class Fieldproperties {
     private int value;
     private int owningStatus = 1;
-    private int[] ownedFields = new int[39];
+    private int[] ownedFields = new int[40];
     private String[] fieldColors = {"","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
             "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
             "","Red","Red","","Yellow","Yellow","","DarkGreen","DarkGreen","","Blue","Blue","","Green","Green","","Cyan","Cyan","","Pink","Pink","","Orange","Orange",
@@ -18,7 +18,7 @@ public class Fieldproperties {
         switch (position){
             case 1:
             case 2:
-                this.value = 1;
+                this.value = 0;
                 this.owningStatus = 3;
                 this.color = "Green";
 

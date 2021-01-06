@@ -55,9 +55,11 @@ public class Game {
                 player[i].releaseFromPrison(player[i].isInPrison());
                 //Moves the car on the GUI and checks if player is over start.
                 matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
+                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
                 //Checks if player has landed on a chancecard field.
-                if (player[i].currentPosition() == 2000 /* Change this value */) {
+                if (player[i].currentPosition() == 2 || player[i].currentPosition() == 7 || player[i].currentPosition() == 17 ||
+                        player[i].currentPosition() == 22 || player[i].currentPosition() == 33 || player[i].currentPosition() == 36 /* Change this value */) {
                     while (true) {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
@@ -70,24 +72,39 @@ public class Game {
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
                         }
+                        if (cards.isHasPositionChange()) {
+                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].setPosition(cards.getPositionChange()));
+                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
+                        }
+                        if (cards.HasPrisonChance()) {
+                            if (!player[i].getPrisonCard()){
+                                matadorGUI.moveToPrison(i, player[i].currentPosition());
+                                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                            }
+                            else if (player[i].getPrisonCard()){
+                                player[i].updatePrisonCard(false);
+                            }
+
+                        }
 
                         player[i].playerBalanceUpdate(cards.extraMoney());
                         matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         if (cards.isHasPrisonCard()) {
                             player[i].updatePrisonCard(true);
                         }
-                        if (cards.isHasBirthday()) {
-                            for (int y = 0; y <= menu.getPlayerAmount() - 1; y++) {
-                                player[y].playerBalanceUpdate(-1);
+                        if (cards.isHasSammenskudsgilde()) {
+                            for (int y = 0; y < menu.getPlayerAmount(); y++) {
+                                player[y].playerBalanceUpdate(-25);
                                 matadorGUI.updateGuiBalance(y, player[y].playerBalance());
                             }
-                            player[i].playerBalanceUpdate(menu.getPlayerAmount());
+                            player[i].playerBalanceUpdate(menu.getPlayerAmount()*25);
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
 
 
                         cards.resetStats();
+                        break;
                     }
 
 

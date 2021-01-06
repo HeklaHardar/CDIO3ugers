@@ -197,7 +197,7 @@ public class MatadorGui {
 
     public void moveToPrison(int currentPlayer, int currentPosition) {
         fields[currentPosition].setCar(player[currentPlayer], false);
-        fields[6].setCar(player[currentPlayer], true);
+        fields[10].setCar(player[currentPlayer], true);
     }
 
     public void updateGuiBalance(int i, int balance) {

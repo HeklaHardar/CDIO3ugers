@@ -19,6 +19,8 @@ public class Player {
         Player = s;
     }
 
+    public boolean getPrisonCard(){return prisonCard;}
+
     public String playerString() {
         return Player;
     }
@@ -75,21 +77,13 @@ public class Player {
     public int updatePosition(int die){
         oldPosition = currentPosition();
         position += die;
-        if(die == 900) {
-            position = 0;
-            account.updateScore(200);
-        }
-        else if(die == 800){
-            position = 23;
-        }
-        else if(die == 700){
-            if (oldPosition > 10)
-                account.updateScore(200);
-            position = 10;
-        }
-        else if(position > 39){
+
+        if(position > 39){
             position = position - 40;
             account.updateScore(200);
+        }
+        else if (position < 0) {
+            position = 39;
         }
         return position;
     }
