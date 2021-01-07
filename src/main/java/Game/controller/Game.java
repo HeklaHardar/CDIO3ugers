@@ -59,7 +59,7 @@ public class Game {
 
                 //Checks if player has landed on a chancecard field.
                 if (player[i].currentPosition() == 2 || player[i].currentPosition() == 7 || player[i].currentPosition() == 17 ||
-                        player[i].currentPosition() == 22 || player[i].currentPosition() == 33 || player[i].currentPosition() == 36 /* Change this value */) {
+                        player[i].currentPosition() == 22 || player[i].currentPosition() == 33 || player[i].currentPosition() == 36) {
                     while (true) {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
@@ -123,10 +123,9 @@ public class Game {
                 cards.resetStats();
 
 
-
                     //Checks the properties of the field that the player landed on
                     properties.Fieldproperties(player[i].currentPosition());
-                    if (properties.getOwnedFields()[player[i].currentPosition()] != i + 1) {
+                    if (properties.getOwningStatus() == 1) {
 
 
                         //Pays rent if a field is owned
@@ -137,20 +136,23 @@ public class Game {
                         }
                         // KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
                         else if(properties.getOwnedFields()[player[i].currentPosition()] == 0) {
-                            if (MatadorGui.getBuyField() == 1) {
+                            if (matadorGUI.getBuyField() == 1) {
+                                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), properties.getOwningStatus(), properties.getOwnedFields());
                                 player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
                                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                                properties.setOwnedFields(properties.getOwnedFields(), player[i].currentPosition(), i);
                             }
                             else {
                                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                             }
                         }
                     }
+
                     matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
-                    matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), properties.getOwningStatus(), properties.getOwnedFields());
 
-                    properties.setOwnedFields(properties.getOwnedFields(), player[i].currentPosition(), i);
+
+
 
 
                 if (properties.isInPrison()) {

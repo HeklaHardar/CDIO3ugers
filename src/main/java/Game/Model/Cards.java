@@ -36,6 +36,7 @@ public class Cards {
         hasPrisonCard = false;
         isSammenskudsgilde = false;
         hasPositionChange = false;
+        PrisonChance = false;
 
     }
 
