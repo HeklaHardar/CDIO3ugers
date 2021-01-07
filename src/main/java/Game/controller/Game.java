@@ -54,7 +54,7 @@ public class Game {
                 //checks if the player is in prison and releases him if he is.
                 player[i].releaseFromPrison(player[i].isInPrison());
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(2/*dices.getValue()*/));
+                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
                 //Checks if player has landed on a chancecard field.
