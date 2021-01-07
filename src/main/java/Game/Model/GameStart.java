@@ -1,12 +1,16 @@
-package Game.controller;
+package Game.Model;
 
 import Game.View.MatadorGui;
+import Game.controller.Game;
 
 public class GameStart {
 
-    // Defines variables
     private final String[] Players = new String[6];
+
+    //Change this value to change minimum amount of players
     private int MinPlayers = 2;
+
+    //Change this value to change maximum amount of players
     private int MaxPlayers = 6;
 
 
