@@ -31,6 +31,7 @@ public class Game {
         Cards cards = new Cards();
         MatadorGui matadorGUI = new MatadorGui();
         Dices dices = new Dices();
+        PrisonConditions prisonproperties = new PrisonConditions();
 
 
         Menu menu = new Menu();
@@ -47,12 +48,20 @@ public class Game {
 
         while (!isWinnerWinnerChickenDinner) {
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
+                //checks if the player is in prison and releases him if he is.
+                if (player[i].isInPrison()) {
+                    prisonproperties.Release(player[i], dices, matadorGUI,i);
+                    if (player[i].isInPrison()){
+                        player[i].InPrison();
+                        continue;
+                    }
+                }
+
                 matadorGUI.gui.getUserButtonPressed("Det er " + player[i].playerString() + "'s tur", "Slå terning");
                 dices.roll();
                 matadorGUI.ShowDie(dices.Die1(), dices.Die2());
 
-                //checks if the player is in prison and releases him if he is.
-                player[i].releaseFromPrison(player[i].isInPrison());
+
                 //Moves the car on the GUI and checks if player is over start.
                 matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());

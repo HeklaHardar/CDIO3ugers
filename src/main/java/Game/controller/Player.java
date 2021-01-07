@@ -8,6 +8,7 @@ public class Player {
     private int position = 0;
     private boolean inPrison = false;
     private int oldPosition;
+    private int roundsinprison;
 
 
     // Determines variables
@@ -36,6 +37,13 @@ public class Player {
     public void setInPrison(){
             inPrison = true;
             position = 10;
+            roundsinprison = 0;
+    }
+    public void InPrison(){
+        roundsinprison += 1;
+    }
+    public int getRoundsinprison(){
+        return roundsinprison;
     }
     // is player in prison?
     public boolean isInPrison(){
@@ -43,15 +51,8 @@ public class Player {
     }
 
     // release player from prison & checks if player has prisonCard and uses it if true
-    public void releaseFromPrison(boolean inPrison){
-        if(inPrison && prisonCard){
-            this.inPrison = false;
-            prisonCard = false;
-        }
-        else if(inPrison) {
-            account.updateScore(-1);
-            this.inPrison = false;
-        }
+    public void releaseFromPrison(){
+        inPrison = false;
     }
 
     //Sets the prisonCard to true, if the player draws the prisonCard
