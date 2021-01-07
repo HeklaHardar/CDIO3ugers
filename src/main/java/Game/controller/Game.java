@@ -25,7 +25,7 @@ public class Game {
     }
 
 
-    public void Game() throws InterruptedException {
+    public void Game() {
 
 
         Cards cards = new Cards();
