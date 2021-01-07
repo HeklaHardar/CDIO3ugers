@@ -1,14 +1,12 @@
 package Game.Model;
 
-public class NotOwnableField extends OwnableField {
+public class NotOwnableField extends Field {
     protected boolean ownable = false;
 
-    @Override
     public boolean isOwnable() {
         return ownable;
     }
 
-    @Override
     public void setOwnable(boolean ownable) {
         this.ownable = ownable;
     }

@@ -36,7 +36,8 @@ public class Game {
         Menu menu = new Menu();
         matadorGUI.createGui();
         menu.startGame(matadorGUI);
-        Fieldproperties properties = new Fieldproperties();
+        FieldController fieldProperties = new FieldController();
+        fieldProperties.createFields();
 
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
@@ -56,10 +57,10 @@ public class Game {
                 //Moves the car on the GUI and checks if player is over start.
                 matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                fieldProperties.getPosition(player[i].currentPosition());
 
                 //Checks if player has landed on a chancecard field.
-                if (player[i].currentPosition() == 2 || player[i].currentPosition() == 7 || player[i].currentPosition() == 17 ||
-                        player[i].currentPosition() == 22 || player[i].currentPosition() == 33 || player[i].currentPosition() == 36) {
+                if (fieldProperties.getdrawCard()) {
                     while (true) {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
@@ -122,14 +123,16 @@ public class Game {
                 }
                 cards.resetStats();
 
-
-                    //Checks the properties of the field that the player landed on
-                    properties.Fieldproperties(player[i].currentPosition());
-                    if (properties.getOwningStatus() == 1) {
+                    if (fieldProperties.getOwningStatus() != player[i].playerString()) {
 
 
                         //Pays rent if a field is owned
-                        if (properties.getOwnedFields()[player[i].currentPosition()] != 0) {
+                        if (fieldProperties.getOwningStatus() != "") {
+                            for(Player playernumber:player){
+                                if(playernumber.playerString()==fieldProperties.getOwningStatus()){
+                                    playernumber.playerBalanceUpdate(fieldProperties.getRent());
+                                }
+                            }
                             player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(properties.getRent());
                             player[i].playerBalanceUpdate(-properties.calculateRent(player[i].currentPosition()));
                             matadorGUI.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());

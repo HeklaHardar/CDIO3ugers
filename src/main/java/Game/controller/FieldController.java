@@ -4,6 +4,8 @@ import Game.Model.*;
 
 public class FieldController {
     private Field[] fields = new Field[40];
+    private String[] ownedFields = new String[40];
+    private int position = 0;
     public Field[] createFields(){
         int fieldcount = 0;
         for(Field field:fields){
@@ -199,5 +201,66 @@ public class FieldController {
             fieldcount = fieldcount+1;
         }
         return fields;
+    }
+
+    public void getPosition(int position){
+        this.position = position;
+    }
+    public int calculateValue() {
+        int value = 0;
+        for (int i=0 ; i <= 39; i++){
+            if(fields[i] instanceof OwnableField){
+                if((i!=position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
+                        && (((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[i]).isOwnable()!=true)){
+                    value = fields[i].getValue()*2;
+                }
+            }
+        }
+        return value;
+    }
+    public int calculateRent() {
+        for (int i=0 ; i <= 39; i++){
+            if((i!=position) && fieldColors[i] == fieldColors[position] && (ownedFields[i] == ownedFields[position] && ownedFields[i]!=0)){
+                //rent = rent*2;
+            }
+        }
+        return rent;
+    }
+
+    public int getValue() {
+        return fields[position].getValue();
+    }
+    public int getRent(int position) {
+        return 0;
+    }
+
+    public String getOwningStatus() {
+        return ((OwnableField) fields[position]).getOwner();
+    }
+
+
+
+    public boolean isInPrison() {
+        return ((GoToPrison) fields[position]).isGoToPrison();
+    }
+
+
+    public String[] getOwnedFields() {
+        return ownedFields;
+    }
+
+    public boolean getdrawCard(){
+        boolean drawcard = false;
+        if(fields[position] instanceof ChanceCard){
+            drawcard = true;
+        };
+        return drawcard;
+    }
+
+
+    public void setOwnedFields(String[] ownedFields, String playerString) {
+        if(((OwnableField)fields[position]).getOwner()==""); {
+            ((OwnableField)fields[position]).setOwner(playerString);
+        }
     }
 }
