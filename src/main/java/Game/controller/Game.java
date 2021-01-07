@@ -126,7 +126,7 @@ public class Game {
                             player[i].playerBalanceUpdate(-properties.calculateRent(player[i].currentPosition()));
                             matadorGUI.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
                         }else{
-                            // KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
+                            //KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
                             player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
                         }
                     }
@@ -167,6 +167,9 @@ public class Game {
                         isWinnerWinnerChickenDinner = true;
                         break;
                 }
+                if (dices.Die1()==dices.Die2()){
+                    i=i-1;
+            }
 
             }
 
