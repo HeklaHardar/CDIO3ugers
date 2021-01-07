@@ -287,4 +287,15 @@ public class MatadorGui {
         }
         return 0;
     }
+
+    public int getBuyField(){
+        stringChoice = gui.getUserSelection("Vil du købe feltet? ", "Ja", "Nej");
+        switch (stringChoice){
+            case "Ja":
+                return 1;
+            case "Nej":
+                return 2;
+        }
+        return 0;
+    }
 }

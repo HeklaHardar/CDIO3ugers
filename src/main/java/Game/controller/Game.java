@@ -134,9 +134,16 @@ public class Game {
                             player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(properties.getRent());
                             player[i].playerBalanceUpdate(-properties.calculateRent(player[i].currentPosition()));
                             matadorGUI.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
-                        }else{
-                            // KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
-                            player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
+                        }
+                        // KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
+                        else if(properties.getOwnedFields()[player[i].currentPosition()] == 0) {
+                            if (MatadorGui.getBuyField() == 1) {
+                                player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
+                                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                            }
+                            else {
+                                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                            }
                         }
                     }
                     matadorGUI.updateGuiBalance(i, player[i].playerBalance());
