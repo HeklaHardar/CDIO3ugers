@@ -2,8 +2,6 @@ package Game.controller;
 
 import Game.Model.*;
 import Game.View.MatadorGui;
-import gui_main.*;
-
 
 
 public class Game {
@@ -33,20 +31,20 @@ public class Game {
         Dices dices = new Dices();
 
 
-        Menu menu = new Menu();
+        GameStart gameStart = new GameStart();
         matadorGUI.createGui();
-        menu.startGame(matadorGUI);
+        gameStart.startGame(matadorGUI);
         Fieldproperties properties = new Fieldproperties();
 
 
-        for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
-            player[i] = new Player(menu.playernamesToString()[i]);
-            player[i].starterScore(menu.getPlayerAmount());
+        for (int i = 0; i <= gameStart.getPlayerAmount() - 1; i++) {
+            player[i] = new Player(gameStart.playernamesToString()[i]);
+            player[i].starterScore(gameStart.getPlayerAmount());
             matadorGUI.guiPlayers(player[i].playerString(), player[i].playerBalance(), i);
         }
 
         while (!isWinnerWinnerChickenDinner) {
-            for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
+            for (int i = 0; i <= gameStart.getPlayerAmount() - 1; i++) {
                 matadorGUI.gui.getUserButtonPressed("Det er " + player[i].playerString() + "'s tur", "Slå terning");
                 dices.roll();
                 matadorGUI.ShowDie(dices.Die1(), dices.Die2());
@@ -95,19 +93,19 @@ public class Game {
                             player[i].updatePrisonCard(true);
                         }
                         if (cards.isHasSammenskudsgilde()) {
-                            for (int y = 0; y < menu.getPlayerAmount(); y++) {
+                            for (int y = 0; y < gameStart.getPlayerAmount(); y++) {
                                 player[y].playerBalanceUpdate(-25);
                                 matadorGUI.updateGuiBalance(y, player[y].playerBalance());
                             }
-                            player[i].playerBalanceUpdate(menu.getPlayerAmount()*25);
+                            player[i].playerBalanceUpdate(gameStart.getPlayerAmount()*25);
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
                         if (cards.isHasMatadorlegat()) {
-                            for (int y = 0; y < menu.getPlayerAmount(); y++) {
+                            for (int y = 0; y < gameStart.getPlayerAmount(); y++) {
                                 player[y].playerBalanceUpdate(-25);
                                 matadorGUI.updateGuiBalance(y, player[y].playerBalance());
                             }
-                            player[i].playerBalanceUpdate(menu.getPlayerAmount()*25);
+                            player[i].playerBalanceUpdate(gameStart.getPlayerAmount()*25);
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
 
@@ -155,7 +153,7 @@ public class Game {
 
                     if (player[i].playerBalance() < 0) {
 
-                        int[] balances = new int[menu.getPlayerAmount()];
+                        int[] balances = new int[gameStart.getPlayerAmount()];
                         for(int j=0; j<
                                 balances.length; j++) {
                             int money = player[j].playerBalance();

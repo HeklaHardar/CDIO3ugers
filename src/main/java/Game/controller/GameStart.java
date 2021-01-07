@@ -2,7 +2,7 @@ package Game.controller;
 
 import Game.View.MatadorGui;
 
-public class Menu {
+public class GameStart {
 
     // Defines variables
     private final String[] Players = new String[6];
