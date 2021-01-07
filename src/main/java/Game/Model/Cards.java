@@ -55,7 +55,7 @@ public class Cards {
                 hasPositionChange = true;
                 break;
             case 2:
-                cardText = "Ryk frem til Grønningen. \n Hvis De passerer start, indkasserer Da kr. 200,00.";
+                cardText = TextforCards.getCards()[1];
                 PositionChange = 24;
                 hasPositionChange = true;
                 break;
@@ -73,36 +73,36 @@ public class Cards {
                 break;
             case 5:
                 //Parkeringsbøde
-                cardText = "De har måttet vedtage en \n parkeringsbøde.\n Betal kr. 20,00 til banken.";
+                cardText = TextforCards.getCards()[4];
                 money = -20;
                 break;
             case 7:
             case 8:
-                cardText = "Ryk tre felter tilbage";
+                cardText = TextforCards.getCards()[7];
                 move = -3;
                 hasExtraMoves = true;
                 //Ryk tre felter tilbage
                 break;
             case 10:
                 //Ryk frem til start
-                cardText = "Ryk frem til start.";
+                cardText = TextforCards.getCards()[9];
                 PositionChange = 0;
                 hasPositionChange = true;
                 break;
             case 11:
                 // HUSE OG HOTELLER SKAL LAVE FØRST
-                cardText = "Kul- og kokspriserne er steget, \n og De skal betale: \n kr. 25,00 pr. hus og \n kr. 125,00 pr. hotel.";
+                cardText = TextforCards.getCards()[10];
                 break;
             case 12:
                 // HUSE OG HOTELLER SKAL LAVE FØRST
-                cardText = "Ejendomsskatterne er steget, \n ekstraudgifterne er: \n kr. 50,00 pr. hus og \n kr. 125,00 pr. hotel.";
+                cardText = TextforCards.getCards()[11];
                 break;
             case 13:
-                cardText = "De har lagt penge ud til sammen- \n skudsgilde. Mærkværdigvis \n betaler alle straks. Modtag fra \n hver medspiller kr. 25,00.";
+                cardText = TextforCards.getCards()[12];
                 isSammenskudsgilde = true;
                 break;
             case 14:
-                cardText = "Værdien af egen avl fra nyttehaven \n udgør kr. 200,00, \n som De modtager af banken.";
+                cardText = TextforCards.getCards()[13];
                 money = 200;
                 break;
             case 15:
@@ -110,54 +110,53 @@ public class Cards {
                 cardText = TextforCards.getCards()[24];
                 break;
             case 16:
-                cardText = "De har anskaffet et nyt dæk til\n Deres vogn.\n Indbetal kr. 100,00.";
+                cardText = TextforCards.getCards()[15];
                 money = -100;
                 break;
             case 17:
-                cardText = "De har kørt frem for >> Fuld Stop<<\n Betal kr. 100,00 i bøde.";
+                cardText = TextforCards.getCards()[16];
                 money = -100;
                 break;
             case 18:
             case 23:
-                cardText = "Betal for vognvask og smøring \n kr. 10,00.";
+                cardText = TextforCards.getCards()[17];
                 money = -10;
                 break;
             case 19:
-                cardText = "De har været en tur i udlandet\n og haft for mange cigaretter med\nhjem. - Betal told kr. 20,00.";
+                cardText = TextforCards.getCards()[18];
                 money = -20;
                 break;
             case 20:
-                cardText = "De har måttet vedtage en par-\nkeringsbøde.\n Betal kr. 20,00 til banken.";
+                cardText = TextforCards.getCards()[19];
                 money = -20;
                 break;
             case 21:
-                cardText = "Grundet på dyrtiden har De fået\n gageforhøjelse. \n Modtag kr. 25,00.";
+                cardText = TextforCards.getCards()[20];
                 money = 25;
                 break;
             case 22:
             case 24:
-                cardText = "I anledning af Kongens fødsels-\n dag benådes De herved for fængsel.\n Dette kort kan opbevares, indtil \n " +
-                        "De får brug for det, eller De \n kan sælge det.";
+                cardText = TextforCards.getCards()[21];
                 hasPrisonCard = true;
                 break;
             case 26:
-                cardText = "De har solgt Deres gamle klude.\n Modtag kr. 20,00.";
+                cardText = TextforCards.getCards()[25];
                 money = 20;
                 break;
             case 27:
-                cardText = "De har rettidigt afleveret Deres\n abonnementskort. \n Depositum kr. 1,00 \n udbetales Dem af banken.";
+                cardText = TextforCards.getCards()[26];
                 money = 1;
                 break;
             case 28:
-                cardText = "Manufakturvarerne er blevet bil-\n ligere og bedre, herved sparer De \n kr. 50,00. \n som De modtager af banken.";
+                cardText = TextforCards.getCards()[27];
                 money = 50;
                 break;
             case 29:
-                cardText = "Efter auktionen på Assistens- \n huset, hvor De havde pantsat Deres tøj, modtager De ekstra \n kr. 108,00.";
+                cardText = TextforCards.getCards()[28];
                 money = 108;
                 break;
             case 30:
-                cardText = "Deres præmieobligation er kom- \n met ud. De motager kr. 100,00 \n af banken.";
+                cardText = TextforCards.getCards()[29];
                 money = 100;
                 break;
             case 31:
