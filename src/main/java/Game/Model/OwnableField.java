@@ -1,10 +1,10 @@
 package Game.Model;
 
 public class OwnableField extends Field{
-
     protected String color;
     protected boolean ownable = true;
     protected int rent;
+
 
     public int getRent() {
         return rent;

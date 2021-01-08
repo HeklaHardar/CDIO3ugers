@@ -228,8 +228,9 @@ public class FieldController {
         this.position = position;
     }
     public int calculateValue() {
-        try {
+
             int value = fields[position].getValue();
+        try {
             if(fields[position] instanceof IncomeTax){
                 return value;
             }
@@ -270,7 +271,9 @@ public class FieldController {
         catch (ClassCastException e){ return 0; }
         return rent;
     }
-
+    public String getColor(){
+        return ((OwnableField)fields[position]).getColor();
+    }
     public int getValue() {
         return fields[position].getValue();
     }
