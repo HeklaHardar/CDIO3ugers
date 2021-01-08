@@ -217,7 +217,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 40:
+                    case 0:
                         Start s1 = new Start();
                         fields[fieldcount]=s1;
                         break;
