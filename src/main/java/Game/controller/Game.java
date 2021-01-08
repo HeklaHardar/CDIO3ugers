@@ -2,8 +2,6 @@ package Game.controller;
 
 import Game.Model.*;
 import Game.View.MatadorGui;
-import gui_main.*;
-
 
 
 public class Game {
@@ -34,7 +32,7 @@ public class Game {
         PrisonConditions prisonproperties = new PrisonConditions();
 
 
-        Menu menu = new Menu();
+        GameStart menu = new GameStart();
         matadorGUI.createGui();
         menu.startGame(matadorGUI);
         Fieldproperties properties = new Fieldproperties();
