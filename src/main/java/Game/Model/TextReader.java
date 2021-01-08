@@ -25,7 +25,7 @@ public class TextReader {
         BufferedReader reader1;
         BufferedReader reader2;
         int counter = 1;
-        String[] textLines = new String[Counter];
+
 
         try {
             //Reads the file and checks how many lines are present to make an array appropriate for the file length
@@ -38,6 +38,7 @@ public class TextReader {
                 Counter +=1;
             }
             reader1.close();
+            String[] textLines = new String[Counter];
 
             //Reads the file and puts each line into it's own place in the array
             reader2 = new BufferedReader(new FileReader(String.valueOf(filePath)));
@@ -50,11 +51,12 @@ public class TextReader {
                 textLines[counter] = TextLine;
                 counter += 1;
             }
+            Text = textLines;
             reader2.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Text = textLines;
+
     }
 
     public String[] getText(){return Text;}
