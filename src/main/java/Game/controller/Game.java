@@ -136,15 +136,15 @@ public class Game {
 
                     //Checks the properties of the field that the player landed on
                 if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0) {
-                    if(cards.isFreeField() && fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0)
-                        player[i].playerBalanceUpdate(0);
-                    else
-                        player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
-                    cards.resetfreeField();
+                    if (matadorGUI.getBuyField() == 1) {
+                            player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
+                    }
+                    matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                 }
 
                 //Pays rent if a field is owned
                 if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0) {
+                    matadorGUI.showMessage(player[i].playerString() + ", du er landet på en ejendom ejet af "+ player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() + " og betaler " + fieldProperties.getRent() + " kr. i husleje");
                     player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(fieldProperties.calculateRent());
                     player[i].playerBalanceUpdate(-fieldProperties.calculateRent());
                     matadorGUI.updateGuiBalance(fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1, player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
@@ -156,8 +156,10 @@ public class Game {
                 fieldProperties.setOwnedFields(i+1);
 
                 if (fieldProperties.isInPrison()) {
+                    matadorGUI.showMessage(player[i].playerString() + " skal i fængsel");
                     matadorGUI.moveToPrison(i,player[i].currentPosition());
                     player[i].setInPrison();
+                    fieldProperties.resetPrisonStatus();
                 }
                 if (player[i].playerBalance() < 0) {
 

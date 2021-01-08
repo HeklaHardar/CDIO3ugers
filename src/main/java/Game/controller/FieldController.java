@@ -5,6 +5,7 @@ import Game.Model.*;
 public class FieldController {
     private Field[] fields = new Field[40];
     private int[] ownedFields = new int[40];
+    private boolean inPrison = false;
     private int position = 1;
     public Field[] createFields(){
         int fieldcount = 0;
@@ -226,6 +227,11 @@ public class FieldController {
     public int getOwnable(){
         return fields[position].isOwnable();
     }
+    public void resetPrisonStatus(){
+        this.inPrison = false;
+
+    }
+
     public void setPosition(int position){
         this.position = position;
     }
@@ -283,6 +289,7 @@ public class FieldController {
     public int getValue() {
         return fields[position].getValue();
     }
+
     public int getRent() {
         int rent = 0;
         if(fields[position]instanceof OwnableField){
@@ -301,10 +308,9 @@ public class FieldController {
     }
 
 
-
     public boolean isInPrison() {
         if(fields[position] instanceof GoToPrison) {
-            return ((GoToPrison) fields[position]).isGoToPrison();
+            return inPrison = true;
         }
         else{
             return false;
