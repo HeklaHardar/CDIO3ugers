@@ -11,6 +11,7 @@ public class Game {
     private int temporary;
     private int balanceid;
     private int finalbalanceid;
+    private int round = 0;
 
     public static void main(String[] args) throws InterruptedException {
         //Instantiating game object
@@ -35,7 +36,8 @@ public class Game {
         GameStart menu = new GameStart();
         matadorGUI.createGui();
         menu.startGame(matadorGUI);
-        Fieldproperties properties = new Fieldproperties();
+        FieldController fieldProperties = new FieldController();
+        fieldProperties.createFields();
 
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
@@ -45,6 +47,7 @@ public class Game {
         }
 
         while (!isWinnerWinnerChickenDinner) {
+            round = round + 1;
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
                 //checks if the player is in prison and releases him if he is.
                 if (player[i].isInPrison()) {
@@ -63,10 +66,10 @@ public class Game {
                 //Moves the car on the GUI and checks if player is over start.
                 matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                fieldProperties.setPosition(player[i].currentPosition());
 
                 //Checks if player has landed on a chancecard field.
-                if (player[i].currentPosition() == 2 || player[i].currentPosition() == 7 || player[i].currentPosition() == 17 ||
-                        player[i].currentPosition() == 22 || player[i].currentPosition() == 33 || player[i].currentPosition() == 36) {
+                if (fieldProperties.getdrawCard()) {
                     while (true) {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
@@ -130,71 +133,55 @@ public class Game {
                 cards.resetStats();
 
 
+
                     //Checks the properties of the field that the player landed on
-                    properties.Fieldproperties(player[i].currentPosition());
-                    if (properties.getOwningStatus() == 1) {
-
-
-                        //Pays rent if a field is owned
-                        if (properties.getOwnedFields()[player[i].currentPosition()] != 0) {
-                            player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(properties.getRent());
-                            player[i].playerBalanceUpdate(-properties.calculateRent(player[i].currentPosition()));
-                            matadorGUI.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
-                            if (player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() != player[i].playerString()){
-                                matadorGUI.showMessage(player[i].playerString() + ", du er landet på en ejendom ejet af "+ player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() + " og betaler " + properties.getRent() + " kr. i husleje");
-                            }
-                        }
-                        // KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
-                        else if(properties.getOwnedFields()[player[i].currentPosition()] == 0 /*&& player[i].playerBalance() >= properties.calculateValue(player[i].currentPosition())*/) {
-                            if (matadorGUI.getBuyField() == 1) {
-                                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), properties.getOwningStatus(), properties.getOwnedFields());
-                                player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
-                                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                                properties.setOwnedFields(properties.getOwnedFields(), player[i].currentPosition(), i);
-                            }
-                            else {
-                                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                            }
-                        }
-                    }
-
-                    matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-
-
-
-
-
-
-                if (properties.isInPrison()) {
-                    matadorGUI.showMessage(player[i].playerString() + " skal i fængsel");
-                    matadorGUI.moveToPrison(i,player[i].currentPosition());
-                    player[i].setInPrison();
-                    properties.resetPrisonStatus();
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0) {
+                    if(cards.isFreeField() && fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0)
+                        player[i].playerBalanceUpdate(0);
+                    else
+                        player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
+                    cards.resetfreeField();
                 }
 
-                    if (player[i].playerBalance() < 0) {
+                //Pays rent if a field is owned
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0) {
+                    player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(fieldProperties.calculateRent());
+                    player[i].playerBalanceUpdate(-fieldProperties.calculateRent());
+                    matadorGUI.updateGuiBalance(fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1, player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
+                }
+                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
-                        int[] balances = new int[menu.getPlayerAmount()];
-                        for(int j=0; j<
-                                balances.length; j++) {
-                            int money = player[j].playerBalance();
-                            balances[j] = money;
+                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.getOwnable(), fieldProperties.getOwnedFields());
+
+                fieldProperties.setOwnedFields(i+1);
+
+                if (fieldProperties.isInPrison()) {
+                    matadorGUI.moveToPrison(i,player[i].currentPosition());
+                    player[i].setInPrison();
+                }
+                if (player[i].playerBalance() < 0) {
+
+                    int[] balances = new int[menu.getPlayerAmount()];
+                    for(int j=0; j<
+                            balances.length; j++) {
+                        int money = player[j].playerBalance();
+                        balances[j] = money;
+                    }
+                    temporary=0;
+                    balanceid = 0;
+                    finalbalanceid = 0;
+
+                    for(int balance:balances){
+                        if(temporary<balance){
+                            temporary = balance;
+                            finalbalanceid = balanceid;
+
                         }
-                        temporary=0;
-                        balanceid = 0;
-                        finalbalanceid = 0;
-
-                        for(int balance:balances){
-                            if(temporary<balance){
-                                temporary = balance;
-                                finalbalanceid = balanceid;
-
-                            }
-                                balanceid+=1;
-                        }
-                            matadorGUI.showMessage("Vinderen er: " + player[finalbalanceid].playerString() + " med " + player[finalbalanceid].playerBalance() + " penge");
-                        isWinnerWinnerChickenDinner = true;
-                        break;
+                        balanceid+=1;
+                    }
+                    matadorGUI.showMessage("Vinderen er: " + player[finalbalanceid].playerString() + " med " + player[finalbalanceid].playerBalance() + " penge");
+                    isWinnerWinnerChickenDinner = true;
+                    break;
                 }
 
             }
