@@ -25,6 +25,9 @@ public class FieldController {
             else if(fieldcount == 10){
                 fields[fieldcount] = new Prison();
             }
+            else if(fieldcount == 30){
+                fields[fieldcount] = new GoToPrison();
+            }
             else if(fieldcount == 20){
                 fields[fieldcount] = new SafeZone();
             }
