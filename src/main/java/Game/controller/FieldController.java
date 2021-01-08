@@ -228,18 +228,21 @@ public class FieldController {
     public void setPosition(int position){
         this.position = position;
     }
- /*   public int calculateValue() {
+    public int calculateValue() {
         int value = 0;
         for (int i=0 ; i <= 39; i++){
             if(fields[i] instanceof OwnableField){
                 if((i!=position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                        && (((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[i]).isOwnable()!=true)){
+                        && ownedFields[i] == ownedFields[position] && ownedFields[i]!=0){
                     value = fields[i].getValue()*2;
+                }
+                else{
+                    value=fields[i].getValue();
                 }
             }
         }
         return value;
-    }*/
+    }
     public int calculateRent() {
         int rent = 0;
         for (int i=0 ; i <= 39; i++){

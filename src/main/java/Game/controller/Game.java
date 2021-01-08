@@ -36,7 +36,8 @@ public class Game {
         Menu menu = new Menu();
         matadorGUI.createGui();
         menu.startGame(matadorGUI);
-        Fieldproperties properties = new Fieldproperties();
+        FieldController fieldProperties = new FieldController();
+        fieldProperties.createFields();
 
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
@@ -56,10 +57,10 @@ public class Game {
                 //Moves the car on the GUI and checks if player is over start.
                 matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(2/*dices.getValue()*/));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                fieldProperties.setPosition(player[i].currentPosition());
 
                 //Checks if player has landed on a chancecard field.
-                if (player[i].currentPosition() == 2 || player[i].currentPosition() == 7 || player[i].currentPosition() == 17 ||
-                        player[i].currentPosition() == 22 || player[i].currentPosition() == 33 || player[i].currentPosition() == 36 /* Change this value */) {
+                if (fieldProperties.getdrawCard()) {
                     while (true) {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
@@ -125,7 +126,29 @@ public class Game {
 
 
                     //Checks the properties of the field that the player landed on
-                    properties.Fieldproperties(player[i].currentPosition());
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != i + 1) {
+                    if(cards.isFreeField() && fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0)
+                        player[i].playerBalanceUpdate(0);
+                    else
+                        player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
+                    cards.resetfreeField();
+                }
+
+                //Pays rent if a field is owned
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0) {
+                    player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(fieldProperties.calculateRent());
+                    matadorGUI.updateGuiBalance(fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1, player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
+                }
+                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+
+                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.getOwningStatus(), fieldProperties.getOwnedFields());
+
+                fieldProperties.setOwnedFields(i);
+            }
+
+
+
+            properties.Fieldproperties(player[i].currentPosition());
                     if (properties.getOwnedFields()[player[i].currentPosition()] != i + 1) {
 
                         if(cards.isFreeField() && properties.getOwnedFields()[player[i].currentPosition()] == 0)
