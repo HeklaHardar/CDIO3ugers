@@ -291,11 +291,7 @@ public class FieldController {
     }
 
     public int getRent() {
-        int rent = 0;
-        if(fields[position]instanceof OwnableField){
-            ((OwnableField) fields[position]).getRent();
-        }
-        return rent;
+           return  ((OwnableField) fields[position]).getRent();
     }
 
     public int getOwningStatus() {

@@ -51,8 +51,8 @@ public class Game {
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
                 //checks if the player is in prison and releases him if he is.
                 if (player[i].isInPrison()) {
-                    prisonproperties.Release(player[i], dices, matadorGUI,i);
-                    if (player[i].isInPrison()){
+                    prisonproperties.Release(player[i], dices, matadorGUI, i);
+                    if (player[i].isInPrison()) {
                         player[i].InPrison();
                         continue;
                     }
@@ -88,12 +88,11 @@ public class Game {
 
                         }
                         if (cards.HasPrisonChance()) {
-                            if (!player[i].getPrisonCard()){
+                            if (!player[i].getPrisonCard()) {
                                 matadorGUI.moveToPrison(i, player[i].currentPosition());
                                 player[i].setInPrison();
                                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                            }
-                            else if (player[i].getPrisonCard()){
+                            } else if (player[i].getPrisonCard()) {
                                 player[i].updatePrisonCard(false);
                             }
 
@@ -109,7 +108,7 @@ public class Game {
                                 player[y].playerBalanceUpdate(-25);
                                 matadorGUI.updateGuiBalance(y, player[y].playerBalance());
                             }
-                            player[i].playerBalanceUpdate(menu.getPlayerAmount()*25);
+                            player[i].playerBalanceUpdate(menu.getPlayerAmount() * 25);
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
                         if (cards.isHasMatadorlegat()) {
@@ -117,7 +116,7 @@ public class Game {
                                 player[y].playerBalanceUpdate(-25);
                                 matadorGUI.updateGuiBalance(y, player[y].playerBalance());
                             }
-                            player[i].playerBalanceUpdate(menu.getPlayerAmount()*25);
+                            player[i].playerBalanceUpdate(menu.getPlayerAmount() * 25);
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                         }
 
@@ -127,17 +126,14 @@ public class Game {
                     }
 
 
-
-
                 }
                 cards.resetStats();
 
 
-
-                    //Checks the properties of the field that the player landed on
-                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0) {
-                    if (matadorGUI.getBuyField() == 1 && fieldProperties.isOwnable()==1) {
-                            player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
+                //Checks the properties of the field that the player landed on
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0 && fieldProperties.isOwnable() == 1) {
+                    if (matadorGUI.getBuyField() == 1) {
+                        player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
                     }
                     matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                 }
