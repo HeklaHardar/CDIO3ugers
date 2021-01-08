@@ -223,7 +223,9 @@ public class FieldController {
         }
         return fields;
     }
-
+    public int getOwnable(){
+        return fields[position].isOwnable();
+    }
     public void setPosition(int position){
         this.position = position;
     }

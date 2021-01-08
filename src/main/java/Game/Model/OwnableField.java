@@ -2,9 +2,11 @@ package Game.Model;
 
 public class OwnableField extends Field{
     protected String color;
-    protected boolean ownable = true;
     protected int rent;
 
+    public OwnableField() {
+        ownable = 1;
+    }
 
     public int getRent() {
         return rent;
@@ -12,14 +14,6 @@ public class OwnableField extends Field{
 
     public void setRent(int rent) {
         this.rent = rent;
-    }
-
-    public boolean isOwnable() {
-        return ownable;
-    }
-
-    public void setOwnable(boolean ownable) {
-        this.ownable = ownable;
     }
 
     public String getColor() {

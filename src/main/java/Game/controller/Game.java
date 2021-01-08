@@ -144,7 +144,7 @@ public class Game {
                 }
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
-                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.getOwningStatus(), fieldProperties.getOwnedFields());
+                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.getOwnable(), fieldProperties.getOwnedFields());
 
                 fieldProperties.setOwnedFields(i+1);
 
