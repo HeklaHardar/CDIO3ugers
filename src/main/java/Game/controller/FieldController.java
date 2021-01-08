@@ -224,7 +224,7 @@ public class FieldController {
         }
         return fields;
     }
-    public int getOwnable(){
+    public int isOwnable(){
         return fields[position].isOwnable();
     }
     public void resetPrisonStatus(){

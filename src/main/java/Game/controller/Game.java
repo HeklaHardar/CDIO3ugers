@@ -136,7 +136,7 @@ public class Game {
 
                     //Checks the properties of the field that the player landed on
                 if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0) {
-                    if (matadorGUI.getBuyField() == 1) {
+                    if (matadorGUI.getBuyField() == 1 && fieldProperties.isOwnable()==1) {
                             player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
                     }
                     matadorGUI.updateGuiBalance(i, player[i].playerBalance());
@@ -151,7 +151,7 @@ public class Game {
                 }
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
-                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.getOwnable(), fieldProperties.getOwnedFields());
+                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.isOwnable(), fieldProperties.getOwnedFields());
 
                 fieldProperties.setOwnedFields(i+1);
 
