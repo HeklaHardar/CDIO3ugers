@@ -5,30 +5,29 @@ import Game.Model.*;
 public class FieldController {
     private Field[] fields = new Field[40];
     private int[] ownedFields = new int[40];
-    private int position = 0;
+    private int position = 1;
     public Field[] createFields(){
         int fieldcount = 0;
         for(Field field:fields){
 
-            if(fieldcount == 1 ||fieldcount == 6 ||fieldcount == 16 ||fieldcount == 21
-                    ||fieldcount == 32 || fieldcount == 35 ){
+            if(fieldcount == 2 ||fieldcount == 7 ||fieldcount == 17 ||fieldcount == 22
+                    ||fieldcount == 33 || fieldcount == 36 ){
                 fields[fieldcount] = new ChanceCard();
             }
-            else if(fieldcount == 4 ||fieldcount == 14 ||fieldcount == 24 ||fieldcount == 34){
+            else if(fieldcount == 5 ||fieldcount == 15 ||fieldcount == 25 ||fieldcount == 35){
                 fields[fieldcount] = new ShippingLine();
-                ((ShippingLine)fields[fieldcount]).setRent(25);
             }
-            else if(fieldcount == 3){
+            else if(fieldcount == 4){
                 fields[fieldcount] = new IncomeTax();
             }
 
             else if(fieldcount == 10){
                 fields[fieldcount] = new Prison();
             }
-            else if(fieldcount == 19){
+            else if(fieldcount == 20){
                 fields[fieldcount] = new SafeZone();
             }
-            else if(fieldcount == 11||fieldcount == 27){
+            else if(fieldcount == 12||fieldcount == 28){
                 fields[fieldcount] = new Brewery();
                 ((Brewery)fields[fieldcount]).setRent(15);
             }
@@ -45,7 +44,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 2:
+                    case 3:
                         own1.setColor("Blue");
                         own1.setName("Hvidovrevej");
                         own1.setValue(60);
@@ -53,7 +52,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 5:
+                    case 6:
                         own1.setColor("Orange");
                         own1.setName("Roskildevej");
                         own1.setValue(100);
@@ -61,7 +60,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 7:
+                    case 8:
                         own1.setColor("Orange");
                         own1.setName("Valby Langade");
                         own1.setValue(100);
@@ -69,7 +68,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 8:
+                    case 9:
                         own1.setColor("Orange");
                         own1.setName("Allegade");
                         own1.setValue(120);
@@ -77,7 +76,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 10:
+                    case 11:
                         own1.setColor("Brown");
                         own1.setName("Frederiksberg Alle");
                         own1.setValue(140);
@@ -85,7 +84,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 12:
+                    case 13:
                         own1.setColor("Brown");
                         own1.setName("Bülowsvej");
                         own1.setValue(140);
@@ -93,7 +92,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 13:
+                    case 14:
                         own1.setColor("Brown");
                         own1.setName("Gl. Kongevej");
                         own1.setValue(160);
@@ -101,7 +100,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 15:
+                    case 16:
                         own1.setColor("Gray");
                         own1.setName("Bernstoffervej");
                         own1.setValue(180);
@@ -109,7 +108,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 17:
+                    case 18:
                         own1.setColor("Gray");
                         own1.setName("Hellerupvej");
                         own1.setValue(180);
@@ -117,7 +116,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 18:
+                    case 19:
                         own1.setColor("Gray");
                         own1.setName("Strandvej");
                         own1.setValue(200);
@@ -125,7 +124,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 20:
+                    case 21:
                         own1.setColor("Red");
                         own1.setName("Trianglen");
                         own1.setValue(220);
@@ -133,7 +132,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 22:
+                    case 23:
                         own1.setColor("Red");
                         own1.setName("Østerbrogade");
                         own1.setValue(220);
@@ -141,7 +140,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 23:
+                    case 24:
                         own1.setColor("Red");
                         own1.setName("Grønningen");
                         own1.setValue(240);
@@ -149,7 +148,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 25:
+                    case 26:
                         own1.setColor("Sand");
                         own1.setName("Bredgade");
                         own1.setValue(260);
@@ -157,7 +156,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 26:
+                    case 27:
                         own1.setColor("Sand");
                         own1.setName("Kg. Nytorv");
                         own1.setValue(260);
@@ -165,7 +164,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 28:
+                    case 29:
                         own1.setColor("Sand");
                         own1.setName("Østergade");
                         own1.setValue(280);
@@ -173,7 +172,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 30:
+                    case 31:
                         own1.setColor("Yellow");
                         own1.setName("Amager Torv");
                         own1.setValue(300);
@@ -181,7 +180,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 31:
+                    case 32:
                         own1.setColor("Yellow");
                         own1.setName("Vimmelskaftet");
                         own1.setValue(300);
@@ -189,7 +188,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 33:
+                    case 34:
                         own1.setColor("Yellow");
                         own1.setName("Nygade");
                         own1.setValue(320);
@@ -197,7 +196,7 @@ public class FieldController {
                         fields[fieldcount]=own1;
                         break;
 
-                    case 36:
+                    case 37:
                         own1.setColor("Purple");
                         own1.setName("Frederiksberg");
                         own1.setValue(350);
@@ -229,33 +228,46 @@ public class FieldController {
         this.position = position;
     }
     public int calculateValue() {
-        int value = 0;
-        for (int i=0 ; i <= 39; i++){
-            if(fields[i] instanceof OwnableField){
-                if((i!=position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                        && ownedFields[i] == ownedFields[position] && ownedFields[i]!=0){
-                    value = fields[i].getValue()*2;
-                }
-                else{
-                    value=fields[i].getValue();
-                }
+        try {
+            int value = fields[position].getValue();
+            if(fields[position] instanceof IncomeTax){
+                return value;
             }
+            if (fields[position] instanceof OwnableField) {
+                for (int i = 1; i <= 39; i++) {
+                    if (fields[i] instanceof OwnableField) {
+                        if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
+                                && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
+                            value = fields[position].getValue() * 2;
+                        }
+
+                    }
+                }
+
+            }
+            return value;
         }
-        return value;
+        catch (ClassCastException e){
+            return 0;
+        }
+
     }
     public int calculateRent() {
-        int rent = 0;
-        for (int i=0 ; i <= 39; i++){
-            if(fields[i] instanceof OwnableField){
-                if((i!=position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                        && ownedFields[i] == ownedFields[position] && ownedFields[i]!=0){
-                    rent = ((OwnableField)fields[i]).getRent()*2;
-                }
-                else{
-                    rent=((OwnableField)fields[i]).getRent();
+
+        int rent = ((OwnableField) fields[position]).getRent();
+        try{
+        if(fields[position] instanceof OwnableField) {
+            for (int i = 0; i <= 39; i++) {
+                if (fields[i] instanceof OwnableField) {
+                    if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
+                            && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
+                        rent = ((OwnableField) fields[position]).getRent() * 2;
+                    }
                 }
             }
         }
+        }
+        catch (ClassCastException e){ return 0; }
         return rent;
     }
 

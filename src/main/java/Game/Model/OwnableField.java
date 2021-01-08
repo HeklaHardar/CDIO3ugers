@@ -4,7 +4,7 @@ public class OwnableField extends Field{
 
     protected String color;
     protected boolean ownable = true;
-    private int rent;
+    protected int rent;
 
     public int getRent() {
         return rent;
