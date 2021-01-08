@@ -142,9 +142,12 @@ public class Game {
                             player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(properties.getRent());
                             player[i].playerBalanceUpdate(-properties.calculateRent(player[i].currentPosition()));
                             matadorGUI.updateGuiBalance(properties.getOwnedFields()[player[i].currentPosition()] - 1, player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
+                            if (player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() != player[i].playerString()){
+                                matadorGUI.showMessage(player[i].playerString() + ", du er landet på en ejendom ejet af "+ player[properties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() + " og betaler " + properties.getRent() + " kr. i husleje");
+                            }
                         }
                         // KØBER FELTET -I FREMTIDEN SKAL DER SPØRGES FØRST
-                        else if(properties.getOwnedFields()[player[i].currentPosition()] == 0) {
+                        else if(properties.getOwnedFields()[player[i].currentPosition()] == 0 /*&& player[i].playerBalance() >= properties.calculateValue(player[i].currentPosition())*/) {
                             if (matadorGUI.getBuyField() == 1) {
                                 matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), properties.getOwningStatus(), properties.getOwnedFields());
                                 player[i].playerBalanceUpdate(-properties.calculateValue(player[i].currentPosition()));
@@ -165,6 +168,7 @@ public class Game {
 
 
                 if (properties.isInPrison()) {
+                    matadorGUI.showMessage(player[i].playerString() + " skal i fængsel");
                     matadorGUI.moveToPrison(i,player[i].currentPosition());
                     player[i].setInPrison();
                     properties.resetPrisonStatus();
