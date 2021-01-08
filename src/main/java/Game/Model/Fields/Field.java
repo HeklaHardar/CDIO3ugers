@@ -1,4 +1,4 @@
-package Game.Model;
+package Game.Model.Fields;
 
 public class Field {
     protected int value;

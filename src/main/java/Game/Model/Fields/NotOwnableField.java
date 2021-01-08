@@ -1,4 +1,6 @@
-package Game.Model;
+package Game.Model.Fields;
+
+import Game.Model.Fields.Field;
 
 public class NotOwnableField extends Field {
 

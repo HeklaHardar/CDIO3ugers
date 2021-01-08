@@ -1,6 +1,6 @@
-package Game.Model;
+package Game.Model.Fields;
 
-public class GoToPrison extends NotOwnableField{
+public class GoToPrison extends NotOwnableField {
     protected boolean inPrison = true;
 
     public boolean isGoToPrison() {

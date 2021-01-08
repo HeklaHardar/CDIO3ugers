@@ -1,5 +1,7 @@
 package Game.Model;
 
-public class ChanceCard extends Field{
+import Game.Model.Fields.Field;
+
+public class ChanceCard extends Field {
     protected boolean giveChanceCard = true;
 }

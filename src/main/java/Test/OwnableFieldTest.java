@@ -1,6 +1,6 @@
 package Test;
 
-import Game.Model.OwnableField;
+import Game.Model.Fields.OwnableField;
 import org.junit.jupiter.api.Test;
 
 class OwnableFieldTest {

@@ -1,6 +1,7 @@
 package Game.controller;
 
 import Game.Model.*;
+import Game.Model.Fields.*;
 
 public class FieldController {
     private Field[] fields = new Field[40];
