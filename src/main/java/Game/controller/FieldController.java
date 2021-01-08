@@ -235,6 +235,10 @@ public class FieldController {
         try {
             if(fields[position] instanceof IncomeTax){
                 return value;
+
+            }
+            if(fields[position].isOwnable()!=1){
+                return 0;
             }
             if (fields[position] instanceof OwnableField) {
                 for (int i = 1; i <= 39; i++) {
