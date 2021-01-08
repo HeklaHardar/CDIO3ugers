@@ -4,6 +4,15 @@ public class OwnableField extends Field{
 
     protected String color;
     protected boolean ownable = true;
+    private int rent;
+
+    public int getRent() {
+        return rent;
+    }
+
+    public void setRent(int rent) {
+        this.rent = rent;
+    }
 
     public boolean isOwnable() {
         return ownable;
