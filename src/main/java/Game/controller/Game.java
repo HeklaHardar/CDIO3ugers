@@ -139,7 +139,7 @@ public class Game {
                 }
 
                 //Pays rent if a field is owned
-                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0) {
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() != player[i].playerString()) {
                     matadorGUI.showMessage(player[i].playerString() + ", du er landet på en ejendom ejet af "+ player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() + " og betaler " + fieldProperties.getRent() + " kr. i husleje");
                     player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(fieldProperties.calculateRent());
                     player[i].playerBalanceUpdate(-fieldProperties.calculateRent());

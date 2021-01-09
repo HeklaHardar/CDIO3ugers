@@ -37,7 +37,7 @@ public class Player {
     public void setInPrison(){
             inPrison = true;
             position = 10;
-            roundsinprison = 0;
+            roundsinprison = 1;
     }
     public void InPrison(){
         roundsinprison += 1;
