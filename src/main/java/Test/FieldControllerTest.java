@@ -11,7 +11,10 @@ class FieldControllerTest {
     void getFields() {
         FieldController field = new FieldController();
         System.out.println(field.getFields().length);
-        System.out.println(field.getRent2().length);
+        System.out.println(field.getFieldColors().length);
+        System.out.println(field.getFieldTitles().length);
+        System.out.println(field.getFieldValues().length);
+
 
     }
 
