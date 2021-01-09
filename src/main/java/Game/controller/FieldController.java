@@ -307,15 +307,20 @@ public class FieldController {
 
         int rent = ((OwnableField) fields[position]).getRent();
         try{
+
         if(fields[position] instanceof OwnableField) {
-            for (int i = 0; i <= 39; i++) {
-                if (fields[i] instanceof OwnableField) {
-                    if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                            && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
-                        rent = ((OwnableField) fields[position]).getRent() * 2;
+
+                for (int i = 0; i <= 39; i++) {
+                    if (fields[i] instanceof OwnableField) {
+                        //Hvis du ejer 2 af blå eller lilla
+                        if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
+                                && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0 && (((OwnableField) fields[position]).getColor()=="Purple" || ((OwnableField) fields[position]).getColor()=="Blue")) {
+                            rent = ((OwnableField) fields[position]).getRent() * 2;
+                        }
                     }
                 }
-            }
+
+
         }
         }
         catch (ClassCastException e){ return 0; }
