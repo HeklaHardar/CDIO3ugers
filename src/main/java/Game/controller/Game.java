@@ -176,6 +176,10 @@ public class Game {
                     isWinnerWinnerChickenDinner = true;
                     break;
                 }
+                if(dices.Die1()==dices.Die2()){
+                    i=i-1;
+                }
+
 
             }
         }
