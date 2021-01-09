@@ -111,22 +111,36 @@ public class FieldController {
     public int calculateRent() {
 
         int rent = ((OwnableField) fields[position]).getRent();
-        try{
+        try {
 
-        if(fields[position] instanceof OwnableField) {
+            if (fields[position] instanceof OwnableField) {
 
                 for (int i = 0; i <= 39; i++) {
+                    int colorCount = 0;
                     if (fields[i] instanceof OwnableField) {
+
                         //Hvis du ejer 2 af blå eller lilla
                         if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                                && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0 && (((OwnableField) fields[position]).getColor()=="Purple" || ((OwnableField) fields[position]).getColor()=="Blue")) {
-                            rent = ((OwnableField) fields[position]).getRent() * 2;
+                                && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
+                            if ((((OwnableField) fields[position]).getColor() == "Purple" || ((OwnableField) fields[position]).getColor() == "Blue")) {
+                                rent = ((OwnableField) fields[position]).getRent() * 2;
+                            } else {
+                                int k = 0;
+                                for (String color : fieldColors) {
+                                    if (color == ((OwnableField) fields[position]).getColor() && ownedFields[k] == ownedFields[position] && ownedFields[k] != 0 && k!=position) {
+                                        colorCount = colorCount + 1;
+                                    }
+                                    k++;
+                                }
+                                if (colorCount == 2) {
+                                    rent = ((OwnableField) fields[position]).getRent() * 2;
+                                }
+
+                            }
                         }
                     }
                 }
-
-
-        }
+            }
         }
         catch (ClassCastException e){ return 0; }
         return rent;
@@ -139,7 +153,11 @@ public class FieldController {
     }
 
     public int getRent() {
-           return  ((OwnableField) fields[position]).getRent();
+        if (fields[position] instanceof OwnableField){
+            return  ((OwnableField) fields[position]).getRent();
+        }
+        else return 0;
+
     }
 
     public int getOwningStatus() {
