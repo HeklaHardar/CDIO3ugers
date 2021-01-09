@@ -4,17 +4,15 @@ public class Account {
 
     private int points;
 
-    public Account() {}
+
+    public Account() {points = 1500;}
 
     // Updates player score
     public void updateScore(int sum) {points += sum;}
 
+
     // Returns new score
-    public int score() {return points;}
+    public int getScore() {return points;}
 
-    public void initializeScore(int players){
 
-        points = 1500;
-
-    }
 }
