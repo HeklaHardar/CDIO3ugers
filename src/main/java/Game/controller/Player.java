@@ -31,7 +31,6 @@ public class Player {
     //Updates the currentplayers score
     public void playerBalanceUpdate(int update){account.updateScore(update);}
 
-//    public void starterScore(){account.initializeScore();}
 
     // put player in prison
     public void setInPrison(){
@@ -76,7 +75,7 @@ public class Player {
     }
     // Move player with die
     public int updatePosition(int die){
-        oldPosition = getCurrentPosition();
+        oldPosition = position;
         position += die;
 
         if(position > 39){
