@@ -11,6 +11,13 @@ public class FieldController {
     ,new BuildableField(), new Brewery(), new BuildableField(), new GoToPrison(), new BuildableField(), new BuildableField(), new ChanceCard(), new BuildableField()
     , new ShippingLine(), new ChanceCard(), new BuildableField(), new IncomeTax(), new BuildableField()};
 
+    private String[] fieldColors = {"","Blue","", "Blue", "", ""
+            , "Orange", "", "Orange", "Orange", "", "Yellow", "Brewery",
+            "Yellow", "Yellow", new ShippingLine(), new BuildableField(), new ChanceCard(), new BuildableField(),new BuildableField()
+            ,new SafeZone(), new BuildableField(), new ChanceCard(), new BuildableField(), new BuildableField(), new ShippingLine(), new BuildableField()
+            ,new BuildableField(), new Brewery(), new BuildableField(), new GoToPrison(), new BuildableField(), new BuildableField(), new ChanceCard(), new BuildableField()
+            , new ShippingLine(), new ChanceCard(), new BuildableField(), new IncomeTax(), new BuildableField()};
+
     private int[] ownedFields = new int[40];
     private int[] rent = {0,2,0,4,0,25
             , 6, 0, 6, 8, 0, 10, 15, 10, 12, 25, 14, 0, 14,16
