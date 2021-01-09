@@ -4,6 +4,7 @@ import Game.Model.*;
 import Game.Model.Fields.*;
 
 public class FieldController {
+
     private Field[] fields = {new Start(),new BuildableField(),new ChanceCard(), new BuildableField(), new IncomeTax(), new ShippingLine()
     , new BuildableField(), new ChanceCard(), new BuildableField(), new BuildableField(), new Prison(), new BuildableField(), new Brewery(),
     new BuildableField(), new BuildableField(), new ShippingLine(), new BuildableField(), new ChanceCard(), new BuildableField(),new BuildableField()
@@ -11,12 +12,18 @@ public class FieldController {
     ,new BuildableField(), new Brewery(), new BuildableField(), new GoToPrison(), new BuildableField(), new BuildableField(), new ChanceCard(), new BuildableField()
     , new ShippingLine(), new ChanceCard(), new BuildableField(), new IncomeTax(), new BuildableField()};
 
-    private String[] fieldColors = {"","Blue","", "Blue", "", ""
+    private String[] fieldColors = {"","Blue","", "Blue", "", "Ship"
             , "Orange", "", "Orange", "Orange", "", "Yellow", "Brewery",
-            "Yellow", "Yellow", new ShippingLine(), new BuildableField(), new ChanceCard(), new BuildableField(),new BuildableField()
-            ,new SafeZone(), new BuildableField(), new ChanceCard(), new BuildableField(), new BuildableField(), new ShippingLine(), new BuildableField()
-            ,new BuildableField(), new Brewery(), new BuildableField(), new GoToPrison(), new BuildableField(), new BuildableField(), new ChanceCard(), new BuildableField()
-            , new ShippingLine(), new ChanceCard(), new BuildableField(), new IncomeTax(), new BuildableField()};
+            "Yellow", "Yellow", "Ship", "Grey", "", "Grey","Grey"
+            ,"", "Red","", "Red", "Red", "Ship", "Sand"
+            ,"Sand", "Brewery", "Sand", "", "Yellow", "Yellow", "", "Yellow"
+            , "Ship", "", "Purple", "", "Purple"};
+    private int[] fieldValues = {0,60,0,60, 200, 200
+            , 100, 0, 100, 120, 0, 140, 150,
+            140, 160, 200, 180, 0, 180,200
+            ,0, 220, 0, 220, 240, 200, 260
+            ,260, 150, 280, 0, 300, 300, 0, 320
+            , 200, 0, 350, 200, 400};
 
     private int[] ownedFields = new int[40];
     private int[] rent = {0,2,0,4,0,25
