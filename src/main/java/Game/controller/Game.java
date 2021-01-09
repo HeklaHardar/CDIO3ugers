@@ -64,7 +64,7 @@ public class Game {
 
 
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
+                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(1));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                 fieldProperties.setPosition(player[i].currentPosition());
 
@@ -139,8 +139,8 @@ public class Game {
                 }
 
                 //Pays rent if a field is owned
-                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() != player[i].playerString()) {
-                    matadorGUI.showMessage(player[i].playerString() + ", du er landet på en ejendom ejet af "+ player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() + " og betaler " + fieldProperties.getRent() + " kr. i husleje");
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0) {
+                    matadorGUI.showMessage(player[i].playerString() + ", du er landet på en ejendom ejet af "+ player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() + " og betaler " + fieldProperties.calculateRent() + " kr. i husleje");
                     player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(fieldProperties.calculateRent());
                     player[i].playerBalanceUpdate(-fieldProperties.calculateRent());
                     matadorGUI.updateGuiBalance(fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1, player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalance());
