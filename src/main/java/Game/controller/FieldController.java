@@ -4,12 +4,7 @@ import Game.Model.*;
 import Game.Model.Fields.*;
 
 public class FieldController {
-    private Field[] fields = {new Start(),new BuildableField(),new ChanceCard(), new BuildableField(), new IncomeTax(), new ShippingLine()
-    , new BuildableField(), new ChanceCard(), new BuildableField(), new BuildableField(), new Prison(), new BuildableField(), new Brewery(),
-    new BuildableField(), new BuildableField(), new ShippingLine(), new BuildableField(), new ChanceCard(), new BuildableField(),new BuildableField()
-    ,new SafeZone(), new BuildableField(), new ChanceCard(), new BuildableField(), new BuildableField(), new ShippingLine(), new BuildableField()
-    ,new BuildableField(), new Brewery(), new BuildableField(), new GoToPrison(), new BuildableField(), new BuildableField(), new ChanceCard(), new BuildableField()
-    , new ShippingLine(), new ChanceCard(), new BuildableField(), new IncomeTax(), new BuildableField()};
+    private Field[] fields = new Field[40];
 
     private String[] fieldColors = {"","Blue","", "Blue", "", ""
             , "Orange", "", "Orange", "Orange", "", "Yellow", "Brewery",
@@ -18,12 +13,11 @@ public class FieldController {
             ,new BuildableField(), new Brewery(), new BuildableField(), new GoToPrison(), new BuildableField(), new BuildableField(), new ChanceCard(), new BuildableField()
             , new ShippingLine(), new ChanceCard(), new BuildableField(), new IncomeTax(), new BuildableField()};
 
+    private String[] fieldNames = {"Rødovrevej", "", "Hvidovrevej", "", "", "Roskildevej", "", "Valby Langade", "Allegade", "", "Frederiksberg Alle", "",
+            "Bülowsvej", "Gl. Kongevej", "", "Bernstoffervej", "", "Hellerupvej", "Strandvej", "", "Trianglen", "", "Østerbrogade", "Grønningen", "", "Bredgade",
+            "Kg. Nytorv", "", "Østergade", "", "Amager Torv", "Vimmelskaftet", "", "Nygade", "", "", "Frederiksberg", "", "Rådhuspladsen"};
+
     private int[] ownedFields = new int[40];
-    private int[] rent = {0,2,0,4,0,25
-            , 6, 0, 6, 8, 0, 10, 15, 10, 12, 25, 14, 0, 14,16
-            ,0, 18, 0, 18, 20, 25, 22
-            ,22, 15, 22, 0, 26, 26, 0, 28
-            , 25, 0, 35, 0, 50};
     private boolean inPrison = false;
     private int position = 1;
     public Field[] createFields(){
@@ -37,7 +31,7 @@ public class FieldController {
             else if(fieldcount == 5 ||fieldcount == 15 ||fieldcount == 25 ||fieldcount == 35){
                 fields[fieldcount] = new ShippingLine();
             }
-            else if(fieldcount == 4 || fieldcount == 38){
+            else if(fieldcount == 4){
                 fields[fieldcount] = new IncomeTax();
             }
 
@@ -257,20 +251,10 @@ public class FieldController {
     public void setPosition(int position){
         this.position = position;
     }
-
-    public Field[] getFields() {
-        return fields;
-    }
-    public int[] getRent2(){
-        return rent;
-    }
-    public int getPosition() {
-        return position;
-    }
-
     public int calculateValue() {
 
             int value = fields[position].getValue();
+        try {
             if(fields[position] instanceof IncomeTax){
                 return value;
 
@@ -291,6 +275,11 @@ public class FieldController {
 
             }
             return value;
+        }
+        catch (ClassCastException e){
+            return 0;
+        }
+
     }
     public int calculateRent() {
 
@@ -325,7 +314,9 @@ public class FieldController {
         if(fields[position] instanceof OwnableField){
             return ownedFields[position];
         }
+        else{
             return 10;
+        }
     }
 
 
