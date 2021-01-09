@@ -18,6 +18,7 @@ public class FieldController {
             ,"", "Red","", "Red", "Red", "Ship", "Sand"
             ,"Sand", "Brewery", "Sand", "", "Yellow", "Yellow", "", "Yellow"
             , "Ship", "", "Purple", "", "Purple"};
+
     private int[] fieldValues = {0,60,0,60, 200, 200
             , 100, 0, 100, 120, 0, 140, 150,
             140, 160, 200, 180, 0, 180,200
@@ -25,11 +26,12 @@ public class FieldController {
             ,260, 150, 280, 0, 300, 300, 0, 320
             , 200, 0, 350, 200, 400};
 
-    private String[] fieldNames = {"Rødovrevej", "", "Hvidovrevej", "", "", "Roskildevej", "", "Valby Langade", "Allegade", "", "Frederiksberg Alle", "",
-            "Bülowsvej", "Gl. Kongevej", "", "Bernstoffervej", "", "Hellerupvej", "Strandvej", "", "Trianglen", "", "Østerbrogade", "Grønningen", "", "Bredgade",
-            "Kg. Nytorv", "", "Østergade", "", "Amager Torv", "Vimmelskaftet", "", "Nygade", "", "", "Frederiksberg", "", "Rådhuspladsen"};
+    private String[] fieldTitles = {"Start","Rødovrevej", "", "Hvidovre", "", "Øresund A/S", "Roskildevej", "", "Valby \n Langgade", "Allégade", "", "Frederiksberg \n Allé", "Tuborg",
+            "Bülowsvej", "Gl. Kongevej", "D. F. D. S.", "Bernstoffsvej", "", "Hellerupvej", "Strandvej", "Helle", "Trianglen", "", "Østerbro-\ngade \n", "Grønningen", "Y. K.",
+            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S Bornholm 1866 \n", "", "Frederiks-\nberggade \n", "", "Rådhus-\npladsen \n"};
 
     private int[] ownedFields = new int[40];
+
     private int[] rent = {0,2,0,4,0,25
             , 6, 0, 6, 8, 0, 10, 15, 10, 12, 25, 14, 0, 14,16
             ,0, 18, 0, 18, 20, 25, 22
@@ -37,225 +39,30 @@ public class FieldController {
             , 25, 0, 35, 0, 50};
     private boolean inPrison = false;
     private int position = 1;
+
     public Field[] createFields(){
         int fieldcount = 0;
         for(Field field:fields){
 
-            if(fieldcount == 2 ||fieldcount == 7 ||fieldcount == 17 ||fieldcount == 22
-                    ||fieldcount == 33 || fieldcount == 36 ){
-                fields[fieldcount] = new ChanceCard();
+            if(field instanceof OwnableField){
+                field.setName(fieldTitles[fieldcount]);
+                ((OwnableField) field).setColor(fieldColors[fieldcount]);
+                ((OwnableField) field).setRent(rent[fieldcount]);
+                field.setValue(fieldValues[fieldcount]);
             }
-            else if(fieldcount == 5 ||fieldcount == 15 ||fieldcount == 25 ||fieldcount == 35){
-                fields[fieldcount] = new ShippingLine();
+            else if(field instanceof ShippingLine){
+                field.setName(fieldTitles[fieldcount]);
             }
-            else if(fieldcount == 4 || fieldcount == 38){
-                fields[fieldcount] = new IncomeTax();
+            else if(field instanceof Brewery){
+                field.setName(fieldTitles[fieldcount]);
             }
 
-            else if(fieldcount == 10){
-                fields[fieldcount] = new Prison();
-            }
-            else if(fieldcount == 30){
-                fields[fieldcount] = new GoToPrison();
-            }
-            else if(fieldcount == 20){
-                fields[fieldcount] = new SafeZone();
-            }
-            else if(fieldcount == 12||fieldcount == 28){
-                fields[fieldcount] = new Brewery();
-                ((Brewery)fields[fieldcount]).setRent(15);
-            }
-            else{
-                OwnableField own1 = new OwnableField();
-                switch (fieldcount){
-
-                    case 1:
-
-                        own1.setColor("Blue");
-                        own1.setName("Rødovrevej");
-                        own1.setRent(2);
-                        own1.setValue(60);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 3:
-                        own1.setColor("Blue");
-                        own1.setName("Hvidovrevej");
-                        own1.setValue(60);
-                        own1.setRent(4);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 6:
-                        own1.setColor("Orange");
-                        own1.setName("Roskildevej");
-                        own1.setValue(100);
-                        own1.setRent(6);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 8:
-                        own1.setColor("Orange");
-                        own1.setName("Valby Langade");
-                        own1.setValue(100);
-                        own1.setRent(6);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 9:
-                        own1.setColor("Orange");
-                        own1.setName("Allegade");
-                        own1.setValue(120);
-                        own1.setRent(8);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 11:
-                        own1.setColor("Brown");
-                        own1.setName("Frederiksberg Alle");
-                        own1.setValue(140);
-                        own1.setRent(10);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 13:
-                        own1.setColor("Brown");
-                        own1.setName("Bülowsvej");
-                        own1.setValue(140);
-                        own1.setRent(10);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 14:
-                        own1.setColor("Brown");
-                        own1.setName("Gl. Kongevej");
-                        own1.setValue(160);
-                        own1.setRent(12);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 16:
-                        own1.setColor("Gray");
-                        own1.setName("Bernstoffervej");
-                        own1.setValue(180);
-                        own1.setRent(14);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 18:
-                        own1.setColor("Gray");
-                        own1.setName("Hellerupvej");
-                        own1.setValue(180);
-                        own1.setRent(14);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 19:
-                        own1.setColor("Gray");
-                        own1.setName("Strandvej");
-                        own1.setValue(200);
-                        own1.setRent(16);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 21:
-                        own1.setColor("Red");
-                        own1.setName("Trianglen");
-                        own1.setValue(220);
-                        own1.setRent(18);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 23:
-                        own1.setColor("Red");
-                        own1.setName("Østerbrogade");
-                        own1.setValue(220);
-                        own1.setRent(18);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 24:
-                        own1.setColor("Red");
-                        own1.setName("Grønningen");
-                        own1.setValue(240);
-                        own1.setRent(20);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 26:
-                        own1.setColor("Sand");
-                        own1.setName("Bredgade");
-                        own1.setValue(260);
-                        own1.setRent(22);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 27:
-                        own1.setColor("Sand");
-                        own1.setName("Kg. Nytorv");
-                        own1.setValue(260);
-                        own1.setRent(22);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 29:
-                        own1.setColor("Sand");
-                        own1.setName("Østergade");
-                        own1.setValue(280);
-                        own1.setRent(22);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 31:
-                        own1.setColor("Yellow");
-                        own1.setName("Amager Torv");
-                        own1.setValue(300);
-                        own1.setRent(26);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 32:
-                        own1.setColor("Yellow");
-                        own1.setName("Vimmelskaftet");
-                        own1.setValue(300);
-                        own1.setRent(26);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 34:
-                        own1.setColor("Yellow");
-                        own1.setName("Nygade");
-                        own1.setValue(320);
-                        own1.setRent(28);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 37:
-                        own1.setColor("Purple");
-                        own1.setName("Frederiksberg");
-                        own1.setValue(350);
-                        own1.setRent(35);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 39:
-                        own1.setColor("Purple");
-                        own1.setName("Rådhuspladsen");
-                        own1.setValue(400);
-                        own1.setRent(50);
-                        fields[fieldcount]=own1;
-                        break;
-
-                    case 0:
-                        Start s1 = new Start();
-                        fields[fieldcount]=s1;
-                        break;
-                }
-
-            }
             fieldcount = fieldcount+1;
         }
         return fields;
+
+
+
     }
     public int isOwnable(){
         return fields[position].isOwnable();
@@ -272,9 +79,7 @@ public class FieldController {
     public Field[] getFields() {
         return fields;
     }
-    public int[] getRent2(){
-        return rent;
-    }
+
     public int getPosition() {
         return position;
     }
@@ -354,6 +159,17 @@ public class FieldController {
         }
     }
 
+    public String[] getFieldColors() {
+        return fieldColors;
+    }
+
+    public int[] getFieldValues() {
+        return fieldValues;
+    }
+
+    public String[] getFieldTitles() {
+        return fieldTitles;
+    }
 
     public int[] getOwnedFields() {
         return ownedFields;
