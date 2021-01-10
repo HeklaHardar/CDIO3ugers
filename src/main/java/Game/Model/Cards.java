@@ -49,7 +49,7 @@ public class Cards {
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (cardPicker.DrawCard()) {
+        switch (15) {                      //cardPicker.DrawCard()
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
@@ -107,6 +107,8 @@ public class Cards {
                 money = 200;
                 break;
             case 15:
+                cardText = TextforCards.getText()[14];      // added line
+                break;
             case 25:
                 cardText = TextforCards.getText()[24];
                 break;
@@ -217,6 +219,10 @@ public class Cards {
 
     public boolean isFreeField() {
         return freeField;
+    }
+
+    public int distToNearestShippingLine(int currentPosition) {
+
     }
 
     public int move() {
