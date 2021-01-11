@@ -92,6 +92,21 @@ public class FieldController {
     public void setPosition(int position){
         this.position = position;
     }
+
+    public int[] getAvaiableHousePositions(){
+        int[] avaiableHousePositions = new int[22];
+        int arrayPosition = 0;
+        int oldPosition = position;
+        for(int i=0;i<39;i++){
+            this.position = i;
+            if(hasAllFields()){
+                avaiableHousePositions[arrayPosition]=i;
+                arrayPosition++;
+            }
+        }
+        this.position = oldPosition;
+        return avaiableHousePositions;
+    }
     public void buildHouses(Player player, int playerNumber){
         if(fields[position] instanceof BuildableField && Houses[position]<5 && hasAllFields() && ownedFields[position]==playerNumber) {
                     player.playerBalanceUpdate(-houseCosts[position]);
@@ -153,8 +168,12 @@ public class FieldController {
         }
             return false;
     }
-//Hello
+
     public int calculateRent() {
+
+        if(Houses[position]>0){
+            return housePrices[position][Houses[position]-1];
+        }
 
         if(hasAllFields()){
             return rent[position]*2;

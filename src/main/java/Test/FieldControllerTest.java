@@ -4,6 +4,8 @@ import Game.controller.FieldController;
 import Game.controller.Player;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FieldControllerTest {
@@ -39,6 +41,25 @@ class FieldControllerTest {
         field.buildHouses(p1,1);
         field.buildHouses(p1,1);
         field.buildHouses(p1,1);
+        System.out.println(field.getHouses()[1]);
+        System.out.println(p1.playerBalance());
+    }
+
+    @Test
+    void returnAvaiableHousePositions() {
+        FieldController field = new FieldController();
+        Player p1 = new Player("Hello");
+        field.createFields();
+        p1.starterScore(1);
+        field.setPosition(6);
+        field.setOwnedFields(1);
+        field.setPosition(8);
+        field.setOwnedFields(1);
+        field.setPosition(9);
+        field.setOwnedFields(1);
+        field.setPosition(1);
+        field.buildHouses(p1,1);
+        System.out.println(Arrays.toString(field.getAvaiableHousePositions()));
         System.out.println(field.getHouses()[1]);
         System.out.println(p1.playerBalance());
     }

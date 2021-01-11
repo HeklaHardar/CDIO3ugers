@@ -3,6 +3,8 @@ package Game.controller;
 import Game.Model.*;
 import Game.View.MatadorGui;
 
+import java.util.Arrays;
+
 
 public class Game {
 
@@ -58,6 +60,19 @@ public class Game {
                     }
                 }
 
+                matadorGUI.getUserSelection("Vælg en plads at bygge på", "Rødovrevej","Hvidovrevej",
+                        "Roskildevej", "Valby Langgade", "Allegade", "Frederiksberg Alle", "Bülowsvej", "Gl. Kongevejen",
+                "Bernstoffervej", "Hellerupvej", "Strandvej", "Trianglen", "Østerbrogade", "Grønningen", "Bredgade",
+                        "Kg. Nyttorv", "Carlsberg", "Østergade", "Amagertorv", "Vimmelskaftet", "Nygade", "Frederiksberggade"
+                , "Rådhuspladsen");
+                for (int field:fieldProperties.getAvaiableHousePositions()){
+                    if (field !=0){
+                        if(matadorGUI.getBuyHouse()==1){
+                            return;
+                        }
+                        return;
+                    }
+                }
                 matadorGUI.gui.getUserButtonPressed("Det er " + player[i].playerString() + "'s tur", "Slå terning");
                 dices.roll();
                 matadorGUI.ShowDie(dices.Die1(), dices.Die2());

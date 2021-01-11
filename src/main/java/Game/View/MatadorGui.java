@@ -225,14 +225,11 @@ public class MatadorGui {
         gui.displayChanceCard(cardText);
     }
 
-    public int getIntSelection(String options, int min, int max) {
-        while (true) {
-            moves = gui.getUserInteger(options);
-            if (moves <= max && moves >= min)
-                return moves;
-            else
-                gui.showMessage("Ugyldigt input");
-        }
+    /*public int selectHousePosition(){
+        gui.getUserSelection()
+    }*/
+    public String getUserSelection(String msg, String... options){
+        return gui.getUserSelection(msg, options);
     }
 
     public int getStringSelection(String[] options) {
@@ -298,4 +295,17 @@ public class MatadorGui {
         }
         return 0;
     }
+
+    public int getBuyHouse(){
+        stringChoice = gui.getUserButtonPressed("Vil du købe et hus eller hotel? ", "Ja", "Nej");
+        switch (stringChoice){
+            case "Ja":
+                return 1;
+            case "Nej":
+                return 2;
+        }
+        return 0;
+    }
+
+
 }
