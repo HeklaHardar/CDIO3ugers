@@ -6,10 +6,23 @@ import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
 
-public class LandOnNotOwnable extends LandOnField {
+public class LandOnNotOwnable{
 
 
-    public LandOnNotOwnable(MatadorGui GUI, FieldController properties, Player currentPlayer, Cards cards) {
-        super(GUI, properties, currentPlayer, cards);
+    public void NotOwnable(MatadorGui GUI, FieldController properties, Cards cards, int currentPosition){
+
+        if(properties.getdrawCard()){
+
+
+
+        }
+        else if(properties.isInPrison()){
+
+        }
+
+
+
     }
+
+
 }

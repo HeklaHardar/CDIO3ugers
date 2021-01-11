@@ -5,12 +5,14 @@ import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
 
-public class LandOnOwnable extends LandOnField {
-    public LandOnOwnable(MatadorGui GUI, FieldController properties, Player currentPlayer, Cards cards) {
-        super(GUI, properties, currentPlayer, cards);
-    }
+public class LandOnOwnable{
 
-    public void test (){
+
+    public void Ownable (MatadorGui GUI, FieldController properties, Cards cards, int currentPosition){
+
+
+
+
 
     }
 }

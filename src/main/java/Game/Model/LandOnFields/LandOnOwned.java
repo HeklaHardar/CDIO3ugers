@@ -7,6 +7,6 @@ import Game.controller.Player;
 
 public class LandOnOwned extends LandOnOwnable {
     public LandOnOwned(MatadorGui GUI, FieldController properties, Player currentPlayer, Cards cards) {
-        super(GUI, properties, currentPlayer, cards);
+        super(GUI, properties, cards);
     }
 }
