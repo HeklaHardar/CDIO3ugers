@@ -81,7 +81,13 @@ public class Game {
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
                         }
-                        if (cards.isHasPositionChange()) {
+
+                        if (cards.isChanceCard15or25() || cards.isHasPositionChange()) {                                                                                                                   // added if-block
+                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].setPosition(cards.distToNearestShippingLine(player[i].currentPosition())));
+                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                        }
+
+                        if (cards.isHasPositionChange() && !cards.isChanceCard15or25()) {       // changed line
                             matadorGUI.moveCars(i, player[i].currentPosition(), player[i].setPosition(cards.getPositionChange()));
                             matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
@@ -128,7 +134,7 @@ public class Game {
                 }
                 cards.resetStats();
 
-
+                fieldProperties.setPosition(player[i].currentPosition());                 // line added
                 //Checks the properties of the field that the player landed on
                 if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0 && fieldProperties.isOwnable() == 1) {
                     if (matadorGUI.getBuyField() == 1) {

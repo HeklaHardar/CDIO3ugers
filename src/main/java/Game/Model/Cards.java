@@ -15,6 +15,7 @@ public class Cards {
     private int PositionChange;
     private boolean hasPositionChange = false;
     private boolean Matadorlegat = false;
+    private boolean isChanceCard15or25 = false;          // added line
 
     private String[] possibleFields = new String[2];
     private String[] possibleFields2 = new String[4];
@@ -37,6 +38,7 @@ public class Cards {
         isSammenskudsgilde = false;
         hasPositionChange = false;
         PrisonChance = false;
+        isChanceCard15or25 = false;                      // added line
 
     }
 
@@ -108,9 +110,14 @@ public class Cards {
                 break;
             case 15:
                 cardText = TextforCards.getText()[14];      // added line
-                break;
+                isChanceCard15or25 = true;
+                hasPositionChange = true;                   // added line
+
+                break;                                      // added line
             case 25:
                 cardText = TextforCards.getText()[24];
+                isChanceCard15or25 = true;
+                hasPositionChange = true;                    // added line
                 break;
             case 16:
                 cardText = TextforCards.getText()[15];
@@ -221,8 +228,24 @@ public class Cards {
         return freeField;
     }
 
-    public int distToNearestShippingLine(int currentPosition) {
+    public boolean isChanceCard15or25() {
+        return isChanceCard15or25;
+    }
 
+    public int distToNearestShippingLine(int currentPosition) {
+        if (currentPosition == 36 || currentPosition == 2) {
+            PositionChange = 5;
+        }
+        else if (currentPosition == 7) {
+            PositionChange = 15;
+        }
+        else if (currentPosition == 17 || currentPosition == 22) {
+            PositionChange = 25;
+        }
+        else if (currentPosition == 33) {
+            PositionChange = 35;
+        }
+        return PositionChange;
     }
 
     public int move() {
