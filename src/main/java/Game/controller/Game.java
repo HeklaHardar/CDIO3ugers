@@ -133,7 +133,7 @@ public class Game {
                 //Checks the properties of the field that the player landed on
                 if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0 && fieldProperties.isOwnable() == 1) {
                     if (matadorGUI.getBuyField() == 1) {
-                        player[i].playerBalanceUpdate(-fieldProperties.calculateValue());
+                        player[i].playerBalanceUpdate(-fieldProperties.getValue());
                     }
                     matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                 }
