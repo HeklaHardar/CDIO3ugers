@@ -28,7 +28,9 @@ class FieldControllerTest {
         FieldController field = new FieldController();
         Player p1 = new Player("Hello");
         field.createFields();
+/*
         p1.starterScore(1);
+*/
         /*p1.starterScore(1);*/
         field.setPosition(1);
         field.setOwnedFields(1);
