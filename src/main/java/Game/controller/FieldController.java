@@ -153,7 +153,7 @@ public class FieldController {
         }
             return false;
     }
-
+//Hello
     public int calculateRent() {
 
         if(hasAllFields()){
