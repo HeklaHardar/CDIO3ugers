@@ -3,6 +3,10 @@ package Game.controller;
 import Game.Model.*;
 import Game.Model.Fields.*;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class FieldController {
 // You have to set position or none of the FieldController Methods will work
     private Field[] fields = {new Start(),new BuildableField(),new ChanceCard(), new BuildableField(), new IncomeTax(), new ShippingLine()
