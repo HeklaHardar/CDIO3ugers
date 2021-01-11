@@ -150,7 +150,7 @@ public class Game {
 
 
 
-                if (fieldProperties.isInPrison()) {
+               if (fieldProperties.isInPrison()) {
                     matadorGUI.showMessage(player[i].playerString() + " skal i fængsel");
                     matadorGUI.moveToPrison(i,player[i].getCurrentPosition());
                     player[i].setInPrison();
