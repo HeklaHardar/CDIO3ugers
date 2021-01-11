@@ -121,6 +121,42 @@ public class FieldController {
     public int getPosition() {
         return position;
     }
+    public int countShips(){
+        int[] multirent={0, 25, 50, 100, 200};
+
+        if(fields[position] instanceof OwnableField){
+            for (int i = 0; i <= 39; i++) {
+
+                if (fields[i] instanceof OwnableField) {
+                    int colorCount=0;
+
+
+
+                            int k = 0;
+                            for (String color : fieldColors) {
+                                if (color == "Ship" && ownedFields[k] == ownedFields[position] && ownedFields[k] != 0) {
+                                    colorCount = colorCount + 1;
+
+                                }
+                                k++;
+                            }
+
+                            return multirent[colorCount];
+
+
+
+
+                        }
+                    }
+
+
+                }
+              return 0;
+            }
+
+
+
+
 
     public boolean hasAllFields(){
         if(fields[position] instanceof OwnableField){
@@ -154,19 +190,30 @@ public class FieldController {
             return false;
     }
 //Hello
+
+    public String getColor(){
+        return ((OwnableField)fields[position]).getColor();
+    }
+
     public int calculateRent() {
 
         if(hasAllFields()){
             return rent[position]*2;
         }
+
         if(fields[position] instanceof OwnableField){
+            if (((OwnableField) fields[position]).getColor() == "Ship") {
+
+                return countShips();
+
+            }
             return rent[position];
         }
         return 0;
+
+
     }
-    public String getColor(){
-        return ((OwnableField)fields[position]).getColor();
-    }
+
     public int getValue() {
         if(fields[position] instanceof IncomeTax) {
             return fields[position].getValue();
