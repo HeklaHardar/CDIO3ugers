@@ -96,10 +96,13 @@ public class FieldController {
     public void setPosition(int position){
         this.position = position;
     }
-    public void buildHouses(Player player){
-        switch (Houses[position]){
-            case 0: player.playerBalanceUpdate(-houseCosts[position]);
-            Houses[position] = 1;
+    public void buildHouses(Player player, int playerNumber){
+        if(fields[position] instanceof BuildableField && Houses[position]<5 && hasAllFields() && ownedFields[position]==playerNumber) {
+                    player.playerBalanceUpdate(-houseCosts[position]);
+                    Houses[position] = Houses[position]+1;
+            }
+        else{
+            return;
         }
     }
 
@@ -122,73 +125,107 @@ public class FieldController {
     public int getPosition() {
         return position;
     }
+    public int countShips(){
+        int[] multirent={0, 25, 50, 100, 200};
 
-    public int calculateValue() {
+        if(fields[position] instanceof OwnableField){
+            for (int i = 0; i <= 39; i++) {
 
-            int value = fields[position].getValue();
-            if(fields[position] instanceof IncomeTax){
-                return value;
+                if (fields[i] instanceof OwnableField) {
+                    int colorCount=0;
 
-            }
-            if(fields[position].isOwnable()!=1){
-                return 0;
-            }
-            if (fields[position] instanceof OwnableField) {
-                for (int i = 1; i <= 39; i++) {
-                    if (fields[i] instanceof OwnableField) {
-                        if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                                && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
-                            value = fields[position].getValue() * 2;
-                        }
 
-                    }
-                }
 
-            }
-            return value;
-    }
-    public int calculateRent() {
+                            int k = 0;
+                            for (String color : fieldColors) {
+                                if (color == "Ship" && ownedFields[k] == ownedFields[position] && ownedFields[k] != 0) {
+                                    colorCount = colorCount + 1;
 
-        int rent = ((OwnableField) fields[position]).getRent();
-        try {
-
-            if (fields[position] instanceof OwnableField) {
-
-                for (int i = 0; i <= 39; i++) {
-                    int colorCount = 0;
-                    if (fields[i] instanceof OwnableField) {
-
-                        //Hvis du ejer 2 af blå eller lilla
-                        if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                                && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
-                            if ((((OwnableField) fields[position]).getColor() == "Purple" || ((OwnableField) fields[position]).getColor() == "Blue")) {
-                                rent = ((OwnableField) fields[position]).getRent() * 2;
-                            } else {
-                                int k = 0;
-                                for (String color : fieldColors) {
-                                    if (color == ((OwnableField) fields[position]).getColor() && ownedFields[k] == ownedFields[position] && ownedFields[k] != 0 && k!=position) {
-                                        colorCount = colorCount + 1;
-                                    }
-                                    k++;
                                 }
-                                if (colorCount == 2) {
-                                    rent = ((OwnableField) fields[position]).getRent() * 2;
-                                }
-
+                                k++;
                             }
+
+                            return multirent[colorCount];
+
+
+
+
+                        }
+                    }
+
+
+                }
+              return 0;
+            }
+
+
+
+
+
+    public boolean hasAllFields(){
+        if(fields[position] instanceof OwnableField){
+            for (int i = 0; i <= 39; i++) {
+                int colorCount = 0;
+                if (fields[i] instanceof OwnableField) {
+
+                    //Hvis du ejer 2 af blå eller lilla
+                    if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
+                            && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
+                        if ((((OwnableField) fields[position]).getColor() == "Purple" || ((OwnableField) fields[position]).getColor() == "Blue")) {
+                            return true;
+                        } else {
+                            int k = 0;
+                            for (String color : fieldColors) {
+                                if (color == ((OwnableField) fields[position]).getColor() && ownedFields[k] == ownedFields[position] && ownedFields[k] != 0 && k!=position) {
+                                    colorCount = colorCount + 1;
+                                }
+                                k++;
+                            }
+                            if (colorCount == 2) {
+                                return true;
+                            }
+
                         }
                     }
                 }
             }
+
         }
-        catch (ClassCastException e){ return 0; }
-        return rent;
+            return false;
     }
+//Hello
+
     public String getColor(){
         return ((OwnableField)fields[position]).getColor();
     }
+
+    public int calculateRent() {
+
+        if(hasAllFields()){
+            return rent[position]*2;
+        }
+
+        if(fields[position] instanceof OwnableField){
+            if (((OwnableField) fields[position]).getColor() == "Ship") {
+
+                return countShips();
+
+            }
+            return rent[position];
+        }
+        return 0;
+
+
+    }
+
     public int getValue() {
-        return fields[position].getValue();
+        if(fields[position] instanceof IncomeTax) {
+            return fields[position].getValue();
+        }
+        if(fields[position] instanceof OwnableField) {
+            return fields[position].getValue();
+        }
+        return 0;
     }
 
     public int getRent() {
