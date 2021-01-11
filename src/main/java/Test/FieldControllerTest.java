@@ -27,10 +27,10 @@ class FieldControllerTest {
     void buildHouses() {
         FieldController field = new FieldController();
         Player p1 = new Player("Hello");
-        p1.starterScore(1);
+        /*p1.starterScore(1);*/
         field.setPosition(1);
         field.buildHouses(p1);
         System.out.println(field.getHouses()[1]);
-        System.out.println(p1.playerBalance());
+        System.out.println(p1.getBalance());
     }
 }

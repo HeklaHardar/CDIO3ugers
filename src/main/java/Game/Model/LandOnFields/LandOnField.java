@@ -11,43 +11,37 @@ public class LandOnField {
     protected MatadorGui GUI;
     protected FieldController properties;
     protected Cards cards;
+    protected Player currentPlayer;
+    protected int playerAmount;
+    protected  int playerNumber;
 
     LandOnOwnable landOnOwnable = new LandOnOwnable();
     LandOnNotOwnable landOnNotOwnable = new LandOnNotOwnable();
 
 
-
-
-
-    public LandOnField(MatadorGui GUI, FieldController properties, Cards cards){
+    public LandOnField(MatadorGui GUI, FieldController properties, Cards cards, int playerAmount) {
 
         this.GUI = GUI;
         this.properties = properties;
         this.cards = cards;
+        this.currentPlayer = currentPlayer;
+        this.playerAmount = playerAmount;
+        this.playerNumber = playerNumber;
 
     }
 
+    //properties.setPosition(currentPosition);
 
-    public void FieldPosition (int currentPosition){
-        System.out.println("Checker hvad feltet er");
+    public void FieldPosition(int currentPosition, int playerNumber, Player currentPlayer) {
 
-        properties.setPosition(currentPosition);
 
+
+        if (!(properties.fields(currentPosition) instanceof OwnableField)) {
+            landOnNotOwnable.NotOwnable(GUI, properties, cards, currentPlayer, playerAmount, playerNumber);
+        }
         if(properties.fields(currentPosition) instanceof OwnableField){
-            System.out.println("Ownable");
-            landOnOwnable.Ownable(GUI,properties,cards,currentPosition);
-
-
+            landOnOwnable.Ownable(GUI, properties, cards, currentPosition, currentPlayer, playerNumber);
         }
-        else {
-            System.out.println("Not ownable");
-            landOnNotOwnable.NotOwnable(GUI,properties,cards,currentPosition);
-
-        }
-
-
-
-
 
 
     }

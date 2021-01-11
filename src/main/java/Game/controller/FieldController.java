@@ -87,6 +87,10 @@ public class FieldController {
 
     }
 
+    public Field fields (int currentField){
+        return fields[currentField];
+    }
+
 
 
     public void setPosition(int position){
