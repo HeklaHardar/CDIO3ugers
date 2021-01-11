@@ -197,10 +197,6 @@ public class FieldController {
 
     public int calculateRent() {
 
-        if(hasAllFields()){
-            return rent[position]*2;
-        }
-
         if(fields[position] instanceof OwnableField){
             if (((OwnableField) fields[position]).getColor() == "Ship") {
 
@@ -209,6 +205,12 @@ public class FieldController {
             }
             return rent[position];
         }
+
+        if(hasAllFields()){
+            return rent[position]*2;
+        }
+
+
         return 0;
 
 
