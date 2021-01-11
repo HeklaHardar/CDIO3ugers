@@ -64,7 +64,7 @@ public class Game {
 
 
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(1));
+                matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(dices.getValue()));
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                 fieldProperties.setPosition(player[i].currentPosition());
 
@@ -75,7 +75,7 @@ public class Game {
                         //Draws card and checks what card has been drawn and completes the actions on the card
                         cards.CardPick();
                         matadorGUI.displayCard(cards.cardToString());
-                        matadorGUI.gui.getUserButtonPressed(cards.cardToString(), "ok");
+                        matadorGUI.gui.getUserButtonPressed("", "ok");
 
                         if (cards.isHasExtraMoves()) {
                             matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(cards.move()));
@@ -134,12 +134,14 @@ public class Game {
                 if (fieldProperties.getOwnedFields()[player[i].currentPosition()] == 0 && fieldProperties.isOwnable() == 1) {
                     if (matadorGUI.getBuyField() == 1) {
                         player[i].playerBalanceUpdate(-fieldProperties.getValue());
+                        matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.isOwnable(), fieldProperties.getOwnedFields());
+                        fieldProperties.setOwnedFields(i+1);
                     }
                     matadorGUI.updateGuiBalance(i, player[i].playerBalance());
                 }
 
                 //Pays rent if a field is owned
-                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0) {
+                if (fieldProperties.getOwnedFields()[player[i].currentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() != player[i].playerString()) {
                     matadorGUI.showMessage(player[i].playerString() + ", du er landet på en ejendom ejet af "+ player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerString() + " og betaler " + fieldProperties.calculateRent() + " kr. i husleje");
                     player[fieldProperties.getOwnedFields()[player[i].currentPosition()] - 1].playerBalanceUpdate(fieldProperties.calculateRent());
                     player[i].playerBalanceUpdate(-fieldProperties.calculateRent());
@@ -147,9 +149,7 @@ public class Game {
                 }
                 matadorGUI.updateGuiBalance(i, player[i].playerBalance());
 
-                matadorGUI.landOnField(i, player[i].currentPosition(), player[i].playerString(), fieldProperties.isOwnable(), fieldProperties.getOwnedFields());
 
-                fieldProperties.setOwnedFields(i+1);
 
                 if (fieldProperties.isInPrison()) {
                     matadorGUI.showMessage(player[i].playerString() + " skal i fængsel");
