@@ -255,27 +255,23 @@ public class FieldController {
                 return countShips();
 
             }
-            if (((OwnableField) fields[position]).getColor() == "Brewery") {
+            else if (((OwnableField) fields[position]).getColor() == "Brewery") {
 
                 return countBrewery(Dices);
 
             }
+            if(hasAllFields()){
+                if(Houses[position]>0){
+                    return housePrices[position][Houses[position]-1];
+                }
+                else {
+                    return rent[position] * 2;
+                }
+            }
             return rent[position];
         }
 
-        if(hasAllFields()){
-            if(Houses[position]>0){
-                return housePrices[position][Houses[position]-1];
-            }
-            else {
-                return rent[position] * 2;
-            }
-        }
-
-
         return 0;
-
-
     }
 
     public int getValue() {

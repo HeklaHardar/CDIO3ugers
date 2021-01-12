@@ -108,7 +108,7 @@ public class Game {
 
 
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(dices.getValue()));
+                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(1));
                 matadorGUI.updateGuiBalance(i, player[i].getBalance());
                 fieldProperties.setPosition(player[i].getCurrentPosition());
 
