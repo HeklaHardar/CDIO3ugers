@@ -8,12 +8,11 @@ import Game.controller.Player;
 
 public class LandOnField {
 
-    private MatadorGui matadorGUI;
-    private FieldController fieldProperties;
-    private Cards cards;
-    private Player currentPlayer;
-    private int playerAmount;
-    private Player[] player;
+    private final MatadorGui matadorGUI;
+    private final FieldController fieldProperties;
+    private final Cards cards;
+    private final int playerAmount;
+    private final Player[] player;
 
 
     LandOnOwnable landOnOwnable = new LandOnOwnable();
