@@ -1,5 +1,6 @@
 package Game.View;
 
+import Game.controller.Player;
 import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
@@ -225,9 +226,7 @@ public class MatadorGui {
         gui.displayChanceCard(cardText);
     }
 
-    /*public int selectHousePosition(){
-        gui.getUserSelection()
-    }*/
+
     public String getUserSelection(String msg, String... options){
         return gui.getUserSelection(msg, options);
     }
@@ -274,12 +273,12 @@ public class MatadorGui {
 
     }
 
-    public int getMoveOrCard() {
-        stringChoice = gui.getUserSelection("Vælg hvad du vil: ", "Træk et nyt kort", "Gå et felt frem");
+    public int getPlayerAction(String playerName) {
+        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName +" s tur.", "Slå med terningerne", "Byg hus/hotel");
         switch (stringChoice) {
-            case "Træk et nyt kort":
+            case "Slå med terningerne":
                 return 1;
-            case "Gå et felt frem":
+            case "Byg hus/hotel":
                 return 2;
         }
         return 0;
@@ -296,8 +295,8 @@ public class MatadorGui {
         return 0;
     }
 
-    public int getBuyHouse(){
-        stringChoice = gui.getUserButtonPressed("Vil du købe et hus eller hotel? ", "Ja", "Nej");
+    public int getBuyHouse(Player player){
+        stringChoice = gui.getUserButtonPressed("Vil du købe et hus eller hotel, spiller " + player.playerString()+"?", "Ja", "Nej");
         switch (stringChoice){
             case "Ja":
                 return 1;
@@ -305,6 +304,16 @@ public class MatadorGui {
                 return 2;
         }
         return 0;
+    }
+
+    public void buyHouse(int position,int housecount, int[] ownedfields, int playerNumber){
+        if(gui.getFields()[position] instanceof GUI_Street && housecount>0 && housecount < 5 && ownedfields[position]==playerNumber){
+            ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
+        }
+        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && ownedfields[position]==playerNumber){
+            ((GUI_Street) gui.getFields()[position]).setHotel(true);
+        }
+
     }
 
 

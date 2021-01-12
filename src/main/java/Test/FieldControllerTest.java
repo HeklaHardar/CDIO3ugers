@@ -36,11 +36,7 @@ class FieldControllerTest {
         field.setPosition(3);
         field.setOwnedFields(1);
         field.setPosition(1);
-        field.buildHouses(p1,1);
-        field.buildHouses(p1,1);
-        field.buildHouses(p1,1);
-        field.buildHouses(p1,1);
-        field.buildHouses(p1,1);
+        field.buildHouses(p1,1, 1);
         System.out.println(field.getHouses()[1]);
         System.out.println(p1.playerBalance());
     }
@@ -58,7 +54,7 @@ class FieldControllerTest {
         field.setPosition(9);
         field.setOwnedFields(1);
         field.setPosition(1);
-        field.buildHouses(p1,1);
+        field.buildHouses(p1,1,1);
         System.out.println(Arrays.toString(field.getAvaiableHousePositions()));
         System.out.println(field.getHouses()[1]);
         System.out.println(p1.playerBalance());

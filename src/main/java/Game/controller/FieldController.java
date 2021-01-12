@@ -107,10 +107,10 @@ public class FieldController {
         this.position = oldPosition;
         return avaiableHousePositions;
     }
-    public void buildHouses(Player player, int playerNumber){
-        if(fields[position] instanceof BuildableField && Houses[position]<5 && hasAllFields() && ownedFields[position]==playerNumber) {
-                    player.playerBalanceUpdate(-houseCosts[position]);
-                    Houses[position] = Houses[position]+1;
+    public void buildHouses(Player player, int playerNumber, int buildposition){
+        if(fields[buildposition] instanceof BuildableField && Houses[buildposition]<5 && hasAllFields() && ownedFields[buildposition]==playerNumber) {
+                    player.playerBalanceUpdate(-houseCosts[buildposition]);
+                    Houses[buildposition] = Houses[buildposition]+1;
             }
         else{
             return;
