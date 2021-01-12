@@ -225,7 +225,7 @@ public class FieldController {
                         else {
                             int k = 0;
                             for (String color : fieldColors) {
-                                if (color == ((OwnableField) fields[testPosition]).getColor() && ownedFields[k] == ownedFields[testPosition] && ownedFields[k] != 0 && k!=position) {
+                                if (color == ((OwnableField) fields[testPosition]).getColor() && ownedFields[k] == ownedFields[testPosition] && ownedFields[k] != 0 && k!=testPosition) {
                                     colorCount = colorCount + 1;
                                 }
                                 k++;
