@@ -8,41 +8,38 @@ import Game.controller.Player;
 
 public class LandOnField {
 
-    protected MatadorGui GUI;
-    protected FieldController properties;
-    protected Cards cards;
-    protected Player currentPlayer;
-    protected int playerAmount;
-    protected  int playerNumber;
+    private MatadorGui matadorGUI;
+    private FieldController fieldProperties;
+    private Cards cards;
+    private Player currentPlayer;
+    private int playerAmount;
+    private Player[] player;
+
 
     LandOnOwnable landOnOwnable = new LandOnOwnable();
     LandOnNotOwnable landOnNotOwnable = new LandOnNotOwnable();
 
 
-    public LandOnField(MatadorGui GUI, FieldController properties, Cards cards, int playerAmount) {
+    public LandOnField(MatadorGui matadorGUI, FieldController fieldProperties, Cards cards, int playerAmount, Player[] player) {
 
-        this.GUI = GUI;
-        this.properties = properties;
+        this.matadorGUI = matadorGUI;
+        this.fieldProperties = fieldProperties;
         this.cards = cards;
-        this.currentPlayer = currentPlayer;
         this.playerAmount = playerAmount;
-        this.playerNumber = playerNumber;
+        this.player = player;
 
     }
 
     //properties.setPosition(currentPosition);
 
-    public void FieldPosition(int currentPosition, int playerNumber, Player currentPlayer) {
+    public void FieldPosition(int currentPosition, Player currentPlayer, int playerID) {
 
-
-
-        if (!(properties.fields(currentPosition) instanceof OwnableField)) {
-            landOnNotOwnable.NotOwnable(GUI, properties, cards, currentPlayer, playerAmount, playerNumber);
+        if (!(fieldProperties.fields(currentPosition) instanceof OwnableField)) {
+            landOnNotOwnable.NotOwnable(matadorGUI, fieldProperties, cards, currentPlayer, playerAmount, playerID, player);
         }
-        if(properties.fields(currentPosition) instanceof OwnableField){
-            landOnOwnable.Ownable(GUI, properties, cards, currentPosition, currentPlayer, playerNumber);
+        if (fieldProperties.fields(currentPosition) instanceof OwnableField) {
+            landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player);
         }
-
 
     }
 

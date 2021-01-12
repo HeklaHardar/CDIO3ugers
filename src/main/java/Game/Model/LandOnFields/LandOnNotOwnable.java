@@ -6,27 +6,26 @@ import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
 
-public class LandOnNotOwnable{
+public class LandOnNotOwnable {
 
     LandOnChanceCard landOnChanceCard = new LandOnChanceCard();
     LandOnGoToPrison landOnGoToPrison = new LandOnGoToPrison();
 
 
-    public void NotOwnable(MatadorGui GUI, FieldController properties, Cards cards, Player currentPlayer, int playerAmount, int playerNumber){
+    public void NotOwnable(MatadorGui matadorGUI, FieldController fieldProperties, Cards cards, Player currentPlayer, int playerAmount, int playerID, Player[] player) {
 
-        if(properties.getdrawCard()){
+        if (fieldProperties.getdrawCard()) {
 
-            landOnChanceCard.ChanceCard(GUI,cards,currentPlayer,playerAmount,playerNumber);
+
+            landOnChanceCard.ChanceCard(matadorGUI, cards, playerAmount, playerID, player);
 
             cards.resetStats();
 
+        } else if (fieldProperties.isInPrison()) {
+
+            landOnGoToPrison.GoToPrison(matadorGUI, currentPlayer, fieldProperties, playerID);
+
         }
-        else if(properties.isInPrison()){
-
-            landOnGoToPrison.GoToPrison(GUI,currentPlayer,properties, playerNumber);
-
-        }
-
 
 
     }

@@ -1,6 +1,7 @@
 package Game.controller;
 
 import Game.Model.*;
+import Game.Model.LandOnFields.LandOnField;
 import Game.View.MatadorGui;
 
 
@@ -13,7 +14,7 @@ public class Game {
     private int finalbalanceid;
     private int round = 0;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
         //Instantiating game object
 
         Game game = new Game();
@@ -24,7 +25,7 @@ public class Game {
     }
 
 
-    public void Game() throws InterruptedException {
+    public void Game(){
 
 
         Cards cards = new Cards();
@@ -45,6 +46,8 @@ public class Game {
             matadorGUI.guiPlayers(player[i].playerString(), player[i].getBalance(), i);
         }
 
+        LandOnField landOnField = new LandOnField(matadorGUI, fieldProperties,cards,menu.getPlayerAmount(),player);
+
         while (!isWinnerWinnerChickenDinner) {
             round = round + 1;
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
@@ -63,12 +66,15 @@ public class Game {
 
 
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(dices.getValue()));
+                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(2));
                 matadorGUI.updateGuiBalance(i, player[i].getBalance());
                 fieldProperties.setPosition(player[i].getCurrentPosition());
 
+
+
+                landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i);
                 //Checks if player has landed on a chancecard field.
-                if (fieldProperties.getdrawCard()) {
+                /*if (fieldProperties.getdrawCard()) {
                     while (true) {
 
                         //Draws card and checks what card has been drawn and completes the actions on the card
@@ -155,7 +161,7 @@ public class Game {
                     matadorGUI.moveToPrison(i,player[i].getCurrentPosition());
                     player[i].setInPrison();
                     fieldProperties.resetPrisonStatus();
-                }
+                }*/
                 if (player[i].getBalance() < 0) {
 
                     int[] balances = new int[menu.getPlayerAmount()];

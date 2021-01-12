@@ -5,15 +5,13 @@ import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
 
-public class LandOnGoToPrison extends LandOnNotOwnable {
+public class LandOnGoToPrison {
 
-    public void GoToPrison(MatadorGui GUI, Player currentPlayer, FieldController properties, int i){
-        
-        GUI.showMessage(currentPlayer.playerString() + " skal i fængsel");
-        GUI.moveToPrison(i,currentPlayer.getCurrentPosition());
+    public void GoToPrison(MatadorGui matadorGUI, Player currentPlayer, FieldController fieldProperties, int playerID) {
+        matadorGUI.showMessage(currentPlayer.playerString() + " skal i fængsel");
+        matadorGUI.moveToPrison(playerID, currentPlayer.getCurrentPosition());
         currentPlayer.setInPrison();
-        properties.resetPrisonStatus();
-        
+        fieldProperties.resetPrisonStatus();
     }
 
 
