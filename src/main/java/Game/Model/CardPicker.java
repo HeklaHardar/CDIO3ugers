@@ -1,7 +1,5 @@
 package Game.Model;
 
-import Game.View.MatadorGui;
-
 public class CardPicker {
 
     private int random1;
@@ -11,14 +9,12 @@ public class CardPicker {
     private int first;
     private int cardNumber = 0;
 
-
     public void CardScrambler() {
         for (int i = 0; i < 1000 - 1; i++) {
             temp = cards[random1 = (int) (Math.random() * (cards.length))];
             cards[random1] = cards[random2 = (int) (Math.random() * (cards.length))];
             cards[random2] = temp;
         }
-
     }
 
     public int DrawCard() {
@@ -31,6 +27,4 @@ public class CardPicker {
 
         return cardNumber;
     }
-
-
 }

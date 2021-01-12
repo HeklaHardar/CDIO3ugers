@@ -10,7 +10,6 @@ public class Player {
     private int oldPosition;
     private int roundsinprison;
 
-
     // Determines variables
     Account account = new Account();
     private String Player;
@@ -30,7 +29,6 @@ public class Player {
     public int getBalance(){return account.getScore();}
     //Updates the currentplayers score
     public void playerBalanceUpdate(int update){account.updateScore(update);}
-
 
     // put player in prison
     public void setInPrison(){
@@ -59,7 +57,6 @@ public class Player {
         prisonCard = Card;
     }
 
-
     // Check where player is currently
     public int getCurrentPosition(){
         return position;
@@ -87,5 +84,4 @@ public class Player {
         }
         return position;
     }
-
 }

@@ -19,5 +19,4 @@ public class LandOnOwned {
         matadorGUI.updateGuiBalance(playerID, player[playerID].getBalance());
 
     }
-
 }

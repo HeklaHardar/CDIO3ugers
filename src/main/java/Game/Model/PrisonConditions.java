@@ -4,9 +4,9 @@ import Game.View.MatadorGui;
 import Game.controller.Player;
 
 public class PrisonConditions {
-    private int Count;
     private String stringChoice;
     public void Release (Player PrisonPlayer, Dices PrisonDices, MatadorGui PrisonGUI, int CurrentPlayer){
+        PrisonDices.roll();
         if (PrisonPlayer.getPrisonCard() && PrisonPlayer.getBalance() >= 50 && PrisonPlayer.getRoundsinprison() < 3){
             stringChoice = PrisonGUI.gui.getUserButtonPressed(PrisonPlayer.playerString()+", du har siddet i fængsel i "+ PrisonPlayer.getRoundsinprison() +" runde(r) vælg hvordan du vil løslades: ", "Brug dit benådelses kort","Betal kr. 50,00", "Slå med terningerne");
             switch (stringChoice){
@@ -20,7 +20,6 @@ public class PrisonConditions {
                     PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.getBalance());
                     break;
                 case "Slå med terningerne":
-                    PrisonDices.roll();
                     PrisonGUI.ShowDie(PrisonDices.Die1(), PrisonDices.Die2());
                     if (PrisonDices.Die1() == PrisonDices.Die2()){
                         PrisonPlayer.releaseFromPrison();
@@ -39,7 +38,6 @@ public class PrisonConditions {
                         PrisonPlayer.updatePrisonCard(false);
                         break;
                     case "Slå med terningerne":
-                        PrisonDices.roll();
                         PrisonGUI.ShowDie(PrisonDices.Die1(), PrisonDices.Die2());
                         if (PrisonDices.Die1() == PrisonDices.Die2()){
                             PrisonPlayer.releaseFromPrison();
@@ -59,7 +57,6 @@ public class PrisonConditions {
                     PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.getBalance());
                     break;
                 case "Slå med terningerne":
-                    PrisonDices.roll();
                     PrisonGUI.ShowDie(PrisonDices.Die1(), PrisonDices.Die2());
                     if (PrisonDices.Die1() == PrisonDices.Die2()){
                         PrisonPlayer.releaseFromPrison();
@@ -74,7 +71,6 @@ public class PrisonConditions {
             stringChoice = PrisonGUI.gui.getUserButtonPressed(PrisonPlayer.playerString()+", du har siddet i fængsel i "+ PrisonPlayer.getRoundsinprison() +" slå to ens for at komme ud af fængslet: ", "Slå med terningerne");
             switch (stringChoice){
                 case "Slå med terningerne":
-                    PrisonDices.roll();
                     PrisonGUI.ShowDie(PrisonDices.Die1(), PrisonDices.Die2());
                     if (PrisonDices.Die1() == PrisonDices.Die2()){
                         PrisonPlayer.releaseFromPrison();

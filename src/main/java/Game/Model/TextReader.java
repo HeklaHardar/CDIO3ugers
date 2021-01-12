@@ -26,7 +26,6 @@ public class TextReader {
         BufferedReader reader2;
         int counter = 1;
 
-
         try {
             //Reads the file and checks how many lines are present to make an array appropriate for the file length
             reader1 = new BufferedReader(new FileReader((String.valueOf(filePath))));
@@ -56,9 +55,7 @@ public class TextReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public String[] getText(){return Text;}
-
 }

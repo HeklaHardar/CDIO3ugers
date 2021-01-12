@@ -1,8 +1,6 @@
 package Game.Model;
 
-
 public class Cards {
-
 
     //Instantiating variables
     private int move;
@@ -37,7 +35,6 @@ public class Cards {
         isSammenskudsgilde = false;
         hasPositionChange = false;
         PrisonChance = false;
-
     }
 
     //Resets the freefield boolean, if a card with that value has been drawn
@@ -45,11 +42,10 @@ public class Cards {
         freeField = false;
     }
 
-
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (15) {
+        switch (cardPicker.DrawCard()) {
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
@@ -171,10 +167,6 @@ public class Cards {
         }
     }
 
-    public int extraFields() {
-        return move;
-    }
-
     public String cardToString() {
         return cardText;
     }
@@ -209,14 +201,6 @@ public class Cards {
 
     public boolean isHasMatadorlegat() {
         return Matadorlegat;
-    }
-
-    public void setHasExtraMoves(boolean hasExtraMoves) {
-        this.hasExtraMoves = hasExtraMoves;
-    }
-
-    public boolean isFreeField() {
-        return freeField;
     }
 
     public int move() {

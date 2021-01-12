@@ -6,7 +6,6 @@ import Game.controller.Player;
 
 public class LandOnChanceCard {
 
-
     public void ChanceCard(MatadorGui matadorGUI, Cards cards, int playerAmount, int playerID, Player[] player) {
 
         while (true) {
@@ -34,7 +33,6 @@ public class LandOnChanceCard {
                 } else if (player[playerID].getPrisonCard()) {
                     player[playerID].updatePrisonCard(false);
                 }
-
             }
 
             player[playerID].playerBalanceUpdate(cards.extraMoney());
@@ -50,23 +48,17 @@ public class LandOnChanceCard {
                 player[playerID].playerBalanceUpdate(playerAmount * 25);
                 matadorGUI.updateGuiBalance(playerID, player[playerID].getBalance());
             }
-            if (cards.isHasMatadorlegat()) {
+            /*if (cards.isHasMatadorlegat()) {
                 for (int y = 0; y < playerAmount; y++) {
                     player[y].playerBalanceUpdate(-25);
                     matadorGUI.updateGuiBalance(y, player[y].getBalance());
                 }
                 player[playerID].playerBalanceUpdate(playerAmount * 25);
                 matadorGUI.updateGuiBalance(playerID, player[playerID].getBalance());
-            }
-
+            }*/
 
             cards.resetStats();
             break;
         }
-
-
     }
-
-
 }
-

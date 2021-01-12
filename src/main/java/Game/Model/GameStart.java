@@ -1,7 +1,6 @@
 package Game.Model;
 
 import Game.View.MatadorGui;
-import Game.controller.Game;
 
 public class GameStart {
 
@@ -12,7 +11,6 @@ public class GameStart {
 
     //Change this value to change maximum amount of players
     private int MaxPlayers = 6;
-
 
     private int playerNumber;
 
@@ -45,5 +43,4 @@ public class GameStart {
     public String[] playernamesToString(){return Players;}
 
     public int getPlayerAmount(){return playerNumber;}
-
 }

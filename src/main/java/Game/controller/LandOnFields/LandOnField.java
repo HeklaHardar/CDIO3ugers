@@ -14,10 +14,8 @@ public class LandOnField {
     private final int playerAmount;
     private final Player[] player;
 
-
     LandOnOwnable landOnOwnable = new LandOnOwnable();
     LandOnNotOwnable landOnNotOwnable = new LandOnNotOwnable();
-
 
     public LandOnField(MatadorGui matadorGUI, FieldController fieldProperties, Cards cards, int playerAmount, Player[] player) {
 
@@ -26,20 +24,16 @@ public class LandOnField {
         this.cards = cards;
         this.playerAmount = playerAmount;
         this.player = player;
-
     }
-
-    //properties.setPosition(currentPosition);
 
     public void FieldPosition(int currentPosition, Player currentPlayer, int playerID, int dices) {
 
         if (!(fieldProperties.fields(currentPosition) instanceof OwnableField)) {
             landOnNotOwnable.NotOwnable(matadorGUI, fieldProperties, cards, currentPlayer, playerAmount, playerID, player);
         }
+        fieldProperties.setPosition(currentPosition);
         if (fieldProperties.fields(currentPosition) instanceof OwnableField) {
             landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player, dices);
         }
-
     }
-
 }

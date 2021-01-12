@@ -1,8 +1,6 @@
 package Game.Model.Fields;
 
-import Game.Model.Fields.OwnableField;
 public class ShippingLine extends OwnableField {
-
 
     public ShippingLine() {
         // int[] multirent;
@@ -11,7 +9,5 @@ public class ShippingLine extends OwnableField {
         rent = 25;
 
         color = "Shipping";
-
-
     }
 }

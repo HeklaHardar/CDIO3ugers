@@ -1,7 +1,5 @@
 package Game.Model.Fields;
 
-import Game.Model.Fields.Field;
-
 public class OwnableField extends Field {
     protected String color;
     protected int rent;
