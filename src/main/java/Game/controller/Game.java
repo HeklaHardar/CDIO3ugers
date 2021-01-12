@@ -1,7 +1,7 @@
 package Game.controller;
 
 import Game.Model.*;
-import Game.Model.LandOnFields.LandOnField;
+import Game.controller.LandOnFields.LandOnField;
 import Game.View.MatadorGui;
 
 

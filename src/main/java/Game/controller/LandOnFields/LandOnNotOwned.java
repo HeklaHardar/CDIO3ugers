@@ -1,7 +1,5 @@
-package Game.Model.LandOnFields;
+package Game.controller.LandOnFields;
 
-import Game.Model.Cards;
-import Game.Model.Fields.OwnableField;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
