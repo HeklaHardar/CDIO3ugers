@@ -41,7 +41,7 @@ class FieldControllerTest {
         field.setPosition(1);
         field.buildHouses(p1,1, 1);
         System.out.println(field.getHouses()[1]);
-        System.out.println(p1.playerBalance());
+        System.out.println(p1.getBalance());
     }
 
     @Test
@@ -49,7 +49,6 @@ class FieldControllerTest {
         FieldController field = new FieldController();
         Player p1 = new Player("Hello");
         field.createFields();
-        p1.starterScore(1);
         field.setPosition(6);
         field.setOwnedFields(1);
         field.setPosition(8);

@@ -82,7 +82,7 @@ public class Game {
                                                 fieldProperties.buildHouses(player[i], i+1, buildindex);
 
                                                 matadorGUI.buyHouse(buildindex, fieldProperties.getHouses()[buildindex],fieldProperties.getOwnedFields(), i+1);
-                                                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
+                                                matadorGUI.updateGuiBalance(i, player[i].getBalance());
                                                 playerAction = matadorGUI.getPlayerAction(player[i].playerString());
                                                 break;
                                             }
