@@ -30,7 +30,10 @@ class FieldControllerTest {
         FieldController field = new FieldController();
         Player p1 = new Player("Hello");
         field.createFields();
+/*
         p1.starterScore(1);
+*/
+        /*p1.starterScore(1);*/
         field.setPosition(1);
         field.setOwnedFields(1);
         field.setPosition(3);
@@ -57,6 +60,6 @@ class FieldControllerTest {
         field.buildHouses(p1,1,1);
         System.out.println(Arrays.toString(field.getAvaiableHousePositions()));
         System.out.println(field.getHouses()[1]);
-        System.out.println(p1.playerBalance());
+        System.out.println(p1.getBalance());
     }
 }

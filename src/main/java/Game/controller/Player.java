@@ -27,11 +27,10 @@ public class Player {
     }
 
     //Keeps track of the currentplayers score
-    public int playerBalance(){return account.score();}
+    public int getBalance(){return account.getScore();}
     //Updates the currentplayers score
     public void playerBalanceUpdate(int update){account.updateScore(update);}
 
-    public void starterScore(int players){account.initializeScore(players);}
 
     // put player in prison
     public void setInPrison(){
@@ -62,13 +61,13 @@ public class Player {
 
 
     // Check where player is currently
-    public int currentPosition(){
+    public int getCurrentPosition(){
         return position;
     }
 
     //Easy way to move the player without having to count the die value
     public int setPosition(int newPosition){
-        if(currentPosition() > newPosition) {
+        if(getCurrentPosition() > newPosition) {
             account.updateScore(200);
         }
         position = newPosition;
@@ -76,7 +75,7 @@ public class Player {
     }
     // Move player with die
     public int updatePosition(int die){
-        oldPosition = currentPosition();
+        oldPosition = position;
         position += die;
 
         if(position > 39){

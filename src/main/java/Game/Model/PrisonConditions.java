@@ -7,7 +7,7 @@ public class PrisonConditions {
     private int Count;
     private String stringChoice;
     public void Release (Player PrisonPlayer, Dices PrisonDices, MatadorGui PrisonGUI, int CurrentPlayer){
-        if (PrisonPlayer.getPrisonCard() && PrisonPlayer.playerBalance() >= 50 && PrisonPlayer.getRoundsinprison() < 3){
+        if (PrisonPlayer.getPrisonCard() && PrisonPlayer.getBalance() >= 50 && PrisonPlayer.getRoundsinprison() < 3){
             stringChoice = PrisonGUI.gui.getUserButtonPressed(PrisonPlayer.playerString()+", du har siddet i fængsel i "+ PrisonPlayer.getRoundsinprison() +" runde(r) vælg hvordan du vil løslades: ", "Brug dit benådelses kort","Betal kr. 50,00", "Slå med terningerne");
             switch (stringChoice){
                 case "Brug dit benådelses kort":
@@ -17,7 +17,7 @@ public class PrisonConditions {
                 case "Betal kr. 50,00":
                     PrisonPlayer.releaseFromPrison();
                     PrisonPlayer.playerBalanceUpdate(-50);
-                    PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.playerBalance());
+                    PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.getBalance());
                     break;
                 case "Slå med terningerne":
                     PrisonDices.roll();
@@ -50,13 +50,13 @@ public class PrisonConditions {
                         }
                 }
         }
-        else if (PrisonPlayer.playerBalance() >= 50 && PrisonPlayer.getRoundsinprison() < 3){
+        else if (PrisonPlayer.getBalance() >= 50 && PrisonPlayer.getRoundsinprison() < 3){
             stringChoice = PrisonGUI.gui.getUserButtonPressed(PrisonPlayer.playerString()+", du har siddet i fængsel i "+ PrisonPlayer.getRoundsinprison() +" runde(r) vælg hvordan du vil løslades: ", "Betal kr. 50,00", "Slå med terningerne");
             switch (stringChoice){
                 case "Betal kr. 50,00":
                     PrisonPlayer.releaseFromPrison();
                     PrisonPlayer.playerBalanceUpdate(-50);
-                    PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.playerBalance());
+                    PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.getBalance());
                     break;
                 case "Slå med terningerne":
                     PrisonDices.roll();
@@ -88,7 +88,7 @@ public class PrisonConditions {
         else{
             PrisonGUI.showMessage(PrisonPlayer.playerString() + " har siddet i fængsel i 3 runder og løslades nu for kr. 50,00");
             PrisonPlayer.playerBalanceUpdate(-50);
-            PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.playerBalance());
+            PrisonGUI.updateGuiBalance(CurrentPlayer, PrisonPlayer.getBalance());
             PrisonPlayer.releaseFromPrison();
         }
     }

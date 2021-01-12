@@ -49,7 +49,7 @@ public class Cards {
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (5) {
+        switch (cardPicker.DrawCard()) {
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
