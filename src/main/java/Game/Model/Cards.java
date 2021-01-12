@@ -15,10 +15,6 @@ public class Cards {
     private boolean Matadorlegat = false;
     private boolean isChanceCard15or25 = false;          // added line
 
-    private String[] possibleFields = new String[2];
-    private String[] possibleFields2 = new String[4];
-    private boolean freeField = false;
-
     CardPicker cardPicker = new CardPicker();
     TextReader TextforCards = new TextReader("CardText.txt");
 
@@ -37,14 +33,7 @@ public class Cards {
         hasPositionChange = false;
         PrisonChance = false;
         isChanceCard15or25 = false;                      // added line
-
     }
-
-    //Resets the freefield boolean, if a card with that value has been drawn
-    public void resetfreeField() {
-        freeField = false;
-    }
-
 
     public void CardPick() {
 
@@ -207,14 +196,6 @@ public class Cards {
 
     public boolean isHasMatadorlegat() {
         return Matadorlegat;
-    }
-
-    public void setHasExtraMoves(boolean hasExtraMoves) {
-        this.hasExtraMoves = hasExtraMoves;
-    }
-
-    public boolean isFreeField() {
-        return freeField;
     }
 
     public boolean isChanceCard15or25() {

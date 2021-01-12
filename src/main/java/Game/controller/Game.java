@@ -107,63 +107,6 @@ public class Game {
 
                 landOnField.FieldPosition(player[i].getCurrentPosition(), player[i], i, dices.getValue());
                 //Checks if player has landed on a chancecard field.
-                if (fieldProperties.getdrawCard()) {
-                    while (true) {
-
-                        //Draws card and checks what card has been drawn and completes the actions on the card
-                        cards.CardPick();
-                        matadorGUI.displayCard(cards.cardToString());
-                        matadorGUI.gui.getUserButtonPressed(cards.cardToString(), "ok");
-
-                        if (cards.isHasExtraMoves()) {
-                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].updatePosition(cards.move()));
-                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-
-                        }
-
-                        if (cards.isChanceCard15or25() || cards.isHasPositionChange()) {                                                                                                                   // added if-block
-                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].setPosition(cards.distToNearestShippingLine(player[i].currentPosition())));
-                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                        }
-
-                        if (cards.isHasPositionChange() && !cards.isChanceCard15or25()) {       // changed line
-                            matadorGUI.moveCars(i, player[i].currentPosition(), player[i].setPosition(cards.getPositionChange()));
-                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-
-                        }
-                        if (cards.HasPrisonChance()) {
-                            if (!player[i].getPrisonCard()) {
-                                matadorGUI.moveToPrison(i, player[i].currentPosition());
-                                player[i].setInPrison();
-                                matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                            } else if (player[i].getPrisonCard()) {
-                                player[i].updatePrisonCard(false);
-                            }
-
-                        }
-
-                        player[i].playerBalanceUpdate(cards.extraMoney());
-                        matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                        if (cards.isHasPrisonCard()) {
-                            player[i].updatePrisonCard(true);
-                        }
-                        if (cards.isHasSammenskudsgilde()) {
-                            for (int y = 0; y < menu.getPlayerAmount(); y++) {
-                                player[y].playerBalanceUpdate(-25);
-                                matadorGUI.updateGuiBalance(y, player[y].playerBalance());
-                            }
-                            player[i].playerBalanceUpdate(menu.getPlayerAmount() * 25);
-                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                        }
-                        if (cards.isHasMatadorlegat()) {
-                            for (int y = 0; y < menu.getPlayerAmount(); y++) {
-                                player[y].playerBalanceUpdate(-25);
-                                matadorGUI.updateGuiBalance(y, player[y].playerBalance());
-                            }
-                            player[i].playerBalanceUpdate(menu.getPlayerAmount() * 25);
-                            matadorGUI.updateGuiBalance(i, player[i].playerBalance());
-                        }
-
 
                 if (player[i].getBalance() < 0) {
 

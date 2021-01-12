@@ -31,8 +31,8 @@ public class LandOnField {
         if (!(fieldProperties.fields(currentPosition) instanceof OwnableField)) {
             landOnNotOwnable.NotOwnable(matadorGUI, fieldProperties, cards, currentPlayer, playerAmount, playerID, player);
         }
-        fieldProperties.setPosition(currentPosition);
-        if (fieldProperties.fields(currentPosition) instanceof OwnableField) {
+        fieldProperties.setPosition(currentPlayer.getCurrentPosition());
+        if (fieldProperties.fields(currentPlayer.getCurrentPosition()) instanceof OwnableField) {
             landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player, dices);
         }
     }
