@@ -13,6 +13,7 @@ public class Cards {
     private int PositionChange;
     private boolean hasPositionChange = false;
     private boolean Matadorlegat = false;
+    private boolean isChanceCard15or25 = false;          // added line
 
     private String[] possibleFields = new String[2];
     private String[] possibleFields2 = new String[4];
@@ -35,12 +36,20 @@ public class Cards {
         isSammenskudsgilde = false;
         hasPositionChange = false;
         PrisonChance = false;
+        isChanceCard15or25 = false;                      // added line
+
     }
+
+    //Resets the freefield boolean, if a card with that value has been drawn
+    public void resetfreeField() {
+        freeField = false;
+    }
+
 
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (cardPicker.DrawCard()) {
+        switch (cardPicker.DrawCard()) {                      //
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
@@ -100,6 +109,8 @@ public class Cards {
             case 15:
             case 25:
                 cardText = TextforCards.getText()[24];
+                isChanceCard15or25 = true;
+                hasPositionChange = true;                    // added line
                 break;
             case 16:
                 cardText = TextforCards.getText()[15];
@@ -196,6 +207,34 @@ public class Cards {
 
     public boolean isHasMatadorlegat() {
         return Matadorlegat;
+    }
+
+    public void setHasExtraMoves(boolean hasExtraMoves) {
+        this.hasExtraMoves = hasExtraMoves;
+    }
+
+    public boolean isFreeField() {
+        return freeField;
+    }
+
+    public boolean isChanceCard15or25() {
+        return isChanceCard15or25;
+    }
+
+    public int distToNearestShippingLine(int currentPosition) {
+        if (currentPosition == 36 || currentPosition == 2) {
+            PositionChange = 5;
+        }
+        else if (currentPosition == 7) {
+            PositionChange = 15;
+        }
+        else if (currentPosition == 17 || currentPosition == 22) {
+            PositionChange = 25;
+        }
+        else if (currentPosition == 33) {
+            PositionChange = 35;
+        }
+        return PositionChange;
     }
 
     public int move() {
