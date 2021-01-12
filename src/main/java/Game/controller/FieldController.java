@@ -103,7 +103,7 @@ public class FieldController {
         int oldPosition = position;
         for(int i=0;i<39;i++){
             this.position = i;
-            if(hasAllFields()){
+            if(hasAllFields(position)){
                 avaiableHousePositions[arrayPosition]=i;
                 arrayPosition++;
             }
@@ -112,7 +112,7 @@ public class FieldController {
         return avaiableHousePositions;
     }
     public void buildHouses(Player player, int playerNumber, int buildposition){
-        if(fields[buildposition] instanceof BuildableField && Houses[buildposition]<5 && hasAllFields() && ownedFields[buildposition]==playerNumber) {
+        if(fields[buildposition] instanceof BuildableField && Houses[buildposition]<5 && hasAllFields(buildposition) && ownedFields[buildposition]==playerNumber) {
                     player.playerBalanceUpdate(-houseCosts[buildposition]);
                     Houses[buildposition] = Houses[buildposition]+1;
             }
@@ -210,22 +210,22 @@ public class FieldController {
 
 
 
-    public boolean hasAllFields(){
-        if(fields[position] instanceof OwnableField){
+    public boolean hasAllFields(int testPosition){
+        if(fields[testPosition] instanceof OwnableField){
             for (int i = 0; i <= 39; i++) {
                 int colorCount = 0;
                 if (fields[i] instanceof OwnableField) {
 
                     //Hvis du ejer 2 af blå eller lilla
-                    if ((i != position) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[position]).getColor()
-                            && ownedFields[i] == ownedFields[position] && ownedFields[i] != 0) {
-                        if ((((OwnableField) fields[position]).getColor() == "Purple" || ((OwnableField) fields[position]).getColor() == "Blue")) {
+                    if ((i != testPosition) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[testPosition]).getColor()
+                            && ownedFields[i] == ownedFields[testPosition] && ownedFields[i] != 0) {
+                        if ((((OwnableField) fields[testPosition]).getColor() == "Purple" || ((OwnableField) fields[testPosition]).getColor() == "Blue")) {
                             return true;
                         }
                         else {
                             int k = 0;
                             for (String color : fieldColors) {
-                                if (color == ((OwnableField) fields[position]).getColor() && ownedFields[k] == ownedFields[position] && ownedFields[k] != 0 && k!=position) {
+                                if (color == ((OwnableField) fields[testPosition]).getColor() && ownedFields[k] == ownedFields[testPosition] && ownedFields[k] != 0 && k!=position) {
                                     colorCount = colorCount + 1;
                                 }
                                 k++;
@@ -260,7 +260,7 @@ public class FieldController {
                 return countBrewery(Dices);
 
             }
-            if(hasAllFields()){
+            else if(hasAllFields(position)){
                 if(Houses[position]>0){
                     return housePrices[position][Houses[position]-1];
                 }

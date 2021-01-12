@@ -61,4 +61,20 @@ class FieldControllerTest {
         System.out.println(field.getHouses()[1]);
         System.out.println(p1.getBalance());
     }
+
+    @Test
+    void calculateRentHouse() {
+        FieldController field = new FieldController();
+        field.createFields();
+        Player p1 = new Player("p1");
+        Player p2 = new Player("p2");
+        field.setPosition(1);
+        field.setOwnedFields(1);
+        field.setPosition(3);
+        field.setOwnedFields(1);
+        field.buildHouses(p1,1,1);
+        field.setPosition(1);
+        System.out.println(field.calculateRent(6));
+
+    }
 }
