@@ -31,13 +31,13 @@ public class LandOnField {
 
     //properties.setPosition(currentPosition);
 
-    public void FieldPosition(int currentPosition, Player currentPlayer, int playerID) {
+    public void FieldPosition(int currentPosition, Player currentPlayer, int playerID, int dices) {
 
         if (!(fieldProperties.fields(currentPosition) instanceof OwnableField)) {
             landOnNotOwnable.NotOwnable(matadorGUI, fieldProperties, cards, currentPlayer, playerAmount, playerID, player);
         }
         if (fieldProperties.fields(currentPosition) instanceof OwnableField) {
-            landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player);
+            landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player, dices);
         }
 
     }

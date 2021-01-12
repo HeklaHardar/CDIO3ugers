@@ -10,12 +10,12 @@ public class LandOnOwnable {
     LandOnOwned landOnOwned = new LandOnOwned();
 
 
-    public void Ownable(MatadorGui matadorGUI, FieldController fieldProperties, Player currentPlayer, int playerID, Player[] player) {
+    public void Ownable(MatadorGui matadorGUI, FieldController fieldProperties, Player currentPlayer, int playerID, Player[] player, int dices) {
 
         if (fieldProperties.getOwnedFields()[currentPlayer.getCurrentPosition()] == 0 && fieldProperties.isOwnable() == 1) {
             landonNotOwned.notOwned(matadorGUI, currentPlayer, fieldProperties, playerID);
         } else if (fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] - 1].playerString() != player[playerID].playerString()) {
-            landOnOwned.Owned(matadorGUI, fieldProperties, player, playerID);
+            landOnOwned.Owned(matadorGUI, fieldProperties, player, playerID, dices);
         }
 
 
