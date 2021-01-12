@@ -51,7 +51,7 @@ public class Cards {
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (15) {                      //cardPicker.DrawCard()
+        switch (cardPicker.DrawCard()) {                      //
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
@@ -109,11 +109,6 @@ public class Cards {
                 money = 200;
                 break;
             case 15:
-                cardText = TextforCards.getText()[14];      // added line
-                isChanceCard15or25 = true;
-                hasPositionChange = true;                   // added line
-
-                break;                                      // added line
             case 25:
                 cardText = TextforCards.getText()[24];
                 isChanceCard15or25 = true;
