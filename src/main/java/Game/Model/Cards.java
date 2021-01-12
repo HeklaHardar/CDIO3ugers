@@ -37,11 +37,6 @@ public class Cards {
         PrisonChance = false;
     }
 
-    //Resets the freefield boolean, if a card with that value has been drawn
-    public void resetfreeField() {
-        freeField = false;
-    }
-
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
