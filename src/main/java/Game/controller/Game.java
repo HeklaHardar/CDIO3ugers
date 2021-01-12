@@ -72,7 +72,7 @@ public class Game {
 
 
 
-                landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i);
+                landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i, dices.getValue());
                 //Checks if player has landed on a chancecard field.
                 /*if (fieldProperties.getdrawCard()) {
                     while (true) {
