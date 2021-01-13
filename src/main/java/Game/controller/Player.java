@@ -9,14 +9,20 @@ public class Player {
     private boolean inPrison = false;
     private int oldPosition;
     private int roundsinprison;
+    private int playerID;
 
     // Determines variables
     Account account = new Account();
     private String Player;
 
     // Gets the player's name
-    public Player(String s) {
+    public Player(String s, int ID) {
         Player = s;
+        playerID = ID;
+    }
+
+    public int getPlayerID(){
+        return playerID;
     }
 
     public boolean getPrisonCard(){return prisonCard;}

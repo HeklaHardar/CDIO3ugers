@@ -1,5 +1,6 @@
 package Game.View;
 
+import Game.controller.Player;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -230,6 +231,15 @@ public class MatadorGui {
                 return 2;
         }
         return 0;
+    }
+
+    public String getAuction(String[] players){
+        stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe feltet?","Ja","Nej");
+        if (stringChoice.equals("Ja")){
+            stringChoice = gui.getUserSelection("Vælg hvilken spiller der vil købe feltet",players);
+            return stringChoice;
+        }else
+            return null;
     }
 
     public void buyHouse(int position,int housecount, int[] ownedfields, int playerNumber){

@@ -4,7 +4,9 @@ import Game.View.MatadorGui;
 
 public class GameStart {
 
-    private final String[] Players = new String[6];
+    //private final String[] Players = new String[6]
+
+    private String[] Players;
 
     //Change this value to change minimum amount of players
     private int MinPlayers = 2;
@@ -24,6 +26,8 @@ public class GameStart {
             else
                 juniorGui.gui.showMessage("ugyldig antal spillere");
         }
+        String[] Players = new String[playerNumber];
+        this.Players = Players;
         // Youngest player name+rest of player names
         for (int i = 0 ; i < playerNumber; i++) {
             if(i == 0) {

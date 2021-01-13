@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class Game {
 
-    private final Player[] player = new Player[6];
+    //private final Player[] player = new Player[6];
     boolean isWinnerWinnerChickenDinner = false;
     private int temporary;
     private int balanceid;
@@ -36,13 +36,15 @@ public class Game {
         FieldController fieldProperties = new FieldController();
         fieldProperties.createFields();
 
+        Player[] player = new Player[menu.getPlayerAmount()];
+
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
-            player[i] = new Player(menu.playernamesToString()[i]);
+            player[i] = new Player(menu.playernamesToString()[i],i);
             matadorGUI.guiPlayers(player[i].playerString(), player[i].getBalance(), i);
         }
 
-        LandOnField landOnField = new LandOnField(matadorGUI, fieldProperties, cards, menu.getPlayerAmount(), player);
+        LandOnField landOnField = new LandOnField(matadorGUI, fieldProperties, cards, menu.getPlayerAmount(), player, menu.playernamesToString());
 
         while (!isWinnerWinnerChickenDinner) {
             round = round + 1;
@@ -101,7 +103,7 @@ public class Game {
                 matadorGUI.ShowDie(dices.Die1(), dices.Die2());
 
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(dices.getValue()));
+                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(1));
                 matadorGUI.updateGuiBalance(i, player[i].getBalance());
                 fieldProperties.setPosition(player[i].getCurrentPosition());
 

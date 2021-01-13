@@ -28,7 +28,7 @@ class FieldControllerTest {
     @Test
     void buildHouses() {
         FieldController field = new FieldController();
-        Player p1 = new Player("Hello");
+        Player p1 = new Player("Hello",1);
         field.createFields();
 /*
         p1.starterScore(1);
@@ -47,7 +47,7 @@ class FieldControllerTest {
     @Test
     void returnAvaiableHousePositions() {
         FieldController field = new FieldController();
-        Player p1 = new Player("Hello");
+        Player p1 = new Player("Hello",1);
         field.createFields();
         field.setPosition(6);
         field.setOwnedFields(1);
@@ -66,8 +66,8 @@ class FieldControllerTest {
     void calculateRentHouse() {
         FieldController field = new FieldController();
         field.createFields();
-        Player p1 = new Player("p1");
-        Player p2 = new Player("p2");
+        Player p1 = new Player("p1",1);
+        Player p2 = new Player("p2",2);
         field.setPosition(1);
         field.setOwnedFields(1);
         field.setPosition(3);
