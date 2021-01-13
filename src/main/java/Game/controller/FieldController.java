@@ -52,6 +52,7 @@ public class FieldController {
             , 22, 15, 22, 0, 26, 26, 0, 28
             , 25, 0, 35, 0, 50};
     private boolean inPrison = false;
+    private boolean IncomeTax = false;
     private int position = 1;
 
     public Field[] createFields() {
@@ -108,6 +109,7 @@ public class FieldController {
     public void buildHouses(Player player, int playerNumber, int buildposition) {
         if (fields[buildposition] instanceof BuildableField && Houses[buildposition] < 5 && hasAllFields(buildposition) && ownedFields[buildposition] == playerNumber) {
             player.playerBalanceUpdate(-houseCosts[buildposition]);
+            player.playerWorthUpdate(houseCosts[buildposition]);
             Houses[buildposition] = Houses[buildposition] + 1;
         } else {
             return;
@@ -241,6 +243,14 @@ public class FieldController {
     public boolean isInPrison() {
         if (fields[position] instanceof GoToPrison) {
             return inPrison = true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isIncomeTax() {
+        if (fields[position] instanceof IncomeTax) {
+            return IncomeTax = true;
         } else {
             return false;
         }

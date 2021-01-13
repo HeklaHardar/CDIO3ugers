@@ -12,6 +12,7 @@ public class LandOnNotOwned {
             currentPlayer.playerBalanceUpdate(-properties.getValue());
             matadorGUI.landOnField(playerID, currentPlayer.getCurrentPosition(), currentPlayer.playerString(), properties.isOwnable(), properties.getOwnedFields());
             properties.setOwnedFields(playerID + 1);
+            currentPlayer.playerWorthUpdate(properties.getValue());
         }
         matadorGUI.updateGuiBalance(playerID, currentPlayer.getBalance());
     }

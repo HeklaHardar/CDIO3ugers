@@ -240,4 +240,15 @@ public class MatadorGui {
             ((GUI_Street) gui.getFields()[position]).setHotel(true);
         }
     }
+
+    public int getIncomeTax(int totalPlayerWorth){
+        stringChoice = gui.getUserButtonPressed("Hvordan vil du betale skat? \n 10 % af dine samlede værdier svarer til: "+ totalPlayerWorth, "200 kr.", "10 % af dine samlede værdier");
+        switch (stringChoice){
+            case "200 kr.":
+                return 1;
+            case "10 % af dine samlede værdier":
+                return 2;
+        }
+        return 0;
+    }
 }
