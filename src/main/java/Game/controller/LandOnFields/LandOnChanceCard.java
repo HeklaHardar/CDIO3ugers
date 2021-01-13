@@ -15,7 +15,7 @@ public class LandOnChanceCard {
             matadorGUI.displayCard(cards.cardToString());
             matadorGUI.gui.getUserButtonPressed("", "ok");
 
-            if (cards.isChanceCard15or25() || cards.isHasPositionChange()) {                                                                                                                   // added if-block
+            if (cards.isChanceCard15or25() && cards.isHasPositionChange()) {                                                                                                                   // added if-block
                 matadorGUI.moveCars(playerID, player[playerID].getCurrentPosition(), player[playerID].setPosition(cards.distToNearestShippingLine(player[playerID].getCurrentPosition())));
                 matadorGUI.updateGuiBalance(playerID, player[playerID].getBalance());
             }

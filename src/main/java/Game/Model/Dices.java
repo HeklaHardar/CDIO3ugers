@@ -24,6 +24,7 @@ public class Dices {
                 die1.getValue() +
                         ", " + die2.getValue();
     }
+
     public int Die1(){
         return
                 die1.getValue();

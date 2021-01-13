@@ -3,6 +3,7 @@ package Game.Model;
 public class Account {
 
     private int points;
+    private int totalWorth;
 
     public Account() {points = 1500;}
 
@@ -12,4 +13,12 @@ public class Account {
     // Returns new score
     public int getScore() {return points;}
 
+    public int AccountWorth() {
+        return totalWorth;
+    }
+
+    public void updateWorth(int newWorth){
+        totalWorth += newWorth;
+
+    }
 }

@@ -9,7 +9,7 @@ public class FieldController {
             new BuildableField(), new BuildableField(), new ShippingLine(), new BuildableField(), new ChanceCard(), new BuildableField(), new BuildableField()
             , new SafeZone(), new BuildableField(), new ChanceCard(), new BuildableField(), new BuildableField(), new ShippingLine(), new BuildableField()
             , new BuildableField(), new Brewery(), new BuildableField(), new GoToPrison(), new BuildableField(), new BuildableField(), new ChanceCard(), new BuildableField()
-            , new ShippingLine(), new ChanceCard(), new BuildableField(), new IncomeTax(), new BuildableField()};
+            , new ShippingLine(), new ChanceCard(), new BuildableField(), new ExtraordinaryTax(), new BuildableField()};
 
     private String[] fieldColors = {"", "Blue", "", "Blue", "", "Ship"
             , "Orange", "", "Orange", "Orange", "", "Yellow", "Brewery",
@@ -24,6 +24,14 @@ public class FieldController {
             , 0, 220, 0, 220, 240, 200, 260
             , 260, 150, 280, 0, 300, 300, 0, 320
             , 200, 0, 350, 200, 400};
+
+    private int[] mortgageValues = {0, 30, 0, 30, 100, 100
+            , 50, 0, 50, 60, 0, 70, 75,
+            70, 80, 100, 90, 0, 90, 100
+            , 0, 110, 0, 110, 120, 100, 130
+            , 130, 75, 140, 0, 150, 150, 0, 160
+            , 100, 0, 175, 100, 200};
+
     private int[] houseCosts = {0, 50, 0, 50, 0, 0
             , 50, 0, 50, 50, 0, 100, 0,
             100, 100, 0, 100, 0, 100, 100
@@ -52,6 +60,8 @@ public class FieldController {
             , 22, 15, 22, 0, 26, 26, 0, 28
             , 25, 0, 35, 0, 50};
     private boolean inPrison = false;
+    private boolean IncomeTax = false;
+    private boolean ExtraordinaryTax = false;
     private int position = 1;
 
     public Field[] createFields() {
@@ -82,7 +92,7 @@ public class FieldController {
         this.inPrison = false;
     }
 
-    public Field fields(int currentField) {
+    public Field getCurrentField(int currentField) {
         return fields[currentField];
     }
 
@@ -108,6 +118,7 @@ public class FieldController {
     public void buildHouses(Player player, int playerNumber, int buildposition) {
         if (fields[buildposition] instanceof BuildableField && Houses[buildposition] < 5 && hasAllFields(buildposition) && ownedFields[buildposition] == playerNumber) {
             player.playerBalanceUpdate(-houseCosts[buildposition]);
+            player.playerWorthUpdate(houseCosts[buildposition]);
             Houses[buildposition] = Houses[buildposition] + 1;
         } else {
             return;
@@ -229,10 +240,7 @@ public class FieldController {
     }
 
     public int getValue() {
-        if (fields[position] instanceof IncomeTax) {
-            return fields[position].getValue();
-        }
-        if (fields[position] instanceof OwnableField) {
+        if (fields[position] instanceof ExtraordinaryTax || fields[position] instanceof OwnableField) {
             return fields[position].getValue();
         }
         return 0;
@@ -241,6 +249,22 @@ public class FieldController {
     public boolean isInPrison() {
         if (fields[position] instanceof GoToPrison) {
             return inPrison = true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isExtraordinaryTax() {
+        if (fields[position] instanceof ExtraordinaryTax) {
+            return ExtraordinaryTax = true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isIncomeTax() {
+        if (fields[position] instanceof IncomeTax) {
+            return IncomeTax = true;
         } else {
             return false;
         }

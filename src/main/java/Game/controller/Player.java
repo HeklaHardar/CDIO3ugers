@@ -36,6 +36,14 @@ public class Player {
     //Updates the currentplayers score
     public void playerBalanceUpdate(int update){account.updateScore(update);}
 
+    public void playerWorthUpdate (int playerWorthUpdate){
+        account.updateWorth(playerWorthUpdate);
+    }
+
+    public int getPlayerAccountWorth (){
+        return account.AccountWorth();
+    }
+
     // put player in prison
     public void setInPrison(){
             inPrison = true;
