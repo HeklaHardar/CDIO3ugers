@@ -2,6 +2,7 @@ package Game.controller.LandOnFields;
 
 
 import Game.Model.Cards;
+import Game.Model.Fields.ExtraordinaryTax;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
@@ -17,7 +18,6 @@ public class LandOnNotOwnable {
 
         if (fieldProperties.getdrawCard()) {
 
-
             landOnChanceCard.ChanceCard(matadorGUI, cards, playerAmount, playerID, player);
 
             cards.resetStats();
@@ -32,7 +32,6 @@ public class LandOnNotOwnable {
             else {
                 currentPlayer.playerBalanceUpdate(-(int) (totalPlayerWorth * 0.1));
             }
-            matadorGUI.updateGuiBalance(playerID,player[playerID].getBalance());
         }
 
         fieldProperties.setPosition(currentPlayer.getCurrentPosition());
@@ -42,5 +41,11 @@ public class LandOnNotOwnable {
             landOnGoToPrison.GoToPrison(matadorGUI, currentPlayer, fieldProperties, playerID);
 
         }
+
+        if (fieldProperties.isExtraordinaryTax()) {
+            matadorGUI.showMessage("Du skal betale extraordinærskat som er på kr. 100,00");
+            currentPlayer.playerBalanceUpdate(fieldProperties.getValue());
+        }
+        matadorGUI.updateGuiBalance(playerID,player[playerID].getBalance());
     }
 }

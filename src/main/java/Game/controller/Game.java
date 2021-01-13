@@ -35,6 +35,7 @@ public class Game {
         Dices dices = new Dices();
         PrisonConditions prisonproperties = new PrisonConditions();
         rollOfDices rollCheck = new rollOfDices();
+        Mortgage mortage = new Mortgage();
 
 
         GameStart menu = new GameStart();
@@ -54,6 +55,7 @@ public class Game {
         while (!isWinnerWinnerChickenDinner) {
             round = round + 1;
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
+                mortage.Mortage(matadorGUI,fieldProperties,player[i],i,player,dices.getValue());
                 //checks if the player is in prison and releases him if he is.
                 if (player[i].isInPrison()) {
                     prisonproperties.Release(player[i], dices, matadorGUI, i);
