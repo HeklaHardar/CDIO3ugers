@@ -82,7 +82,7 @@ public class FieldController {
         this.inPrison = false;
     }
 
-    public Field fields(int currentField) {
+    public Field getCurrentField(int currentField) {
         return fields[currentField];
     }
 
@@ -229,10 +229,7 @@ public class FieldController {
     }
 
     public int getValue() {
-        if (fields[position] instanceof IncomeTax) {
-            return fields[position].getValue();
-        }
-        if (fields[position] instanceof OwnableField) {
+        if (fields[position] instanceof IncomeTax || fields[position] instanceof OwnableField) {
             return fields[position].getValue();
         }
         return 0;

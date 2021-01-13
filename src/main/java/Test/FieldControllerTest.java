@@ -68,13 +68,18 @@ class FieldControllerTest {
         field.createFields();
         Player p1 = new Player("p1");
         Player p2 = new Player("p2");
-        field.setPosition(1);
+        field.setPosition(37);
         field.setOwnedFields(1);
-        field.setPosition(3);
+        field.setPosition(39);
         field.setOwnedFields(1);
-        field.buildHouses(p1,1,1);
-        field.setPosition(1);
-        System.out.println(field.calculateRent(6));
+        field.setPosition(0);
+        field.buildHouses(p1,1,39);
+        field.buildHouses(p1,1,39);
+        field.buildHouses(p1,1,39);
+        field.buildHouses(p1,1,39);
+        field.buildHouses(p1,1,39);
+        field.setPosition(39);
+        System.out.println(field.calculateRent(4));
 
     }
 }
