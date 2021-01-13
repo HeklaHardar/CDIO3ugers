@@ -13,6 +13,10 @@ public class Die {
         max = maximum + 1;
     }
 
+    public void setValue(int value) {
+        Value = value;
+    }
+
     public int getValue() {
         return Value;
     }

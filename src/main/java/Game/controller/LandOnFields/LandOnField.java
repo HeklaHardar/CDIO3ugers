@@ -28,11 +28,11 @@ public class LandOnField {
 
     public void FieldPosition(int currentPosition, Player currentPlayer, int playerID, int dices) {
 
-        if (!(fieldProperties.fields(currentPosition) instanceof OwnableField)) {
+        if (!(fieldProperties.getCurrentField(currentPosition) instanceof OwnableField)) {
             landOnNotOwnable.NotOwnable(matadorGUI, fieldProperties, cards, currentPlayer, playerAmount, playerID, player);
         }
         fieldProperties.setPosition(currentPlayer.getCurrentPosition());
-        if (fieldProperties.fields(currentPlayer.getCurrentPosition()) instanceof OwnableField) {
+        if (fieldProperties.getCurrentField(currentPlayer.getCurrentPosition()) instanceof OwnableField) {
             landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player, dices);
         }
     }
