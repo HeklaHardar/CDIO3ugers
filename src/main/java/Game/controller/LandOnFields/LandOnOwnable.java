@@ -1,5 +1,6 @@
 package Game.controller.LandOnFields;
 
+import Game.Model.Cards;     // ADDED IMPORT OF CLASS
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
@@ -10,12 +11,12 @@ public class LandOnOwnable {
     LandOnOwned landOnOwned = new LandOnOwned();
 
 
-    public void Ownable(MatadorGui matadorGUI, FieldController fieldProperties, Player currentPlayer, int playerID, Player[] player, int dices) {
+    public void Ownable(MatadorGui matadorGUI, FieldController fieldProperties, Player currentPlayer, int playerID, Player[] player, int dices, Cards cards) {       // ADDED CARDS
 
         if (fieldProperties.getOwnedFields()[currentPlayer.getCurrentPosition()] == 0 && fieldProperties.isOwnable() == 1) {
             landonNotOwned.notOwned(matadorGUI, currentPlayer, fieldProperties, playerID);
         } else if (fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] - 1].playerString() != player[playerID].playerString()) {
-            landOnOwned.Owned(matadorGUI, fieldProperties, player, playerID, dices);
+            landOnOwned.Owned(matadorGUI, fieldProperties, player, playerID, dices, cards);
         }
     }
 }

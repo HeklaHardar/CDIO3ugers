@@ -74,7 +74,7 @@ class FieldControllerTest {
         field.setOwnedFields(1);
         field.buildHouses(p1,1,1);
         field.setPosition(1);
-        System.out.println(field.calculateRent(6));
+        System.out.println(field.calculateRent(6, false));   // ADDED FALSE
 
     }
 }

@@ -23,7 +23,6 @@ public class LandOnChanceCard {
             if (cards.isHasPositionChange() && !cards.isChanceCard15or25()) {       // changed line
                 matadorGUI.moveCars(playerID, player[playerID].getCurrentPosition(), player[playerID].setPosition(cards.getPositionChange()));
                 matadorGUI.updateGuiBalance(playerID, player[playerID].getBalance());
-
             }
 
             if (cards.isHasExtraMoves()) {

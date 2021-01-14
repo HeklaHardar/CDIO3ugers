@@ -33,7 +33,8 @@ public class LandOnField {
         }
         fieldProperties.setPosition(currentPlayer.getCurrentPosition());
         if (fieldProperties.fields(currentPlayer.getCurrentPosition()) instanceof OwnableField) {
-            landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player, dices);
+            landOnOwnable.Ownable(matadorGUI, fieldProperties, currentPlayer, playerID, player, dices, cards);  // ADDED CARDS
         }
+        cards.setChanceCard15or25(false);  // added   (optimalt skulle dette gøres i resetStats, og resetStats stå her
     }
 }

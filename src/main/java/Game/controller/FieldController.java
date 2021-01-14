@@ -1,5 +1,6 @@
 package Game.controller;
 
+import Game.Model.Cards;
 import Game.Model.Fields.*;
 
 public class FieldController {
@@ -206,12 +207,13 @@ public class FieldController {
         return false;
     }
 
-    public int calculateRent(int Dices) {
+    public int calculateRent(int Dices, boolean isChanceCard15or25) {
 
         if (fields[position] instanceof OwnableField) {
-            if (((OwnableField) fields[position]).getColor() == "Ship") {
-
+            if (((OwnableField) fields[position]).getColor() == "Ship" && !isChanceCard15or25) {
                 return countShips();
+            } if (((OwnableField) fields[position]).getColor() == "Ship" && isChanceCard15or25) {
+                return countShips() * 2;
             } else if (((OwnableField) fields[position]).getColor() == "Brewery") {
 
                 return countBrewery(Dices);
