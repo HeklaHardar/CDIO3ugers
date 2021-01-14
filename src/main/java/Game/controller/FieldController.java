@@ -307,6 +307,9 @@ public class FieldController {
             else if (ownedFields[position] == 0) {
                 ownedFields[position] = playerNumber;
             }
+            else if (ownedFields[position] > 9){
+                ownedFields[position] = playerNumber;
+        }
         }
     }
 }

@@ -17,7 +17,10 @@ public class PlayerChoice {
 
     }
 
-    public String[] PlayerChoices(int playerID, Player currentPlayer){
+    public String[] PlayerChoices(int playerID, Player currentPlayer, Player[] Player){
+        hasOwnedField = false;
+        hasOwnedMortgageField = false;
+        hasOwnedAllFields = false;
         for (int i = 0;i<40;i++){
             if(fieldProperties.getOwnedFields()[i] == playerID + 1){
                 hasOwnedField = true;
@@ -25,7 +28,7 @@ public class PlayerChoice {
             if (fieldProperties.getOwnedFields()[i] == playerID + 10){
                 hasOwnedMortgageField = true;
             }
-            if (fieldProperties.hasAllFields(currentPlayer.getCurrentPosition())){
+            if (fieldProperties.hasAllFields(i) && fieldProperties.getOwnedFields()[i] == playerID + 1){
                 hasOwnedAllFields = true;
             }
         }

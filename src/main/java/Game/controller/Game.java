@@ -35,7 +35,7 @@ public class Game {
         Dices dices = new Dices();
         PrisonConditions prisonproperties = new PrisonConditions();
         rollOfDices rollCheck = new rollOfDices();
-        Mortgage mortage = new Mortgage();
+        Mortgage mortgage = new Mortgage();
 
         GameStart menu = new GameStart();
         matadorGUI.createGui();
@@ -67,25 +67,30 @@ public class Game {
                 }
 
 
+                while(true) {
+                    int playerAction = matadorGUI.getPlayerAction(player[i].playerString(), TurnChoices.PlayerChoices(i, player[i], player));
 
+                    if (playerAction == 1) {
+                        break;
+                    }
+                    if (playerAction == 3) {
+                        mortgage.SellMortgage(matadorGUI, fieldProperties, player[i], i);
+                    }
+                    if (playerAction == 4) {
+                        mortgage.BuyMortgage(matadorGUI, fieldProperties, player[i], i);
 
-                int playerAction = matadorGUI.getPlayerAction(player[i].playerString(), TurnChoices.PlayerChoices(i,player[i]));
+                    }
 
-                if(playerAction == 3){
+                    if (playerAction == 2) {
 
-                    mortage.Mortage(matadorGUI,fieldProperties,player[i],i,player,dices.getValue());
-
-                }
-
-
-                while(playerAction!=1){
-
-                    String selection = matadorGUI.getUserSelection("Vælg en plads at bygge på", "Rødovrevej", "Hvidovre", "Roskildevej", "Valby  Langgade", "Allégade", "Frederiksberg  Allé",
-                            "Bülowsvej", "Gl. Kongevej", "Bernstoffsvej", "Hellerupvej", "Strandvej", "Trianglen", "Østerbro-gade ", "Grønningen",
-                            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade",  "Amagertorv", "Vimmelskaftet","Nygade", "Frederiks-berggade ", "Rådhus-pladsen ");
-                    boolean titleFound = false;
-                    for (int field: fieldProperties.getAvaiableHousePositions()){
-                        if(titleFound) {break;}
+                        String selection = matadorGUI.getUserSelection("Vælg en plads at bygge på", "Rødovrevej", "Hvidovre", "Roskildevej", "Valby  Langgade", "Allégade", "Frederiksberg  Allé",
+                                "Bülowsvej", "Gl. Kongevej", "Bernstoffsvej", "Hellerupvej", "Strandvej", "Trianglen", "Østerbro-gade ", "Grønningen",
+                                "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "Amagertorv", "Vimmelskaftet", "Nygade", "Frederiks-berggade ", "Rådhus-pladsen ");
+                        boolean titleFound = false;
+                        for (int field : fieldProperties.getAvaiableHousePositions()) {
+                            if (titleFound) {
+                                break;
+                            }
                             if (field != 0) {
                                 if (fieldProperties.getFieldTitles()[field] == selection) {
                                     int buildindex = 0;
@@ -95,10 +100,9 @@ public class Game {
                                             titleFound = true;
 
                                             if (titleFound) {
-                                                fieldProperties.buildHouses(player[i], i+1, buildindex);
-                                                matadorGUI.buyHouse(buildindex, fieldProperties.getHouses()[buildindex],fieldProperties.getOwnedFields(), i+1);
+                                                fieldProperties.buildHouses(player[i], i + 1, buildindex);
+                                                matadorGUI.buyHouse(buildindex, fieldProperties.getHouses()[buildindex], fieldProperties.getOwnedFields(), i + 1);
                                                 matadorGUI.updateGuiBalance(i, player[i].getBalance());
-                                                playerAction = matadorGUI.getPlayerAction(player[i].playerString(), TurnChoices.PlayerChoices(i,player[i]));
                                                 break;
                                             }
 
@@ -111,12 +115,12 @@ public class Game {
                                 }
                             }
 
-                    }
-                    if(!titleFound) {
-                        matadorGUI.showMessage("Du kan ikke bygge her");
-                        playerAction = matadorGUI.getPlayerAction(player[i].playerString(), TurnChoices.PlayerChoices(i,player[i]));
-                    }
+                        }
+                        if (!titleFound) {
+                            matadorGUI.showMessage("Du kan ikke bygge her");
+                        }
 
+                    }
                 }
                 dices.roll();
                 matadorGUI.ShowDie(dices.Die1(), dices.Die2());
@@ -131,7 +135,6 @@ public class Game {
                 matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(matadorGUI.getMoveDebug()));
                 matadorGUI.updateGuiBalance(i, player[i].getBalance());
                 fieldProperties.setPosition(player[i].getCurrentPosition());
-
 
 
                 landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i, dices.getValue());
@@ -165,13 +168,7 @@ public class Game {
                     i = i - 1;
                     matadorGUI.showMessage("Du slog to ens og får en ekstra tur");
                 }
-
             }
-
         }
-
-
     }
-
-
 }

@@ -1,5 +1,6 @@
 package Game.View;
 
+import Game.controller.FieldController;
 import Game.controller.Player;
 import gui_fields.*;
 import gui_main.GUI;
@@ -253,8 +254,12 @@ public class MatadorGui {
 
         fields[position].setSubText("PANTSAT");
         fields[position].setDescription("Pris: kr. "+ (int)(mortgageValues[position] * 1.1)+",00");
+    }
 
+    public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
 
+        fields[position].setSubText("Pris: " + fieldpropertiesUnsetMortgage.getFieldValues()[position] + " kr.");
+        fields[position].setDescription(fieldTitles[position]);
     }
 
     public String getAuction(String[] players){
