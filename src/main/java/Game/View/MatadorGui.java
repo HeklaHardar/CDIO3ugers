@@ -193,9 +193,9 @@ public class MatadorGui {
         gui.showMessage(message);
     }
 
-    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int[] ownedfields) {
+    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner) {
         GUI_Field field = gui.getFields()[currentField];
-        if (ownable == 1 && ownedfields[currentField] == 0) {
+        if (ownable == 1 && owner == 0) {
             GUI_Ownable o = (GUI_Ownable) field;
             o.setBorder(colors[currentPlayer]);
             o.setOwnerName(playerName);
@@ -232,11 +232,11 @@ public class MatadorGui {
         return 0;
     }
 
-    public void buyHouse(int position,int housecount, int[] ownedfields, int playerNumber){
-        if(gui.getFields()[position] instanceof GUI_Street && housecount>0 && housecount < 5 && ownedfields[position]==playerNumber){
+    public void buyHouse(int position,int housecount, int owner, int playerNumber){
+        if(gui.getFields()[position] instanceof GUI_Street && housecount>0 && housecount < 5 && owner==playerNumber){
             ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
         }
-        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && ownedfields[position]==playerNumber){
+        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner==playerNumber){
             ((GUI_Street) gui.getFields()[position]).setHotel(true);
         }
     }
