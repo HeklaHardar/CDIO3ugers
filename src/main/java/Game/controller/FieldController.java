@@ -254,6 +254,10 @@ public class FieldController {
         }
     }
 
+    public int[] getmortageValues() {
+        return mortgageValues;
+    }
+
     public boolean isExtraordinaryTax() {
         if (fields[position] instanceof ExtraordinaryTax) {
             return ExtraordinaryTax = true;
@@ -296,7 +300,11 @@ public class FieldController {
 
     public void setOwnedFields(int playerNumber) {
         if (fields[position] instanceof OwnableField) {
-            if (ownedFields[position] == 0) {
+
+        if (playerNumber>9){
+            ownedFields[position] = playerNumber;
+        }
+            else if (ownedFields[position] == 0) {
                 ownedFields[position] = playerNumber;
             }
         }

@@ -14,7 +14,7 @@ public class LandOnOwnable {
 
         if (fieldProperties.getOwnedFields()[currentPlayer.getCurrentPosition()] == 0 && fieldProperties.isOwnable() == 1) {
             landonNotOwned.notOwned(matadorGUI, currentPlayer, fieldProperties, playerID,player,playerNames);
-        } else if (fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] - 1].playerString() != player[playerID].playerString()) {
+        } else if (fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] < 10 && fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] - 1].playerString() != player[playerID].playerString()) {
             landOnOwned.Owned(matadorGUI, fieldProperties, player, playerID, dices);
         }
     }

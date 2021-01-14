@@ -206,8 +206,14 @@ public class MatadorGui {
             GUI_Ownable o = (GUI_Ownable) field;
             o.setBorder(colors[currentPlayer]);
             o.setOwnerName(playerName);
+           /* o.setSubText();*/
+
         } else return;
     }
+
+    /*public void RentSubText(int FieldRent){
+
+    }*/
 
     public void displayCard(String cardText) {
         gui.displayChanceCard(cardText);
@@ -217,15 +223,17 @@ public class MatadorGui {
         return gui.getUserSelection(msg, options);
     }
 
-    public int getPlayerAction(String playerName) {
-        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName +" s tur.", "Byg hus/hotel", "Slå med terningerne", "Pantsæt huse");
+    public int getPlayerAction(String playerName, String[] Options) {
+        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName +" s tur.",Options);
         switch (stringChoice) {
             case "Slå med terningerne":
                 return 1;
             case "Byg hus/hotel":
                 return 2;
-                case "Pantsæt huse":
+            case "Pantsæt":
                 return 3;
+            case "Køb pantsætning tilbage":
+                return 4;
         }
         return 0;
     }
@@ -241,9 +249,10 @@ public class MatadorGui {
         return 0;
     }
 
-    public void setMortgage(int position){
+    public void setMortgage(int position, int[] mortgageValues){
 
-
+        fields[position].setSubText("PANTSAT");
+        fields[position].setDescription("Pris: kr. "+ (int)(mortgageValues[position] * 1.1)+",00");
 
 
     }
