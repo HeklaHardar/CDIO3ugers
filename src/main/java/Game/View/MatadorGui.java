@@ -218,12 +218,14 @@ public class MatadorGui {
     }
 
     public int getPlayerAction(String playerName) {
-        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName +" s tur.", "Byg hus/hotel", "Slå med terningerne");
+        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName +" s tur.", "Byg hus/hotel", "Slå med terningerne", "Pantsæt huse");
         switch (stringChoice) {
             case "Slå med terningerne":
                 return 1;
             case "Byg hus/hotel":
                 return 2;
+                case "Pantsæt huse":
+                return 3;
         }
         return 0;
     }
@@ -237,6 +239,13 @@ public class MatadorGui {
                 return 2;
         }
         return 0;
+    }
+
+    public void setMortgage(int position){
+
+
+
+
     }
 
     public String getAuction(String[] players){

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class Game {
 
-    //private final Player[] player = new Player[6];
+    private Player[] player;
     boolean isWinnerWinnerChickenDinner = false;
     private int temporary;
     private int balanceid;
@@ -44,7 +44,7 @@ public class Game {
         FieldController fieldProperties = new FieldController();
         fieldProperties.createFields();
 
-        Player[] player = new Player[menu.getPlayerAmount()];
+        player = new Player[menu.getPlayerAmount()];
 
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
@@ -53,12 +53,10 @@ public class Game {
         }
 
         LandOnField landOnField = new LandOnField(matadorGUI, fieldProperties, cards, menu.getPlayerAmount(), player, menu.playernamesToString());
-        LandOnField landOnField = new LandOnField(matadorGUI, fieldProperties,cards,menu.getPlayerAmount(),player);
 
         while (!isWinnerWinnerChickenDinner) {
             round = round + 1;
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
-                mortage.Mortage(matadorGUI,fieldProperties,player[i],i,player,dices.getValue());
                 //checks if the player is in prison and releases him if he is.
                 if (player[i].isInPrison()) {
                     prisonproperties.Release(player[i], dices, matadorGUI, i);
@@ -67,7 +65,19 @@ public class Game {
                         continue;
                     }
                 }
+
+
+
+
                 int playerAction = matadorGUI.getPlayerAction(player[i].playerString());
+
+                if(playerAction == 3){
+
+                    mortage.Mortage(matadorGUI,fieldProperties,player[i],i,player,dices.getValue());
+
+                }
+
+
                 while(playerAction!=1){
 
                     String selection = matadorGUI.getUserSelection("Vælg en plads at bygge på", "Rødovrevej", "Hvidovre", "Roskildevej", "Valby \n Langgade", "Allégade", "Frederiksberg \n Allé",
@@ -118,7 +128,7 @@ public class Game {
                     continue;
                 }
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(dices.getValue()));
+                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(matadorGUI.getMoveDebug()));
                 matadorGUI.updateGuiBalance(i, player[i].getBalance());
                 fieldProperties.setPosition(player[i].getCurrentPosition());
 

@@ -24,6 +24,10 @@ public class LandOnNotOwnable {
 
         }
 
+        //Updates current players position, incase chance card moved them.
+        fieldProperties.setPosition(currentPlayer.getCurrentPosition());
+
+
         if (fieldProperties.isIncomeTax()) {
             totalPlayerWorth = currentPlayer.getPlayerAccountWorth() + currentPlayer.getBalance();
             if (matadorGUI.getIncomeTax((int) (totalPlayerWorth * 0.1)) == 1){
@@ -33,8 +37,6 @@ public class LandOnNotOwnable {
                 currentPlayer.playerBalanceUpdate(-(int) (totalPlayerWorth * 0.1));
             }
         }
-
-        fieldProperties.setPosition(currentPlayer.getCurrentPosition());
 
         if (fieldProperties.isInPrison()) {
 
