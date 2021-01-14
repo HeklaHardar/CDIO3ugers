@@ -90,16 +90,4 @@ class FieldControllerTest {
             i++;
         }
     }
-
-    @Test
-    void housePrices {
-        int i = 1;
-        while (i < 40) {
-            FieldController field = new FieldController();
-            field.createFields();
-            field.setPosition(i);
-            System.out.println();
-            i++;
-        }
-    }
 }

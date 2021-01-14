@@ -51,9 +51,13 @@ public class FieldController {
 
     private int[] Houses = new int[40];
 
-    private String[] fieldTitles = {"Start", "Rødovrevej", "", "Hvidovre", "", "Øresund A/S", "Roskildevej", "", "Valby  Langgade", "Allégade", "", "Frederiksberg  Allé", "Tuborg",
+    /*private String[] fieldTitles = {"Start", "Rødovrevej", "", "Hvidovre", "", "Øresund A/S", "Roskildevej", "", "Valby  Langgade", "Allégade", "", "Frederiksberg  Allé", "Tuborg",
             "Bülowsvej", "Gl. Kongevej", "D. F. D. S.", "Bernstoffsvej", "", "Hellerupvej", "Strandvej", "Helle", "Trianglen", "", "Østerbro-gade ", "Grønningen", "Y. K.",
             "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S Bornholm 1866 ", "", "Frederiks-berggade ", "", "Rådhus-pladsen "};
+    */
+    TextReader fieldTitlesText = new TextReader("Navne.txt");
+    private String[] fieldTitles = fieldTitlesText.getText();
+
 
     private int[] ownedFields = new int[40];
 
