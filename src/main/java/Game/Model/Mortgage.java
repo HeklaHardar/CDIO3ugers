@@ -38,7 +38,7 @@ public class Mortgage {
 
                 }
 
-               mortgageChoice = matadorGUI.getUserSelection("Vælg hvilken grund du vil pantsætte: ",OwnedFields);
+               mortgageChoice = matadorGUI.getUserSelection("Vælg hvad du vil pantsætte: ",OwnedFields);
 
                 Count = 0;
 
@@ -46,70 +46,15 @@ public class Mortgage {
                  ) {
                 if(s.equals(mortgageChoice)){
                     fieldProperties.setPosition(Count);
-                    currentPlayer.playerBalanceUpdate(fieldProperties.getValue()/2);
+                    currentPlayer.playerBalanceUpdate(fieldProperties.getmortageValues()[Count]);
                     matadorGUI.updateGuiBalance(playerID,currentPlayer.getBalance());
-
+                    matadorGUI.setMortgage(Count, fieldProperties.getmortageValues());
+                    fieldProperties.setOwnedFields(playerID + 10);
 
                 }
                 Count += 1;
             }
-
-        break;
-
-            }
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*Count = 0;
-        for (int number: fieldProperties.getOwnedFields()
-             ) {
-
-            if (number -1 == playerID){
-                Count += 1;
+            break;
             }
         }
-        if(Count > 0) {
-            OwnedFields = new String[Count];
-        }
-        Count = 0;
-
-        for (int number: fieldProperties.getOwnedFields()
-        ) {
-            temp = fieldProperties.getFieldTitles()[Count];
-
-            if (number -1 == playerID){
-                OwnedFields[Count] = temp;
-                Count += 1;
-            }
-        }
-        if(Count > 0) {
-        System.out.println(OwnedFields[Count-1]);
-        }*/
-        //(fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] != 0 && player[fieldProperties.getOwnedFields()[player[playerID].getCurrentPosition()] - 1].playerString() != player[playerID].playerString())
-
     }
