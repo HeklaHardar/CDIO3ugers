@@ -1,6 +1,7 @@
 package Game.controller;
 
 import Game.Model.Fields.*;
+import Game.Model.TextReader;
 
 public class FieldController {
     // You have to set position or none of the FieldController Methods will work
@@ -18,18 +19,28 @@ public class FieldController {
             , "Sand", "Brewery", "Sand", "", "Yellow", "Yellow", "", "Yellow"
             , "Ship", "", "Purple", "", "Purple"};
 
-    private int[] fieldValues = {0, 60, 0, 60, 200, 200
+  /*  private int[] fieldValues = {0, 60, 0, 60, 200, 200
             , 100, 0, 100, 120, 0, 140, 150,
             140, 160, 200, 180, 0, 180, 200
             , 0, 220, 0, 220, 240, 200, 260
             , 260, 150, 280, 0, 300, 300, 0, 320
             , 200, 0, 350, 200, 400};
-    private int[] houseCosts = {0, 50, 0, 50, 0, 0
+    */
+
+    TextReader FieldValuesText = new TextReader("Priser.txt");
+    private int[] fieldValues = FieldValuesText.getInts();
+
+
+   /* private int[] houseCosts = {0, 50, 0, 50, 0, 0
             , 50, 0, 50, 50, 0, 100, 0,
             100, 100, 0, 100, 0, 100, 100
             , 0, 150, 0, 150, 150, 0, 150
             , 150, 0, 150, 0, 200, 200, 0, 200
             , 0, 0, 200, 0, 200};
+    */
+
+    TextReader houseCostsText = new TextReader("HusHotelPriser.txt");
+    private int[] houseCosts = houseCostsText.getInts();
 
     private int[][] housePrices = {{}, {10, 30, 90, 160, 250}, {}, {20, 60, 180, 320, 540}, {}, {200, 200, 200, 200, 200}
             , {30, 90, 270, 400, 550}, {}, {30, 90, 270, 400, 550}, {40, 100, 300, 450, 600}, {}, {50, 150, 450, 625, 750}, {150, 150, 150, 150, 150},
@@ -120,6 +131,10 @@ public class FieldController {
 
     public Field[] getFields() {
         return fields;
+    }
+
+    public String getFieldTitle(){
+        return fieldTitles[position];
     }
 
     public int countShips() {

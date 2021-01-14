@@ -39,7 +39,7 @@ class FieldControllerTest {
         field.setPosition(3);
         field.setOwnedFields(1);
         field.setPosition(1);
-        field.buildHouses(p1,1, 1);
+        field.buildHouses(p1, 1, 1);
         System.out.println(field.getHouses()[1]);
         System.out.println(p1.getBalance());
     }
@@ -56,7 +56,7 @@ class FieldControllerTest {
         field.setPosition(9);
         field.setOwnedFields(1);
         field.setPosition(1);
-        field.buildHouses(p1,1,1);
+        field.buildHouses(p1, 1, 1);
         System.out.println(Arrays.toString(field.getAvaiableHousePositions()));
         System.out.println(field.getHouses()[1]);
         System.out.println(p1.getBalance());
@@ -72,9 +72,34 @@ class FieldControllerTest {
         field.setOwnedFields(1);
         field.setPosition(3);
         field.setOwnedFields(1);
-        field.buildHouses(p1,1,1);
+        field.buildHouses(p1, 1, 1);
         field.setPosition(1);
         System.out.println(field.calculateRent(6));
 
+    }
+
+    @Test
+    void valueTest() {
+        int i = 1;
+        while (i < 40) {
+            FieldController field = new FieldController();
+            field.createFields();
+            field.setPosition(i);
+
+            System.out.println(field.getValue() + " " + field.getFieldTitle());
+            i++;
+        }
+    }
+
+    @Test
+    void housePrices {
+        int i = 1;
+        while (i < 40) {
+            FieldController field = new FieldController();
+            field.createFields();
+            field.setPosition(i);
+            System.out.println();
+            i++;
+        }
     }
 }
