@@ -1,5 +1,6 @@
 package Game.controller.LandOnFields;
 
+import Game.Model.Fields.OwnableField;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.Player;
@@ -13,7 +14,7 @@ public class LandOnNotOwned {
 
         if (matadorGUI.getBuyField() == 1) {
             currentPlayer.playerBalanceUpdate(-properties.getValue());
-            matadorGUI.landOnField(playerID, currentPlayer.getCurrentPosition(), currentPlayer.playerString(), properties.isOwnable(), properties.getOwnedFields());
+            matadorGUI.landOnField(playerID, currentPlayer.getCurrentPosition(), currentPlayer.playerString(), properties.isOwnable(), ((OwnableField)properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner());
             properties.setOwnedFields(playerID + 1);
             currentPlayer.playerWorthUpdate(properties.getValue());
         } else{

@@ -2,8 +2,8 @@ package Game.Model.Fields;
 
 public class NotOwnableField extends Field {
 
-    public NotOwnableField() {
-        value = 0;
+    public NotOwnableField(int position) {
+        super(position);
         ownable = 0;
     }
 }

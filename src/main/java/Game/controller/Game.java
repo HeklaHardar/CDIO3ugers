@@ -1,6 +1,8 @@
 package Game.controller;
 
 import Game.Model.*;
+import Game.Model.Fields.BuildableField;
+import Game.Model.Fields.Field;
 import Game.controller.LandOnFields.LandOnField;
 import Game.View.MatadorGui;
 
@@ -41,7 +43,6 @@ public class Game {
         matadorGUI.createGui();
         menu.startGame(matadorGUI);
         FieldController fieldProperties = new FieldController();
-        fieldProperties.createFields();
         PlayerChoice TurnChoices = new PlayerChoice(fieldProperties);
 
         player = new Player[menu.getPlayerAmount()];
@@ -65,70 +66,35 @@ public class Game {
                         continue;
                     }
                 }
+                int playerAction = matadorGUI.getPlayerAction(player[i].playerString());
+                while(playerAction!=1) {
 
-
-                while(true) {
-                    int playerAction = matadorGUI.getPlayerAction(player[i].playerString(), TurnChoices.PlayerChoices(i, player[i], player));
-
-                    if (playerAction == 1) {
-                        break;
-                    }
-                    if (playerAction == 3) {
-                        mortgage.SellMortgage(matadorGUI, fieldProperties, player[i], i);
-                    }
-                    if (playerAction == 4) {
-                        mortgage.BuyMortgage(matadorGUI, fieldProperties, player[i], i);
-
-                    }
-
-                    if (playerAction == 2) {
-
-                        String selection = matadorGUI.getUserSelection("Vælg en plads at bygge på", "Rødovrevej", "Hvidovre", "Roskildevej", "Valby  Langgade", "Allégade", "Frederiksberg  Allé",
-                                "Bülowsvej", "Gl. Kongevej", "Bernstoffsvej", "Hellerupvej", "Strandvej", "Trianglen", "Østerbro-gade ", "Grønningen",
-                                "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "Amagertorv", "Vimmelskaftet", "Nygade", "Frederiks-berggade ", "Rådhus-pladsen ");
-                        boolean titleFound = false;
-                        for (int field : fieldProperties.getAvaiableHousePositions()) {
-                            if (titleFound) {
-                                break;
-                            }
-                            if (field != 0) {
-                                if (fieldProperties.getFieldTitles()[field] == selection) {
-                                    int buildindex = 0;
-
-                                    for (String title : fieldProperties.getFieldTitles()) {
-                                        if (title == selection) {
-                                            titleFound = true;
-
-                                            if (titleFound) {
-                                                fieldProperties.buildHouses(player[i], i + 1, buildindex);
-                                                matadorGUI.buyHouse(buildindex, fieldProperties.getHouses()[buildindex], fieldProperties.getOwnedFields(), i + 1);
-                                                matadorGUI.updateGuiBalance(i, player[i].getBalance());
-                                                break;
-                                            }
-
-                                        } else {
-                                            buildindex++;
-                                        }
-
-
-                                    }
-                                }
-                            }
-
+                    String selection = matadorGUI.getUserSelection("Vælg en plads at bygge på", "Rødovrevej", "Hvidovre", "Roskildevej", "Valby \n Langgade", "Allégade", "Frederiksberg \n Allé",
+                            "Bülowsvej", "Gl. Kongevej", "Bernstoffsvej", "Hellerupvej", "Strandvej", "Trianglen", "Østerbro-\ngade \n", "Grønningen",
+                            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "Amagertorv", "Vimmelskaftet", "Nygade", "Frederiks-\nberggade \n", "Rådhus-\npladsen \n");
+                    boolean buildable = false;
+                    for (Field field : fieldProperties.getFields()) {
+                        if (field instanceof BuildableField && field.getName() == selection) {
+                            fieldProperties.buildHouses(player[i], i + 1, field.getPosition());
+                            matadorGUI.buyHouse(field.getPosition(), ((BuildableField) field).getHouses(), ((BuildableField) field).getOwner(), i + 1);
+                            matadorGUI.updateGuiBalance(i, player[i].getBalance());
+                            buildable = true;
+                            break;
                         }
-                        if (!titleFound) {
-                            matadorGUI.showMessage("Du kan ikke bygge her");
-                        }
-
                     }
+                    if(!buildable) {
+                        matadorGUI.showMessage("Du kan ikke bygge her");
+                    }
+                    playerAction = matadorGUI.getPlayerAction(player[i].playerString());
                 }
+
                 dices.roll();
                 matadorGUI.ShowDie(dices.Die1(), dices.Die2());
 
                 if(rollCheck.twoOfTheSameThreeTimes(dices.Die1(),dices.Die2(),i,player[i],matadorGUI)){
                     matadorGUI.showMessage("Du slog to ens tre gange i træk, og rykker til gå i fængsel");
                     fieldProperties.setPosition(30);
-                    landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i, dices.getValue());
+                    landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i, 1);
                     continue;
                 }
                 //Moves the car on the GUI and checks if player is over start.
