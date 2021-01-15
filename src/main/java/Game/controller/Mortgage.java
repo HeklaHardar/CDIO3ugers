@@ -1,4 +1,4 @@
-package Game.Model;
+package Game.controller;
 
 import Game.Model.Fields.Field;
 import Game.Model.Fields.OwnableField;
