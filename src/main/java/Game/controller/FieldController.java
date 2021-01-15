@@ -64,25 +64,26 @@ public class FieldController {
         int[] multirent = {0, 25, 50, 100, 200};
 
         if (fields[position] instanceof OwnableField) {
+            int colorCount = 0;
             for (int i = 0; i <= 39; i++) {
-                int colorCount = 0;
+
                     if (fields[i] instanceof OwnableField) {
                         if (((OwnableField) fields[i]).getColor() == "Ship" && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[i]).getOwner() != 0) {
                             colorCount = colorCount + 1;
 
                         }
                     }
-
-                    ((OwnableField) fields[position]).setRent(multirent[colorCount]);
             }
+            ((OwnableField) fields[position]).setRent(multirent[colorCount]);
         }
     }
 
     public void countBrewery(int BreweryDices) {
 
         if (fields[position] instanceof OwnableField) {
+            int breweryCount = 0;
             for (int i = 0; i <= 39; i++) {
-                int breweryCount = 0;
+
 
                 if (fields[i] instanceof OwnableField) {
 
@@ -90,12 +91,12 @@ public class FieldController {
                             breweryCount = breweryCount + 1;
                         }
                 }
-                if (breweryCount == 1) {
-                    ((OwnableField) fields[position]).setRent(BreweryDices * 4);
-                }
-                if (breweryCount == 2) {
-                    ((OwnableField) fields[position]).setRent(BreweryDices * 10);
-                }
+            }
+            if (breweryCount == 1) {
+                ((OwnableField) fields[position]).setRent(BreweryDices * 4);
+            }
+            else if (breweryCount == 2) {
+                ((OwnableField) fields[position]).setRent(BreweryDices * 10);
             }
         }
     }
