@@ -1,4 +1,4 @@
-package Game.Model;
+package Game.controller;
 
 import Game.View.MatadorGui;
 
@@ -32,14 +32,32 @@ public class GameStart {
         for (int i = 0 ; i < playerNumber; i++) {
             if(i == 0) {
                 Players[i] = juniorGui.gui.getUserString("Indtast navnet på den yngste spiller");
-            }
-            else {
-                Players[i] = juniorGui.gui.getUserString("Indtast navn for spiller " + (i + 1) + ": ");
+                if(Players[i].isEmpty() || Players[i].startsWith(" ")){
+                    juniorGui.gui.showMessage("Ugyldigt navn");
+                    i--;
+                    continue;
+                }
             }
 
-            if(Players[i].isEmpty() || Players[i].startsWith(" ")){
-                juniorGui.gui.showMessage("Ugyldigt navn");
-                i--;
+            else{
+                boolean removePlayerName = false;
+                Players[i] = juniorGui.gui.getUserString("Indtast navn for spiller " + (i + 1) + ": ");
+                if(Players[i].isEmpty() || Players[i].startsWith(" ")){
+                    juniorGui.gui.showMessage("Ugyldigt navn");
+                    i--;
+                    continue;
+                }
+                for (int j=0; j<i;j++){
+                        if(Players[j].toLowerCase().equals(Players[i].toLowerCase()) && i!=j){
+                            removePlayerName = true;
+                        }
+                    }
+                if(removePlayerName){
+                    juniorGui.gui.showMessage("Du hedder det samme som en anden spiller, indtast andet navn");
+                    Players[i]="";
+                    i--;
+
+                }
             }
         }
     }
