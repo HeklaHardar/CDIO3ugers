@@ -1,8 +1,8 @@
-package Game.Model;
+package Game.controller;
 
 import Game.Model.Fields.OwnableField;
+import Game.Model.Player;
 import Game.controller.FieldController;
-import Game.controller.Player;
 
 public class PlayerChoice {
 
@@ -58,6 +58,36 @@ public class PlayerChoice {
         }
         else{
             return Options = new String[]{"Slå med terningerne"};
+        }
+    }
+
+    public String[] LosingChoices(int playerID, Player currentPlayer, Player[] Player) {
+        hasOwnedField = false;
+        hasOwnedMortgageField = false;
+        hasOwnedAllFields = false;
+        for (int i = 0; i < 40; i++) {
+            if (fieldProperties.getFields()[i] instanceof OwnableField) {
+                if (((OwnableField) fieldProperties.getFields()[i]).getOwner() == playerID + 1) {
+                    hasOwnedField = true;
+                }
+                if (((OwnableField) fieldProperties.getFields()[i]).getOwner() == playerID + 10) {
+                    hasOwnedMortgageField = true;
+                }
+                if (fieldProperties.hasAllFields(i) && ((OwnableField) fieldProperties.getFields()[i]).getOwner() == playerID + 1) {
+                    hasOwnedAllFields = true;
+                }
+            } else {
+                continue;
+            }
+        }
+        if (hasOwnedAllFields && hasOwnedField) {
+            return Options = new String[]{"Pantsæt"};
+        }
+        else if (hasOwnedField) {
+            return Options = new String[]{"Pantsæt"};
+        }
+        else{
+            return null;
         }
     }
 }

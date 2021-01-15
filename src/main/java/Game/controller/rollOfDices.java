@@ -1,5 +1,6 @@
 package Game.controller;
 
+import Game.Model.Player;
 import Game.View.MatadorGui;
 
 public class rollOfDices {

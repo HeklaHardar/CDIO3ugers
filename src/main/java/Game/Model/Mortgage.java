@@ -4,7 +4,6 @@ import Game.Model.Fields.Field;
 import Game.Model.Fields.OwnableField;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
-import Game.controller.Player;
 
 public class Mortgage {
     private int Count;

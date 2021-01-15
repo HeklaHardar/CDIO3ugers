@@ -6,8 +6,6 @@ import Game.Model.Fields.Field;
 import Game.controller.LandOnFields.LandOnField;
 import Game.View.MatadorGui;
 
-import java.util.Arrays;
-
 
 public class Game {
 
@@ -38,6 +36,7 @@ public class Game {
         PrisonConditions prisonproperties = new PrisonConditions();
         rollOfDices rollCheck = new rollOfDices();
         Mortgage mortgage = new Mortgage();
+        LosingConditions losingConditions = new LosingConditions();
 
         GameStart menu = new GameStart();
         matadorGUI.createGui();
@@ -87,15 +86,17 @@ public class Game {
                         boolean buildable = false;
                         for (Field field : fieldProperties.getFields()) {
                             if (field instanceof BuildableField && field.getName() == selection) {
-                                fieldProperties.buildHouses(player[i], i + 1, field.getPosition());
-                                matadorGUI.buyHouse(field.getPosition(), ((BuildableField) field).getHouses(), ((BuildableField) field).getOwner(), i + 1);
-                                matadorGUI.updateGuiBalance(i, player[i].getBalance());
-                                buildable = true;
-                                break;
+                                if(fieldProperties.buildHouses(player[i], i + 1, field.getPosition())=="buildable"){
+                                    matadorGUI.buyHouse(field.getPosition(), ((BuildableField) field).getHouses(), ((BuildableField) field).getOwner(), i + 1);
+                                    matadorGUI.updateGuiBalance(i, player[i].getBalance());
+                                    buildable = true;
+                                    matadorGUI.RentOnField(fieldProperties);
+                                    break;
+                                }
+                                else if ((fieldProperties.buildHouses(player[i], i + 1, field.getPosition())=="houseRequirements")){
+                                    matadorGUI.showMessage("Du skal have lige mange huse på alle grundene");
+                                }
                             }
-                        }
-                        if (!buildable) {
-                            matadorGUI.showMessage("Du kan ikke bygge her");
                         }
                     }
                 }
@@ -115,8 +116,10 @@ public class Game {
 
 
                 landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i, dices.getValue());
+                matadorGUI.RentOnField(fieldProperties);
+                losingConditions.CheckPlayerWorth(player[i],matadorGUI,TurnChoices,i,player,mortgage,fieldProperties);
 
-                if (player[i].getBalance() < 0) {
+                /*if (player[i].getBalance() < 0) {
 
                     int[] balances = new int[menu.getPlayerAmount()];
                     for(int j=0; j<
@@ -139,7 +142,7 @@ public class Game {
                     matadorGUI.showMessage("Vinderen er: " + player[finalbalanceid].playerString() + " med " + player[finalbalanceid].getBalance() + " penge");
                     isWinnerWinnerChickenDinner = true;
                     break;
-                }
+                }*/
 
                 if(rollCheck.twoOfTheSame(dices.Die1(), dices.Die2())) {
                     i = i - 1;
