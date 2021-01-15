@@ -1,7 +1,6 @@
 package Game.Model;
 
 import Game.View.MatadorGui;
-import Game.controller.Player;
 
 public class PrisonConditions {
     private String stringChoice;

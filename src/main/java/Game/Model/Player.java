@@ -1,6 +1,7 @@
-package Game.controller;
+package Game.Model;
 
 import Game.Model.Account;
+import Game.controller.Game;
 
 public class Player {
 
@@ -10,6 +11,7 @@ public class Player {
     private int oldPosition;
     private int roundsinprison;
     private int playerID;
+    private boolean inGame = true;
 
     // Determines variables
     Account account = new Account();
@@ -74,6 +76,13 @@ public class Player {
     // Check where player is currently
     public int getCurrentPosition(){
         return position;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
+    }
+    public boolean isInGame() {
+        return inGame;
     }
 
     //Easy way to move the player without having to count the die value

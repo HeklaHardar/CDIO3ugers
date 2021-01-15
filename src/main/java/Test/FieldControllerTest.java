@@ -2,7 +2,7 @@
 package Test;
 
 import Game.controller.FieldController;
-import Game.controller.Player;
+import Game.Model.Player;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
