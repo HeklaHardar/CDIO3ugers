@@ -1,3 +1,4 @@
+/*
 package Test;
 
 import Game.controller.FieldController;
@@ -25,10 +26,14 @@ class FieldControllerTest {
     void buildHouses() {
         FieldController field = new FieldController();
         Player p1 = new Player("Hello");
+*/
 /*
         p1.starterScore(1);
-*/
-        /*p1.starterScore(1);*/
+*//*
+
+        */
+/*p1.starterScore(1);*//*
+
         field.setPosition(1);
         field.setOwnedFields(1);
         field.setPosition(3);
@@ -72,4 +77,4 @@ class FieldControllerTest {
         field.setPosition(39);
 
     }
-}
+}*/

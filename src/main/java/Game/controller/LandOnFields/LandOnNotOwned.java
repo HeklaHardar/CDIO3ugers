@@ -12,21 +12,21 @@ public class LandOnNotOwned {
 
     public void notOwned(MatadorGui matadorGUI, Player currentPlayer, FieldController properties, int playerID, Player[] players,String[] playerNames) {
 
-        if (matadorGUI.getBuyField() == 1) {
+        if (matadorGUI.getBuyField(properties.getFields()[currentPlayer.getCurrentPosition()].getName()) == 1) {
             currentPlayer.playerBalanceUpdate(-properties.getValue());
             matadorGUI.landOnField(playerID, currentPlayer.getCurrentPosition(), currentPlayer.playerString(), properties.isOwnable(), ((OwnableField)properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner());
             properties.setOwnedFields(playerID + 1);
             currentPlayer.playerWorthUpdate(properties.getValue());
         } else{
 
-            playerName = matadorGUI.getAuction(playerNames);
+            playerName = matadorGUI.getAuction(playerNames, properties.getFields()[currentPlayer.getCurrentPosition()].getName());
 
             for (Player s:players
                  ) {
                 if(s.playerString() == playerName){
                   //  s.playerBalanceUpdate();
                     s.playerBalanceUpdate(-properties.getValue());
-                    matadorGUI.landOnField(s.getPlayerID(), currentPlayer.getCurrentPosition(), s.playerString(), properties.isOwnable(), properties.getOwnedFields());
+                    matadorGUI.landOnField(s.getPlayerID(), currentPlayer.getCurrentPosition(), s.playerString(), properties.isOwnable(),((OwnableField)properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner());
                     properties.setOwnedFields(s.getPlayerID() + 1);
                     matadorGUI.updateGuiBalance(s.getPlayerID(),s.getBalance());
                     s.playerWorthUpdate(properties.getValue());

@@ -20,6 +20,12 @@ public class FieldProperties {
             , 0, 150, 0, 150, 150, 0, 150
             , 150, 0, 150, 0, 200, 200, 0, 200
             , 0, 0, 200, 0, 200};
+    private int[] mortgageValues = {0, 30, 0, 30, 100, 100
+            , 50, 0, 50, 60, 0, 70, 75,
+            70, 80, 100, 90, 0, 90, 100
+            , 0, 110, 0, 110, 120, 100, 130
+            , 130, 75, 140, 0, 150, 150, 0, 160
+            , 100, 0, 175, 100, 200};
 
 
 
@@ -73,5 +79,7 @@ public class FieldProperties {
         ownedFields[position] = ownerNumber;
     }
 
-
+    public int[] getMortgageValues() {
+        return mortgageValues;
+    }
 }

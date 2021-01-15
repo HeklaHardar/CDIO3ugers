@@ -126,9 +126,15 @@ public class FieldController {
         return false;
     }
 
-    public int calculateRent() {
+    public int calculateRent(int rentDices) {
 
         if (fields[position] instanceof OwnableField) {
+            if (fields[position] instanceof ShippingLine){
+                countShips();
+            }
+            else if (fields[position] instanceof Brewery){
+                countBrewery(rentDices);
+            }
             if(fields[position] instanceof BuildableField && ((BuildableField) fields[position]).getHouses()==0 && hasAllFields(position)){
                 return ((BuildableField) fields[position]).getRentPrices()[position][0]*2;
             }
@@ -138,8 +144,14 @@ public class FieldController {
     }
 
     public int getValue() {
-        if (fields[position] instanceof ExtraordinaryTax || fields[position] instanceof OwnableField) {
-            return fields[position].getValue();
+        if (fields[position] instanceof OwnableField) {
+            return ((OwnableField) fields[position]).getValue();
+        }
+        else if(fields[position] instanceof IncomeTax){
+        return ((IncomeTax) fields[position]).getTax();
+    }
+        else if( fields[position] instanceof ExtraordinaryTax){
+            return ((ExtraordinaryTax) fields[position]).getTax();
         }
         return 0;
     }
@@ -150,10 +162,6 @@ public class FieldController {
         } else {
             return false;
         }
-    }
-
-    public int[] getmortageValues() {
-        return mortgageValues;
     }
 
     public boolean isExtraordinaryTax() {
@@ -184,6 +192,15 @@ public class FieldController {
     public void setOwnedFields(int playerNumber) {
         if (fields[position] instanceof OwnableField) {
             if (((OwnableField) fields[position]).getOwner()==0) {
+                ((OwnableField) fields[position]).setOwner(playerNumber);
+            }
+            else if (playerNumber>9){
+                ((OwnableField) fields[position]).setOwner(playerNumber);
+            }
+            else if (((OwnableField) fields[position]).getOwner() == 0) {
+                ((OwnableField) fields[position]).setOwner(playerNumber);
+            }
+            else if (((OwnableField) fields[position]).getOwner() > 9){
                 ((OwnableField) fields[position]).setOwner(playerNumber);
             }
         }

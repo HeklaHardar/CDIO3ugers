@@ -1,5 +1,7 @@
 package Game.View;
 
+import Game.Model.Fields.Field;
+import Game.Model.Fields.OwnableField;
 import Game.controller.FieldController;
 import Game.controller.Player;
 import gui_fields.*;
@@ -239,8 +241,8 @@ public class MatadorGui {
         return 0;
     }
 
-    public int getBuyField(){
-        stringChoice = gui.getUserButtonPressed("Vil du købe feltet? ", "Ja", "Nej");
+    public int getBuyField(String fieldName){
+        stringChoice = gui.getUserButtonPressed("Vil du købe "+ fieldName +"?", "Ja", "Nej");
         switch (stringChoice){
             case "Ja":
                 return 1;
@@ -250,22 +252,22 @@ public class MatadorGui {
         return 0;
     }
 
-    public void setMortgage(int position, int[] mortgageValues){
+    public void setMortgage(int position, int mortgageValues){
 
         fields[position].setSubText("PANTSAT");
-        fields[position].setDescription("Pris: kr. "+ (int)(mortgageValues[position] * 1.1)+",00");
+        fields[position].setDescription("Pris: kr. "+ (mortgageValues * 1.1)+",00");
     }
 
     public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
 
-        fields[position].setSubText("Pris: " + fieldpropertiesUnsetMortgage.getFieldValues()[position] + " kr.");
+        fields[position].setSubText("Pris: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getValue() + " kr.");
         fields[position].setDescription(fieldTitles[position]);
     }
 
-    public String getAuction(String[] players){
-        stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe feltet?","Ja","Nej");
+    public String getAuction(String[] players, String fieldName){
+        stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe " + fieldName +"?","Ja","Nej");
         if (stringChoice.equals("Ja")){
-            stringChoice = gui.getUserSelection("Vælg hvilken spiller der vil købe feltet",players);
+            stringChoice = gui.getUserSelection("Vælg hvilken spiller der vil købe "+ fieldName +"? ",players);
             return stringChoice;
         }else
             return null;
