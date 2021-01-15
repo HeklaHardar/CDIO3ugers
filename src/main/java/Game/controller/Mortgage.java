@@ -2,6 +2,7 @@ package Game.controller;
 
 import Game.Model.Fields.Field;
 import Game.Model.Fields.OwnableField;
+import Game.Model.Player;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
 

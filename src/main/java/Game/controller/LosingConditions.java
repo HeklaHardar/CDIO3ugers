@@ -1,5 +1,6 @@
-package Game.Model;
+package Game.controller;
 
+import Game.Model.Player;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
 import Game.controller.PlayerChoice;

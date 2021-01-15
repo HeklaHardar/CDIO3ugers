@@ -50,7 +50,7 @@ public class FieldController {
 
     public String buildHouses(Player player, int playerNumber, int buildposition) {
 
-        if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
+        if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber && player.getBalance()>((BuildableField) fields[buildposition]).getHouseCost()) {
             int colorCount = 0;
             int sameHouses = 0;
             for (Field field:fields){
@@ -125,8 +125,9 @@ public class FieldController {
 
     public boolean hasAllFields(int testPosition) {
         if (fields[testPosition] instanceof OwnableField) {
+            int colorCount = 0;
             for (int i = 0; i <= 39; i++) {
-                int colorCount = 0;
+
                 if (fields[i] instanceof OwnableField) {
 
                     //Hvis du ejer 2 af blå eller lilla
