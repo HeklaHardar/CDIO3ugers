@@ -22,6 +22,9 @@ public class rollOfDices {
         if(twoOfTheSame(dice1,dice2)){
             counter++;
         }
+        else{
+            counter=0;
+        }
         if(counter==3){
             gui.moveCars(playernumber,player.getCurrentPosition(),player.setPosition(30));
             counter=0;

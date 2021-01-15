@@ -1,5 +1,7 @@
 package Game.View;
 
+import Game.Model.Fields.Field;
+import Game.Model.Fields.OwnableField;
 import Game.controller.FieldController;
 import Game.controller.Player;
 import gui_fields.*;
@@ -201,9 +203,9 @@ public class MatadorGui {
         gui.showMessage(message);
     }
 
-    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int[] ownedfields) {
+    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner) {
         GUI_Field field = gui.getFields()[currentField];
-        if (ownable == 1 && ownedfields[currentField] == 0) {
+        if (ownable == 1 && owner == 0) {
             GUI_Ownable o = (GUI_Ownable) field;
             o.setBorder(colors[currentPlayer]);
             o.setOwnerName(playerName);
@@ -239,8 +241,8 @@ public class MatadorGui {
         return 0;
     }
 
-    public int getBuyField(){
-        stringChoice = gui.getUserButtonPressed("Vil du købe feltet? ", "Ja", "Nej");
+    public int getBuyField(String fieldName){
+        stringChoice = gui.getUserButtonPressed("Vil du købe "+ fieldName +"?", "Ja", "Nej");
         switch (stringChoice){
             case "Ja":
                 return 1;
@@ -250,32 +252,33 @@ public class MatadorGui {
         return 0;
     }
 
-    public void setMortgage(int position, int[] mortgageValues){
+    public void setMortgage(int position, int mortgageValues){
 
         fields[position].setSubText("PANTSAT");
-        fields[position].setDescription("Pris: kr. "+ (int)(mortgageValues[position] * 1.1)+",00");
+        fields[position].setDescription("Pris: kr. "+ (mortgageValues * 1.1)+",00");
     }
 
     public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
 
-        fields[position].setSubText("Pris: " + fieldpropertiesUnsetMortgage.getFieldValues()[position] + " kr.");
+        fields[position].setSubText("Pris: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getValue() + " kr.");
         fields[position].setDescription(fieldTitles[position]);
     }
 
-    public String getAuction(String[] players){
-        stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe feltet?","Ja","Nej");
+    public String getAuction(String[] players, String fieldName){
+        stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe " + fieldName +"?","Ja","Nej");
         if (stringChoice.equals("Ja")){
-            stringChoice = gui.getUserSelection("Vælg hvilken spiller der vil købe feltet",players);
+            stringChoice = gui.getUserSelection("Vælg hvilken spiller der vil købe "+ fieldName +"? ",players);
             return stringChoice;
         }else
             return null;
     }
 
-    public void buyHouse(int position,int housecount, int[] ownedfields, int playerNumber){
-        if(gui.getFields()[position] instanceof GUI_Street && housecount>0 && housecount < 5 && ownedfields[position]==playerNumber){
+
+    public void buyHouse(int position,int housecount, int owner, int playerNumber){
+        if(gui.getFields()[position] instanceof GUI_Street && housecount>0 && housecount < 5 && owner==playerNumber){
             ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
         }
-        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && ownedfields[position]==playerNumber){
+        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner==playerNumber){
             ((GUI_Street) gui.getFields()[position]).setHotel(true);
         }
     }

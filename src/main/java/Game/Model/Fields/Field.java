@@ -1,32 +1,28 @@
 package Game.Model.Fields;
 
 public class Field {
-    protected int value;
+
     protected String name;
     protected int ownable;
+    protected int position;
+    protected static FieldProperties fieldProperties = new FieldProperties();
+
+    public Field(int position) {
+        this.position = position;
+        this.name = fieldProperties.getFieldTitles()[position];
+    }
+
+
+    public int getPosition() {
+        return position;
+    }
 
     public int isOwnable() {
         return ownable;
     }
 
-    public void setOwnable(int ownable) {
-        this.ownable = ownable;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

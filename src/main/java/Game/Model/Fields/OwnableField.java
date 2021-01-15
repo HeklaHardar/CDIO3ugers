@@ -3,9 +3,28 @@ package Game.Model.Fields;
 public class OwnableField extends Field {
     protected String color;
     protected int rent;
+    protected int value;
+    protected int mortgageValue;
 
-    public OwnableField() {
+
+    public OwnableField(int position) {
+        super(position);
+        value = fieldProperties.getFieldValues()[position];
+        rent = fieldProperties.getRentPrices()[position][0];
+        color = fieldProperties.getFieldColors()[position];
+        mortgageValue = fieldProperties.getMortgageValues()[position];
         ownable = 1;
+    }
+    public int getOwner() {
+        return fieldProperties.getOwner(position);
+    }
+
+    public void setOwner(int ownerNumber) {
+        fieldProperties.setOwner(position,ownerNumber);
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public int getRent() {
@@ -22,5 +41,9 @@ public class OwnableField extends Field {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public int getMortgageValue() {
+        return mortgageValue;
     }
 }
