@@ -1,5 +1,6 @@
 package Game.View;
 
+import Game.Model.Fields.Brewery;
 import Game.Model.Fields.OwnableField;
 import Game.controller.FieldController;
 import gui_fields.*;
@@ -229,12 +230,16 @@ public class MatadorGui {
         switch (stringChoice) {
             case "Slå med terningerne":
                 return 1;
-            case "Byg hus/hotel":
+            case "Bygninger":
                 return 2;
             case "Pantsæt":
                 return 3;
             case "Køb pantsætning tilbage":
                 return 4;
+            case "Sælg hus/hotel":
+                return 5;
+            case "Byg hus/hotel":
+                return 6;
         }
         return 0;
     }
@@ -264,9 +269,10 @@ public class MatadorGui {
 
     public void RentOnField(FieldController fieldpropertiesRentonField){
         for (int y = 0; y < 40; y++){
-            if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField) {
+            if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && !(fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
                 if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
-                    fields[y].setSubText("Leje: " + ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getRent() + " kr.");
+                    fieldpropertiesRentonField.setPosition(y);
+                    fields[y].setSubText("Leje: " + ( fieldpropertiesRentonField.calculateRent(1) + " kr."));
                 }
             }
         }
@@ -288,6 +294,16 @@ public class MatadorGui {
         }
         if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner==playerNumber){
             ((GUI_Street) gui.getFields()[position]).setHotel(true);
+        }
+    }
+
+    public void sellHouse(int position,int housecount, int owner, int playerNumber){
+        if(gui.getFields()[position] instanceof GUI_Street && housecount>=0 && housecount < 5 && owner==playerNumber){
+            ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
+        }
+        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner==playerNumber){
+            ((GUI_Street) gui.getFields()[position]).setHotel(false);
+            ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
         }
     }
 

@@ -10,7 +10,7 @@ public class FieldController {
             new BuildableField(13), new BuildableField(14), new ShippingLine(15), new BuildableField(16), new ChanceCard(17), new BuildableField(18), new BuildableField(19)
             , new SafeZone(20), new BuildableField(21), new ChanceCard(22), new BuildableField(23), new BuildableField(24), new ShippingLine(25), new BuildableField(26)
             , new BuildableField(27), new Brewery(28), new BuildableField(29), new GoToPrison(30), new BuildableField(31), new BuildableField(32), new ChanceCard(33), new BuildableField(34)
-            , new ShippingLine(35), new ChanceCard(36), new BuildableField(37), new IncomeTax(38), new BuildableField(39)};
+            , new ShippingLine(35), new ChanceCard(36), new BuildableField(37), new ExtraordinaryTax(38), new BuildableField(39)};
 
     private boolean inPrison = false;
     private boolean IncomeTax = false;
@@ -51,6 +51,9 @@ public class FieldController {
     public String buildHouses(Player player, int playerNumber, int buildposition) {
 
         if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
+            if(player.getBalance()<((BuildableField) fields[buildposition]).getHouseCost()){
+                return "noMoney";
+            }
             int colorCount = 0;
             int sameHouses = 0;
             for (Field field:fields){
@@ -67,6 +70,35 @@ public class FieldController {
                 player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
                 player.playerWorthUpdate(((BuildableField) fields[buildposition]).getHouseCost());
                 ((BuildableField) fields[buildposition]).buildHouse();
+                ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
+                return "buildable";
+            }
+            else{
+                return "houseRequirements";
+            }
+        }
+        return "notbuilable";
+    }
+
+    public String RemoveHouses(Player player, int playerNumber, int buildposition) {
+
+        if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() <= 5 && ((BuildableField) fields[buildposition]).getHouses() > 0 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
+            int colorCount = 0;
+            int sameHouses = 0;
+            for (Field field:fields){
+                if(field instanceof BuildableField) {
+                    if (((BuildableField) fields[buildposition]).getColor() == ((BuildableField) field).getColor() && ((BuildableField)fields[buildposition]).getOwner()==((BuildableField) field).getOwner()){
+                        colorCount++;
+                        if(((BuildableField) fields[buildposition]).getHouses() >= ((BuildableField) field).getHouses()){
+                            sameHouses++;
+                        }
+                    }
+                }
+            }
+            if(colorCount==sameHouses) {
+                player.playerBalanceUpdate(+((BuildableField) fields[buildposition]).getHouseCost());
+                player.playerWorthUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
+                ((BuildableField) fields[buildposition]).removeHouse();
                 ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
                 return "buildable";
             }
@@ -125,8 +157,9 @@ public class FieldController {
 
     public boolean hasAllFields(int testPosition) {
         if (fields[testPosition] instanceof OwnableField) {
+            int colorCount = 0;
             for (int i = 0; i <= 39; i++) {
-                int colorCount = 0;
+
                 if (fields[i] instanceof OwnableField) {
 
                     //Hvis du ejer 2 af blå eller lilla

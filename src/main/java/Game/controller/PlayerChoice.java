@@ -39,19 +39,19 @@ public class PlayerChoice {
             }
         }
         if (hasOwnedAllFields && hasOwnedMortgageField && hasOwnedField){
-            return Options = new String[]{"Pantsæt", "Køb pantsætning tilbage", "Byg hus/hotel","Slå med terningerne"};
+            return Options = new String[]{"Pantsæt", "Køb pantsætning tilbage", "Bygninger","Slå med terningerne"};
         }
         else if (hasOwnedMortgageField && hasOwnedField) {
             return Options = new String[]{"Pantsæt", "Køb pantsætning tilbage","Slå med terningerne"};
         }
         else if (hasOwnedAllFields && hasOwnedField){
-            return Options = new String[]{"Pantsæt","Byg hus/hotel","Slå med terningerne"};
+            return Options = new String[]{"Pantsæt","Bygninger","Slå med terningerne"};
         }
         else if (hasOwnedMortgageField){
             return Options = new String[]{"Køb pantsætning tilbage","Slå med terningerne"};
         }
         else if (hasOwnedAllFields){
-            return Options = new String[]{"Pantsæt","Byg hus/hotel","Slå med terningerne"};
+            return Options = new String[]{"Pantsæt","Bygninger","Slå med terningerne"};
         }
         else if (hasOwnedField){
             return Options = new String[]{"Pantsæt","Slå med terningerne"};

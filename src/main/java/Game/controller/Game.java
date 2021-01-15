@@ -45,7 +45,7 @@ public class Game {
         PlayerChoice TurnChoices = new PlayerChoice(fieldProperties);
 
         player = new Player[menu.getPlayerAmount()];
-
+        BuildingController buildingController = new BuildingController(matadorGUI,fieldProperties,player);
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
             player[i] = new Player(menu.playernamesToString()[i],i);
@@ -79,25 +79,8 @@ public class Game {
 
                     }
                     if (playerAction == 2) {
+                        buildingController.BuildingChoice(i);
 
-                        String selection = matadorGUI.getUserSelection("Vælg en plads at bygge på", "Rødovrevej", "Hvidovre", "Roskildevej", "Valby  Langgade", "Allégade", "Frederiksberg  Allé",
-                                "Bülowsvej", "Gl. Kongevej", "Bernstoffsvej", "Hellerupvej", "Strandvej", "Trianglen", "Østerbro-gade ", "Grønningen",
-                                "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "Amagertorv", "Vimmelskaftet", "Nygade", "Frederiks-berggade ", "Rådhus-pladsen ");
-                        boolean buildable = false;
-                        for (Field field : fieldProperties.getFields()) {
-                            if (field instanceof BuildableField && field.getName() == selection) {
-                                if(fieldProperties.buildHouses(player[i], i + 1, field.getPosition())=="buildable"){
-                                    matadorGUI.buyHouse(field.getPosition(), ((BuildableField) field).getHouses(), ((BuildableField) field).getOwner(), i + 1);
-                                    matadorGUI.updateGuiBalance(i, player[i].getBalance());
-                                    buildable = true;
-                                    matadorGUI.RentOnField(fieldProperties);
-                                    break;
-                                }
-                                else if ((fieldProperties.buildHouses(player[i], i + 1, field.getPosition())=="houseRequirements")){
-                                    matadorGUI.showMessage("Du skal have lige mange huse på alle grundene");
-                                }
-                            }
-                        }
                     }
                 }
                 dices.roll();
