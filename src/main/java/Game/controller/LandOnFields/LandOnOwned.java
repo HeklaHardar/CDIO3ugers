@@ -3,7 +3,7 @@ package Game.controller.LandOnFields;
 import Game.Model.Fields.OwnableField;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
-import Game.controller.Player;
+import Game.Model.Player;
 
 public class LandOnOwned {
 

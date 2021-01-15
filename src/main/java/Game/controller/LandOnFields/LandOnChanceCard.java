@@ -2,7 +2,7 @@ package Game.controller.LandOnFields;
 
 import Game.Model.Cards;
 import Game.View.MatadorGui;
-import Game.controller.Player;
+import Game.Model.Player;
 
 public class LandOnChanceCard {
 

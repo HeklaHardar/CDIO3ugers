@@ -1,6 +1,7 @@
 package Game.controller;
 
 import Game.Model.Fields.*;
+import Game.Model.Player;
 
 public class FieldController {
     // You have to set position or none of the FieldController Methods will work
@@ -64,6 +65,7 @@ public class FieldController {
             }
             if(colorCount==sameHouses) {
                 player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
+                player.playerWorthUpdate(((BuildableField) fields[buildposition]).getHouseCost());
                 ((BuildableField) fields[buildposition]).buildHouse();
                 ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
                 return "buildable";

@@ -1,9 +1,7 @@
 package Game.View;
 
-import Game.Model.Fields.Field;
 import Game.Model.Fields.OwnableField;
 import Game.controller.FieldController;
-import Game.controller.Player;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -260,8 +258,18 @@ public class MatadorGui {
 
     public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
 
-        fields[position].setSubText("Pris: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getValue() + " kr.");
+        fields[position].setSubText("Leje: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getRent() + " kr.");
         fields[position].setDescription(fieldTitles[position]);
+    }
+
+    public void RentOnField(FieldController fieldpropertiesRentonField){
+        for (int y = 0; y < 40; y++){
+            if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField) {
+                if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
+                    fields[y].setSubText("Leje: " + ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getRent() + " kr.");
+                }
+            }
+        }
     }
 
     public String getAuction(String[] players, String fieldName){
