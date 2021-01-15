@@ -7,7 +7,5 @@ public class ShippingLine extends OwnableField {
         super(position);
         value = 200;
         rent = 25;
-
-        color = "Shipping";
     }
 }

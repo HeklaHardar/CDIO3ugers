@@ -48,13 +48,32 @@ public class FieldController {
         return avaiableHousePositions;
     }
 
-    public void buildHouses(Player player, int playerNumber, int buildposition) {
+    public String buildHouses(Player player, int playerNumber, int buildposition) {
+
         if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
-            player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
-            player.playerWorthUpdate(((BuildableField) fields[buildposition]).getHouseCost());
-            ((BuildableField) fields[buildposition]).buildHouse();
-            ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
+            int colorCount = 0;
+            int sameHouses = 0;
+            for (Field field:fields){
+                if(field instanceof BuildableField) {
+                    if (((BuildableField) fields[buildposition]).getColor() == ((BuildableField) field).getColor() && ((BuildableField)fields[buildposition]).getOwner()==((BuildableField) field).getOwner()){
+                        colorCount++;
+                        if(((BuildableField) fields[buildposition]).getHouses() <= ((BuildableField) field).getHouses() ){
+                            sameHouses++;
+                        }
+                    }
+                }
+            }
+            if(colorCount==sameHouses) {
+                player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
+                ((BuildableField) fields[buildposition]).buildHouse();
+                ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
+                return "buildable";
+            }
+            else{
+                return "houseRequirements";
+            }
         }
+        return "notbuilable";
     }
 
 
@@ -66,25 +85,26 @@ public class FieldController {
         int[] multirent = {0, 25, 50, 100, 200};
 
         if (fields[position] instanceof OwnableField) {
+            int colorCount = 0;
             for (int i = 0; i <= 39; i++) {
-                int colorCount = 0;
+
                     if (fields[i] instanceof OwnableField) {
                         if (((OwnableField) fields[i]).getColor() == "Ship" && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[i]).getOwner() != 0) {
                             colorCount = colorCount + 1;
 
                         }
                     }
-
-                    ((OwnableField) fields[position]).setRent(multirent[colorCount]);
             }
+            ((OwnableField) fields[position]).setRent(multirent[colorCount]);
         }
     }
 
     public void countBrewery(int BreweryDices) {
 
         if (fields[position] instanceof OwnableField) {
+            int breweryCount = 0;
             for (int i = 0; i <= 39; i++) {
-                int breweryCount = 0;
+
 
                 if (fields[i] instanceof OwnableField) {
 
@@ -92,12 +112,12 @@ public class FieldController {
                             breweryCount = breweryCount + 1;
                         }
                 }
-                if (breweryCount == 1) {
-                    ((OwnableField) fields[position]).setRent(BreweryDices * 4);
-                }
-                if (breweryCount == 2) {
-                    ((OwnableField) fields[position]).setRent(BreweryDices * 10);
-                }
+            }
+            if (breweryCount == 1) {
+                ((OwnableField) fields[position]).setRent(BreweryDices * 4);
+            }
+            else if (breweryCount == 2) {
+                ((OwnableField) fields[position]).setRent(BreweryDices * 10);
             }
         }
     }

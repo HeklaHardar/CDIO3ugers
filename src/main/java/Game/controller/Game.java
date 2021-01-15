@@ -86,16 +86,16 @@ public class Game {
                         boolean buildable = false;
                         for (Field field : fieldProperties.getFields()) {
                             if (field instanceof BuildableField && field.getName() == selection) {
-                                fieldProperties.buildHouses(player[i], i + 1, field.getPosition());
-                                matadorGUI.buyHouse(field.getPosition(), ((BuildableField) field).getHouses(), ((BuildableField) field).getOwner(), i + 1);
-                                matadorGUI.updateGuiBalance(i, player[i].getBalance());
-                                buildable = true;
-                                matadorGUI.RentOnField(fieldProperties);
-                                break;
+                                if(fieldProperties.buildHouses(player[i], i + 1, field.getPosition())=="buildable"){
+                                    matadorGUI.buyHouse(field.getPosition(), ((BuildableField) field).getHouses(), ((BuildableField) field).getOwner(), i + 1);
+                                    matadorGUI.updateGuiBalance(i, player[i].getBalance());
+                                    buildable = true;
+                                    break;
+                                }
+                                else if ((fieldProperties.buildHouses(player[i], i + 1, field.getPosition())=="houseRequirements")){
+                                    matadorGUI.showMessage("Du skal have lige mange huse på alle grundene");
+                                }
                             }
-                        }
-                        if (!buildable) {
-                            matadorGUI.showMessage("Du kan ikke bygge her");
                         }
                     }
                 }
