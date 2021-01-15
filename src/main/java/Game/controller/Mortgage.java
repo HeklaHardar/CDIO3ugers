@@ -1,5 +1,6 @@
 package Game.controller;
 
+import Game.Model.Fields.BuildableField;
 import Game.Model.Fields.Field;
 import Game.Model.Fields.OwnableField;
 import Game.Model.Player;
@@ -41,17 +42,37 @@ public class Mortgage {
                 mortgageChoice = matadorGUI.getUserSelection("Vælg hvad du vil pantsætte: ", OwnedFields);
 
                 Count = 0;
+                boolean hasHouses = false;
+                String Color = null;
+                int size = fieldProperties.getFields().length;
+                Field[] fields = fieldProperties.getFields();
 
+                /*for (int i = 0;i<size;i++){
+                    if (fields[i].getName().equals(mortgageChoice)){
+                    Color = ((BuildableField) fields[i]).getColor();
+                    i = 0;
+                    continue;
+                }*/
+                    /*if (fields[i] instanceof OwnableField && fields[i] instanceof BuildableField) {
+                        if ((((BuildableField) fields[i]).getHouses() > 0) && !(fields[i].getName().equals(mortgageChoice)) && Color == ((BuildableField) fields[i]).getColor()) {
+                            matadorGUI.showMessage("Du har huse på andre grunde som du skal sælge først");
+                            hasHouses = true;
+                        }
+                    }}*/
                 for (Field field : fieldProperties.getFields()
                 ) {
-                    if (field instanceof OwnableField) {
-                        if (field.getName().equals(mortgageChoice)) {
+                    if (field instanceof OwnableField && field instanceof BuildableField) {
+
+                        if (field.getName().equals(mortgageChoice) && !(((BuildableField) field).getHouses() > 0) && !hasHouses) {
                             fieldProperties.setPosition(Count);
                             currentPlayer.playerBalanceUpdate(((OwnableField) field).getMortgageValue());
                             matadorGUI.updateGuiBalance(playerID, currentPlayer.getBalance());
                             matadorGUI.setMortgage(Count, ((OwnableField) field).getMortgageValue());
                             fieldProperties.setOwnedFields(playerID + 10);
 
+                        }
+                        else if (field.getName().equals(mortgageChoice) && (((BuildableField) field).getHouses() > 0)) {
+                            matadorGUI.showMessage("Du har huse her som du skal sælge først");
                         }
                     }
                     Count += 1;
