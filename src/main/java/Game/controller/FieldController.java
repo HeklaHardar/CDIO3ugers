@@ -50,7 +50,10 @@ public class FieldController {
 
     public String buildHouses(Player player, int playerNumber, int buildposition) {
 
-        if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber && player.getBalance()>((BuildableField) fields[buildposition]).getHouseCost()) {
+        if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
+            if(player.getBalance()<((BuildableField) fields[buildposition]).getHouseCost()){
+                return "noMoney";
+            }
             int colorCount = 0;
             int sameHouses = 0;
             for (Field field:fields){
