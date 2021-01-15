@@ -1,5 +1,6 @@
-package Game.Model;
+package Game.controller;
 
+import Game.Model.Dices;
 import Game.View.MatadorGui;
 import Game.controller.Player;
 

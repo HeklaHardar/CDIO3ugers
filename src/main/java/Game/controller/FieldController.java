@@ -47,12 +47,32 @@ public class FieldController {
         return avaiableHousePositions;
     }
 
-    public void buildHouses(Player player, int playerNumber, int buildposition) {
+    public String buildHouses(Player player, int playerNumber, int buildposition) {
+
         if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
-            player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
-            ((BuildableField) fields[buildposition]).buildHouse();
-            ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
+            int colorCount = 0;
+            int sameHouses = 0;
+            for (Field field:fields){
+                if(field instanceof BuildableField) {
+                    if (((BuildableField) fields[buildposition]).getColor() == ((BuildableField) field).getColor() && ((BuildableField)fields[buildposition]).getOwner()==((BuildableField) field).getOwner()){
+                        colorCount++;
+                        if(((BuildableField) fields[buildposition]).getHouses() <= ((BuildableField) field).getHouses() ){
+                            sameHouses++;
+                        }
+                    }
+                }
+            }
+            if(colorCount==sameHouses) {
+                player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
+                ((BuildableField) fields[buildposition]).buildHouse();
+                ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
+                return "buildable";
+            }
+            else{
+                return "houseRequirements";
+            }
         }
+        return "notbuilable";
     }
 
 
