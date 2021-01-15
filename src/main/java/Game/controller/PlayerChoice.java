@@ -1,6 +1,7 @@
 package Game.controller;
 
 import Game.Model.Fields.OwnableField;
+import Game.Model.Player;
 import Game.controller.FieldController;
 
 public class PlayerChoice {

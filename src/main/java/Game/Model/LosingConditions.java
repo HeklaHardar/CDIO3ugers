@@ -2,6 +2,7 @@ package Game.Model;
 
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
+import Game.controller.PlayerChoice;
 
 public class LosingConditions {
 

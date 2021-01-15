@@ -90,6 +90,7 @@ public class Game {
                                     matadorGUI.buyHouse(field.getPosition(), ((BuildableField) field).getHouses(), ((BuildableField) field).getOwner(), i + 1);
                                     matadorGUI.updateGuiBalance(i, player[i].getBalance());
                                     buildable = true;
+                                    matadorGUI.RentOnField(fieldProperties);
                                     break;
                                 }
                                 else if ((fieldProperties.buildHouses(player[i], i + 1, field.getPosition())=="houseRequirements")){

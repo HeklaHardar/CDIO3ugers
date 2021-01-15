@@ -65,6 +65,7 @@ public class FieldController {
             }
             if(colorCount==sameHouses) {
                 player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
+                player.playerWorthUpdate(((BuildableField) fields[buildposition]).getHouseCost());
                 ((BuildableField) fields[buildposition]).buildHouse();
                 ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
                 return "buildable";

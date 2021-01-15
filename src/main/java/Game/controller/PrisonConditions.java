@@ -1,6 +1,7 @@
 package Game.controller;
 
 import Game.Model.Dices;
+import Game.Model.Player;
 import Game.View.MatadorGui;
 
 public class PrisonConditions {
