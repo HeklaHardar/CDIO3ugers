@@ -49,6 +49,7 @@ public class Mortgage {
                 hasHouses = false;
                 fields = fieldProperties.getFields();
                 size = fieldProperties.getFields().length;
+                Color = null;
 
 
 
@@ -62,7 +63,6 @@ public class Mortgage {
                 }
                     if (fields[i] instanceof OwnableField && fields[i] instanceof BuildableField) {
                         if ((((BuildableField) fields[i]).getHouses() > 0) && !(fields[i].getName().equals(mortgageChoice)) && Color == ((BuildableField) fields[i]).getColor()) {
-                            matadorGUI.showMessage("Du har huse på andre grunde som du skal sælge først");
                             hasHouses = true;
                         }
                     }}
@@ -79,8 +79,8 @@ public class Mortgage {
                             fieldProperties.setOwnedFields(playerID + 10);
 
                         }
-                        else if (field.getName().equals(mortgageChoice) && (((BuildableField) field).getHouses() > 0)) {
-                            matadorGUI.showMessage("Du har huse her som du skal sælge først");
+                        else if (field.getName().equals(mortgageChoice) && (((BuildableField) field).getHouses() > 0) || hasHouses && field.getName().equals(mortgageChoice)) {
+                            matadorGUI.showMessage("Du har huse som du skal sælge før du kan pantsætte");
                         }
                     }
                     Count += 1;
