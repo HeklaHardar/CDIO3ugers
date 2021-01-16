@@ -12,6 +12,10 @@ public class Mortgage {
     private String temp;
     private String[] OwnedFields;
     private String mortgageChoice;
+    private boolean hasHouses;
+    private String Color = null;
+    private int size;
+    private Field[] fields;
 
     public void SellMortgage(MatadorGui matadorGUI, FieldController fieldProperties, Player currentPlayer, int playerID) {
 
@@ -42,26 +46,30 @@ public class Mortgage {
                 mortgageChoice = matadorGUI.getUserSelection("Vælg hvad du vil pantsætte: ", OwnedFields);
 
                 Count = 0;
-                boolean hasHouses = false;
-                String Color = null;
-                int size = fieldProperties.getFields().length;
-                Field[] fields = fieldProperties.getFields();
+                hasHouses = false;
+                fields = fieldProperties.getFields();
+                size = fieldProperties.getFields().length;
 
-                /*for (int i = 0;i<size;i++){
-                    if (fields[i].getName().equals(mortgageChoice)){
+
+
+
+
+                for (int i = 0;i<size;i++){
+                    if (fields[i].getName().equals(mortgageChoice) && !(((BuildableField) fields[i]).getColor().equals(Color))){
                     Color = ((BuildableField) fields[i]).getColor();
                     i = 0;
                     continue;
-                }*/
-                    /*if (fields[i] instanceof OwnableField && fields[i] instanceof BuildableField) {
+                }
+                    if (fields[i] instanceof OwnableField && fields[i] instanceof BuildableField) {
                         if ((((BuildableField) fields[i]).getHouses() > 0) && !(fields[i].getName().equals(mortgageChoice)) && Color == ((BuildableField) fields[i]).getColor()) {
                             matadorGUI.showMessage("Du har huse på andre grunde som du skal sælge først");
                             hasHouses = true;
                         }
-                    }}*/
+                    }}
+
                 for (Field field : fieldProperties.getFields()
                 ) {
-                    if (field instanceof OwnableField && field instanceof BuildableField) {
+                    if (field instanceof BuildableField) {
 
                         if (field.getName().equals(mortgageChoice) && !(((BuildableField) field).getHouses() > 0) && !hasHouses) {
                             fieldProperties.setPosition(Count);
