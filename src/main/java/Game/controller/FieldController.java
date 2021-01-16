@@ -77,7 +77,7 @@ public class FieldController {
                 return "houseRequirements";
             }
         }
-        return "notbuilable";
+        return "notbuildable";
     }
 
     public String RemoveHouses(Player player, int playerNumber, int buildposition) {

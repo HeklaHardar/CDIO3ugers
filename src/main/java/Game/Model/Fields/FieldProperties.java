@@ -71,7 +71,7 @@ public class FieldProperties {
         return Houses;
     }
 
-    public String[] getFIELDTITLES() {
+    public String[] getFieldTitles() {
         return FIELDTITLES;
     }
 

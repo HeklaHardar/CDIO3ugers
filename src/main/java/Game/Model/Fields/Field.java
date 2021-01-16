@@ -9,7 +9,7 @@ public class Field {
 
     public Field(int position) {
         this.position = position;
-        this.name = fieldProperties.getFIELDTITLES()[position];
+        this.name = fieldProperties.getFieldTitles()[position];
     }
 
 
