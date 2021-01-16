@@ -52,6 +52,10 @@ public class LandOnNotOwned {
                     } else {
                         break;
                     }
+
+                    if(((OwnableField)properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner() != 0)
+                        break;
+
                 }
             break;
 
