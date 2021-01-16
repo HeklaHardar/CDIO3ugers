@@ -32,7 +32,7 @@ public class LosingConditions {
         Counter = 0;
 
         if (currentPlayer.getBalance() < 0) {
-            while (true) {
+            while (currentPlayer.getBalance() < 0) {
                 if (currentPlayer.getPlayerAccountWorth() > 0) {
                     int playerAction = losingConditionsGUI.getPlayLossActions(currentPlayer.playerString(), losingChoices.LosingChoices(playerID, currentPlayer, player));
 

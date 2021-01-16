@@ -37,7 +37,7 @@ public class Cards {
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (15) {                      //
+        switch (cardPicker.DrawCard()) {                      //
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
@@ -154,10 +154,6 @@ public class Cards {
                 cardText = TextforCards.getText()[30];
                 money = 50;
                 break;
-            case 32:
-                cardText = TextforCards.getText()[31];
-                //money = 50;
-                break;
         }
     }
 
@@ -191,10 +187,6 @@ public class Cards {
 
     public boolean isHasSammenskudsgilde() {
         return isSammenskudsgilde;
-    }
-
-    public boolean isHasMatadorlegat() {
-        return Matadorlegat;
     }
 
     public boolean isChanceCard15or25() {

@@ -212,7 +212,7 @@ public class MatadorGui {
             GUI_Ownable o = (GUI_Ownable) field;
             o.setBorder(colors[currentPlayer]);
             o.setOwnerName(playerName);
-            o.setRent(String.valueOf((landOnFieldController.calculateRent(1)))+",00 kr.");
+            o.setRent("");
         } else return;
     }
 
@@ -293,7 +293,12 @@ public class MatadorGui {
     }
 
     public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
+        if (!(fieldpropertiesUnsetMortgage.getFields()[position] instanceof Brewery)){
         fields[position].setSubText("Leje: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getRent() + " kr.");
+        }
+        else {
+            fields[position].setSubText("");
+        }
         fields[position].setDescription(fieldTitles[position]);
     }
 
@@ -303,6 +308,12 @@ public class MatadorGui {
                 if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
                     fieldpropertiesRentonField.setPosition(y);
                     fields[y].setSubText("Leje: " + ( fieldpropertiesRentonField.calculateRent(1, false) + " kr."));
+                }
+            }
+            else if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && (fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
+                if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
+                    fieldpropertiesRentonField.setPosition(y);
+                    fields[y].setSubText("");
                 }
             }
         }
