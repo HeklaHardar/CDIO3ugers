@@ -31,7 +31,7 @@ public class BuildingController {
                     break;
                 }
                 else if ((stringchoice=="houseRequirements")){
-                    BuildingGUI.showMessage("Du skal have lige mange huse på alle grundene");
+                    BuildingGUI.showMessage("Du skal have lige mange huse på grunde af samme farve");
                     break;
                 }
                 else if(stringchoice=="noMoney"){
@@ -59,10 +59,10 @@ public class BuildingController {
                     break;
                 }
                 else if ((fieldController.RemoveHouses(BuildingPlayer[playerID], playerID + 1, field.getPosition())=="houseRequirements")){
-                    BuildingGUI.showMessage("Du skal have lige mange huse på alle grundene");
+                    BuildingGUI.showMessage("Du skal have lige mange huse på grunde af samme farve");
                 }
                 else {
-                    BuildingGUI.showMessage("Du kan ikke bygge her");
+                    BuildingGUI.showMessage("Du kan ikke sælge noget her");
                 }
             }
         }

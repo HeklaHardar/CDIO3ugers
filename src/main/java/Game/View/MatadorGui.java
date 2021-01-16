@@ -14,12 +14,12 @@ public class MatadorGui {
     private GUI_Field[] fields = new GUI_Field[40];
     private GUI_Player[] player = new GUI_Player[6];
     private GUI_Car[] car = new GUI_Car[6];
-    private Color[] colors = {Color.black, new Color(175, 4, 182), new Color(255, 255, 255), new Color(139, 33, 33), new Color(0, 255, 0), new Color(0, 255, 225)};
+    private Color[] colors = {new Color(255, 220, 39), new Color(175, 4, 182), new Color(255, 255, 255), new Color(139, 33, 33), new Color(0, 255, 0), new Color(0, 255, 225)};
     private GUI_Car.Type[] type = {GUI_Car.Type.CAR, GUI_Car.Type.RACECAR, GUI_Car.Type.UFO, GUI_Car.Type.TRACTOR, GUI_Car.Type.CAR, GUI_Car.Type.RACECAR};
     private String stringChoice;
     private String[] fieldTitles = {"Rødovrevej", "", "Hvidovre", "", "Øresund A/S", "Roskildevej", "", "Valby \n Langgade", "Allégade", "", "Frederiksberg \n Allé", "Tuborg",
             "Bülowsvej", "Gl. Kongevej", "D. F. D. S.", "Bernstoffsvej", "", "Hellerupvej", "Strandvej", "Helle", "Trianglen", "", "Østerbro-\ngade \n", "Grønningen", "Y. K.",
-            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S Bornholm 1866 \n", "", "Frederiks-\nberggade \n", "", "Rådhus-\npladsen \n"};
+            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S Bornholm 1866 \n", "", "Frederiks-\nberggade \n", "", "Rådhus-\npladsen \n", ""};
 
     public MatadorGui() {
 
@@ -91,7 +91,7 @@ public class MatadorGui {
                         "Street " + i,
                         "Price: " + (i * 50),
                         "This is a street",
-                        "100",
+                        "",
                         Color.RED,
                         Color.BLACK
                 );
@@ -206,14 +206,17 @@ public class MatadorGui {
         gui.showMessage(message);
     }
 
-    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner) {
+    public void setName (String playerName, int playerID){
+        player[playerID].setName(playerName +" - Udgået fra spillet");
+    }
+
+    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner, FieldController landOnFieldController) {
         GUI_Field field = gui.getFields()[currentField];
         if (ownable == 1 && owner == 0) {
             GUI_Ownable o = (GUI_Ownable) field;
             o.setBorder(colors[currentPlayer]);
             o.setOwnerName(playerName);
-           /* o.setSubText();*/
-
+            o.setRent("");
         } else return;
     }
 
@@ -221,17 +224,12 @@ public class MatadorGui {
         GUI_Field field = gui.getFields()[currentField];
         if (ownable == 1) {
             GUI_Ownable o = (GUI_Ownable)field;
-            o.setBorder(Color.black);
+            o.setBorder(Color.black, Color.black);
             o.setOwnerName("");
             o.setSubText("Pris: " + price + " kr.");
+            o.setDescription("");
         }
-
-
     }
-
-    /*public void RentSubText(int FieldRent){
-
-    }*/
 
     public void displayCard(String cardText) {
         gui.displayChanceCard(cardText);
@@ -289,14 +287,17 @@ public class MatadorGui {
     }
 
     public void setMortgage(int position, int mortgageValues){
-
         fields[position].setSubText("PANTSAT");
-        fields[position].setDescription("Pris: kr. "+ (mortgageValues * 1.1)+",00");
+        fields[position].setDescription("Pris: kr. "+ (int)((mortgageValues * 1.1))+",00");
     }
 
     public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
-
+        if (!(fieldpropertiesUnsetMortgage.getFields()[position] instanceof Brewery)){
         fields[position].setSubText("Leje: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getRent() + " kr.");
+        }
+        else {
+            fields[position].setSubText("");
+        }
         fields[position].setDescription(fieldTitles[position]);
     }
 
@@ -305,7 +306,13 @@ public class MatadorGui {
             if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && !(fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
                 if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
                     fieldpropertiesRentonField.setPosition(y);
-                    fields[y].setSubText("Leje: " + ( fieldpropertiesRentonField.calculateRent(1) + " kr."));
+                    fields[y].setSubText("Leje: " + ( fieldpropertiesRentonField.calculateRent(1, false) + " kr."));
+                }
+            }
+            else if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && (fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
+                if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
+                    fieldpropertiesRentonField.setPosition(y);
+                    fields[y].setSubText("");
                 }
             }
         }

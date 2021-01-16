@@ -32,8 +32,10 @@ public class PlayerChoice {
                 if (((OwnableField) fieldProperties.getFields()[i]).getOwner() == playerID + 10) {
                     hasOwnedMortgageField = true;
                 }
-                if (fieldProperties.hasAllFields(i) && ((OwnableField) fieldProperties.getFields()[i]).getOwner() == playerID + 1) {
-                    hasOwnedAllFields = true;
+                if (fieldProperties.getFields()[i] instanceof BuildableField) {
+                    if (fieldProperties.hasAllFields(i) && ((OwnableField) fieldProperties.getFields()[i]).getOwner() == playerID + 1) {
+                        hasOwnedAllFields = true;
+                    }
                 }
             } else {
                 continue;

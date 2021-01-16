@@ -11,9 +11,6 @@ public class Game {
 
     private Player[] player;
     boolean isWinnerWinnerChickenDinner = false;
-    private int temporary;
-    private int balanceid;
-    private int finalbalanceid;
     private int round = 0;
     private int tempID = 20;
     private int remainingPlayers;
@@ -27,7 +24,6 @@ public class Game {
         game.Game();
 
     }
-
 
     public void Game(){
 
@@ -64,13 +60,22 @@ public class Game {
             round = round + 1;
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
 
-                if(tempID == i){
-                    matadorGUI.showMessage(player[i].playerString() + " du har VUNDET spillet!");
-                }
-
-
                 if(!player[i].isInGame()){
                     continue;
+                }
+
+                remainingPlayers = menu.getPlayerAmount();
+                for (Player players:player
+                     ) {
+                    if (!players.isInGame()){
+                        remainingPlayers--;
+                    }
+                    if (remainingPlayers == 1){
+                        while (true){
+                            matadorGUI.showMessage(player[i].playerString() + " du har VUNDET spillet!");
+                            System.exit(0);
+                        }
+                    }
                 }
 
 
@@ -119,30 +124,6 @@ public class Game {
                 matadorGUI.RentOnField(fieldProperties);
                 losingConditions.CheckPlayerWorth(player[i],i);
 
-                /*if (player[i].getBalance() < 0) {
-
-                    int[] balances = new int[menu.getPlayerAmount()];
-                    for(int j=0; j<
-                            balances.length; j++) {
-                        int money = player[j].getBalance();
-                        balances[j] = money;
-                    }
-                    temporary=0;
-                    balanceid = 0;
-                    finalbalanceid = 0;
-
-                    for(int balance:balances){
-                        if(temporary<balance){
-                            temporary = balance;
-                            finalbalanceid = balanceid;
-
-                        }
-                        balanceid+=1;
-                    }
-                    matadorGUI.showMessage("Vinderen er: " + player[finalbalanceid].playerString() + " med " + player[finalbalanceid].getBalance() + " penge");
-                    isWinnerWinnerChickenDinner = true;
-                    break;
-                }*/
                 if(player[i].isInGame()) {
 
                     if (rollCheck.twoOfTheSame(dices.Die1(), dices.Die2())) {

@@ -1,8 +1,6 @@
 package Game.controller;
 
-import Game.Model.Fields.BuildableField;
-import Game.Model.Fields.Field;
-import Game.Model.Fields.OwnableField;
+import Game.Model.Fields.*;
 import Game.Model.Player;
 import Game.View.MatadorGui;
 import Game.controller.FieldController;
@@ -50,16 +48,14 @@ public class Mortgage {
                 size = fieldProperties.getFields().length;
                 Color = null;
 
-
-
-
-
                 for (int i = 0;i<size;i++){
-                    if (fields[i].getName().equals(mortgageChoice) && !(((BuildableField) fields[i]).getColor().equals(Color))){
-                    Color = ((BuildableField) fields[i]).getColor();
-                    i = 0;
-                    continue;
-                }
+                    if (fields[i] instanceof BuildableField) {
+                        if (fields[i].getName().equals(mortgageChoice) && !(((BuildableField) fields[i]).getColor().equals(Color))) {
+                            Color = ((BuildableField) fields[i]).getColor();
+                            i = 0;
+                            continue;
+                        }
+                    }
                     if (fields[i] instanceof OwnableField && fields[i] instanceof BuildableField) {
                         if ((((BuildableField) fields[i]).getHouses() > 0) && !(fields[i].getName().equals(mortgageChoice)) && Color == ((BuildableField) fields[i]).getColor()) {
                             hasHouses = true;
@@ -76,12 +72,20 @@ public class Mortgage {
                             matadorGUI.updateGuiBalance(playerID, currentPlayer.getBalance());
                             matadorGUI.setMortgage(Count, ((OwnableField) field).getMortgageValue());
                             fieldProperties.setOwnedFields(playerID + 10);
+                            matadorGUI.RentOnField(fieldProperties);
 
-                        }
-                        else if (field.getName().equals(mortgageChoice) && (((BuildableField) field).getHouses() > 0) || hasHouses && field.getName().equals(mortgageChoice)) {
+                        } else if (field.getName().equals(mortgageChoice) && (((BuildableField) field).getHouses() > 0) || hasHouses && field.getName().equals(mortgageChoice)) {
                             matadorGUI.showMessage("Du har huse som du skal sælge før du kan pantsætte");
                         }
                     }
+                    if (field.getName().equals(mortgageChoice) && (field instanceof ShippingLine || field instanceof Brewery)) {
+                            fieldProperties.setPosition(Count);
+                            currentPlayer.playerBalanceUpdate(((OwnableField) field).getMortgageValue());
+                            matadorGUI.updateGuiBalance(playerID, currentPlayer.getBalance());
+                            matadorGUI.setMortgage(Count, ((OwnableField) field).getMortgageValue());
+                            fieldProperties.setOwnedFields(playerID + 10);
+                            matadorGUI.RentOnField(fieldProperties);
+                        }
                     Count += 1;
                 }
                 break;
@@ -120,13 +124,17 @@ public class Mortgage {
                 for (Field field:fieldProperties.getFields()
                 ) {
                     if (field instanceof OwnableField) {
-                        if (field.getName().equals(mortgageChoice)) {
+                        if (field.getName().equals(mortgageChoice) && currentPlayer.getBalance() >= (int) (((OwnableField) field).getMortgageValue()*1.1)) {
                             fieldProperties.setPosition(Count);
                             currentPlayer.playerBalanceUpdate(-(int) (((OwnableField) field).getMortgageValue() * 1.1));
                             matadorGUI.updateGuiBalance(playerID, currentPlayer.getBalance());
                             matadorGUI.UnsetMortgage(Count, fieldProperties);
                             fieldProperties.setOwnedFields(playerID + 1);
+                            matadorGUI.RentOnField(fieldProperties);
+                        }
 
+                        else if (field.getName().equals(mortgageChoice)) {
+                            matadorGUI.showMessage("Du har ikke råd til at købe pantsætningen tilbage");
                         }
                     }
                     Count += 1;
