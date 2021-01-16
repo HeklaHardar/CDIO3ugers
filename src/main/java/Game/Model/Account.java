@@ -5,7 +5,7 @@ public class Account {
     private int points;
     private int totalWorth;
 
-    public Account() {points = 120;}
+    public Account() {points = 1500;}
 
     // Updates player score
     public void updateScore(int sum) {points += sum;}

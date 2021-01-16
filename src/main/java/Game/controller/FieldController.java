@@ -114,7 +114,7 @@ public class FieldController {
         return fields;
     }
 
-    public void countShips() {
+    public void countShips(boolean isChanceCard15or25) {
         int[] multirent = {0, 25, 50, 100, 200};
 
         if (fields[position] instanceof OwnableField) {
@@ -128,8 +128,14 @@ public class FieldController {
                         }
                     }
             }
-            ((OwnableField) fields[position]).setRent(multirent[colorCount]);
-        }
+            if (!isChanceCard15or25) {
+                ((OwnableField) fields[position]).setRent(multirent[colorCount]);
+            }
+            else if (isChanceCard15or25) {
+                ((OwnableField) fields[position]).setRent(multirent[colorCount]*2);
+            }
+
+            }
     }
 
     public void countBrewery(int BreweryDices) {
@@ -182,11 +188,11 @@ public class FieldController {
         return false;
     }
 
-    public int calculateRent(int rentDices) {
+    public int calculateRent(int rentDices, boolean isChanceCard15or25) {
 
         if (fields[position] instanceof OwnableField) {
             if (fields[position] instanceof ShippingLine){
-                countShips();
+                countShips(isChanceCard15or25);
             }
             else if (fields[position] instanceof Brewery){
                 countBrewery(rentDices);
