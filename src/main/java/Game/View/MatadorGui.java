@@ -14,7 +14,7 @@ public class MatadorGui {
     private GUI_Field[] fields = new GUI_Field[40];
     private GUI_Player[] player = new GUI_Player[6];
     private GUI_Car[] car = new GUI_Car[6];
-    private Color[] colors = {Color.black, new Color(175, 4, 182), new Color(255, 255, 255), new Color(139, 33, 33), new Color(0, 255, 0), new Color(0, 255, 225)};
+    private Color[] colors = {new Color(255, 220, 39), new Color(175, 4, 182), new Color(255, 255, 255), new Color(139, 33, 33), new Color(0, 255, 0), new Color(0, 255, 225)};
     private GUI_Car.Type[] type = {GUI_Car.Type.CAR, GUI_Car.Type.RACECAR, GUI_Car.Type.UFO, GUI_Car.Type.TRACTOR, GUI_Car.Type.CAR, GUI_Car.Type.RACECAR};
     private String stringChoice;
     private String[] fieldTitles = {"Rødovrevej", "", "Hvidovre", "", "Øresund A/S", "Roskildevej", "", "Valby \n Langgade", "Allégade", "", "Frederiksberg \n Allé", "Tuborg",
@@ -220,7 +220,7 @@ public class MatadorGui {
         GUI_Field field = gui.getFields()[currentField];
         if (ownable == 1) {
             GUI_Ownable o = (GUI_Ownable)field;
-            o.setBorder(Color.black);
+            o.setBorder(Color.black, Color.black);
             o.setOwnerName("");
             o.setSubText("Pris: " + price + " kr.");
         }
