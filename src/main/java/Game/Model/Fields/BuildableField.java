@@ -1,6 +1,6 @@
 package Game.Model.Fields;
 
-public class BuildableField extends OwnableField{
+public class BuildableField extends OwnableField {
 
     protected int houseCost;
 
@@ -13,19 +13,19 @@ public class BuildableField extends OwnableField{
         return houseCost;
     }
 
-    public int getHouses(){
+    public int getHouses() {
         return fieldProperties.getHouses()[position];
     }
 
-    public int[][] getRentPrices(){
+    public int[][] getRentPrices() {
         return fieldProperties.getRENTPRICES();
     }
 
-    public void buildHouse(){
+    public void buildHouse() {
         fieldProperties.setHouses(position);
     }
 
-    public void removeHouse(){
+    public void removeHouse() {
         fieldProperties.removeHouses(position);
     }
 }

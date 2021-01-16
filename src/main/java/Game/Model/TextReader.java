@@ -12,13 +12,13 @@ public class TextReader {
     private String filePath;
 
     //Provide FileName to find the files path **FILE MUST BE IN THE TextFiles FOLDER**
-    public TextReader(String FileName)  {
+    public TextReader(String FileName) {
 
         //Finds the filepath from the folders it is held within, and its name
         try {
             Path path = Paths.get("", "src", "Assets", "TextFiles", FileName);
             filePath = String.valueOf(path.toAbsolutePath());
-        }catch(FileSystemNotFoundException e){
+        } catch (FileSystemNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -30,18 +30,18 @@ public class TextReader {
             //Reads the file and checks how many lines are present to make an array appropriate for the file length
             reader1 = new BufferedReader(new FileReader((String.valueOf(filePath))));
             String Line = "";
-            while(Line!=null){
+            while (Line != null) {
                 Line = reader1.readLine();
-                if(Line==null)
+                if (Line == null)
                     break;
-                Counter +=1;
+                Counter += 1;
             }
             reader1.close();
             String[] textLines = new String[Counter];
 
             //Reads the file and puts each line into it's own place in the array
             reader2 = new BufferedReader(new FileReader(String.valueOf(filePath)));
-            String TextLine  = reader2.readLine();
+            String TextLine = reader2.readLine();
             textLines[0] = TextLine;
             while (TextLine != null) {
                 TextLine = reader2.readLine();
@@ -57,13 +57,15 @@ public class TextReader {
         }
     }
 
-    public String[] getText(){return Text;}
+    public String[] getText() {
+        return Text;
+    }
 
-    public int[] getInts(){
+    public int[] getInts() {
 
         int size = Text.length;
         int[] arr = new int[size];
-        for(int i = 0; i<size;i++){
+        for (int i = 0; i < size; i++) {
             arr[i] = Integer.parseInt(Text[i]);
         }
         return arr;

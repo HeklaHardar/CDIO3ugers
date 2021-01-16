@@ -59,14 +59,6 @@ public class LandOnChanceCard {
                 player[playerID].playerBalanceUpdate(playerAmount * 25);
                 matadorGUI.updateGuiBalance(playerID, player[playerID].getBalance());
             }
-            /*if (cards.isHasMatadorlegat()) {
-                for (int y = 0; y < playerAmount; y++) {
-                    player[y].playerBalanceUpdate(-25);
-                    matadorGUI.updateGuiBalance(y, player[y].getBalance());
-                }
-                player[playerID].playerBalanceUpdate(playerAmount * 25);
-                matadorGUI.updateGuiBalance(playerID, player[playerID].getBalance());
-            }*/
 
             cards.resetStats();
             break;

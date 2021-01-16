@@ -174,14 +174,14 @@ public class MatadorGui {
 
     }
 
-    public int getMoveDebug(){
+    public int getMoveDebug() {
 
         return gui.getUserInteger("Hvor mange felter vil du rykke?");
 
     }
 
     public void ShowDie(int DieGui, int Die2Gui) {
-        gui.setDice(DieGui,0,1,7, Die2Gui,0,2,7);
+        gui.setDice(DieGui, 0, 1, 7, Die2Gui, 0, 2, 7);
     }
 
     public void moveCars(int currentPlayer, int currentPosition, int newPosition) {
@@ -189,8 +189,8 @@ public class MatadorGui {
         fields[newPosition].setCar(player[currentPlayer], true);
     }
 
-    public void removeCar(int currentPlayer, int currentPosition){
-        fields[currentPosition].setCar(player[currentPlayer],false);
+    public void removeCar(int currentPlayer, int currentPosition) {
+        fields[currentPosition].setCar(player[currentPlayer], false);
     }
 
     public void moveToPrison(int currentPlayer, int currentPosition) {
@@ -206,8 +206,8 @@ public class MatadorGui {
         gui.showMessage(message);
     }
 
-    public void setName (String playerName, int playerID){
-        player[playerID].setName(playerName +" - Udgået fra spillet");
+    public void setName(String playerName, int playerID) {
+        player[playerID].setName(playerName + " - Udgået fra spillet");
     }
 
     public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner, FieldController landOnFieldController) {
@@ -220,10 +220,10 @@ public class MatadorGui {
         } else return;
     }
 
-    public void unsetField(int currentField, String price, int ownable){
+    public void unsetField(int currentField, String price, int ownable) {
         GUI_Field field = gui.getFields()[currentField];
         if (ownable == 1) {
-            GUI_Ownable o = (GUI_Ownable)field;
+            GUI_Ownable o = (GUI_Ownable) field;
             o.setBorder(Color.black, Color.black);
             o.setOwnerName("");
             o.setSubText("Pris: " + price + " kr.");
@@ -235,12 +235,12 @@ public class MatadorGui {
         gui.displayChanceCard(cardText);
     }
 
-    public String getUserSelection(String msg, String... options){
+    public String getUserSelection(String msg, String... options) {
         return gui.getUserSelection(msg, options);
     }
 
     public int getPlayerAction(String playerName, String[] Options) {
-        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName +" s tur.",Options);
+        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName + " s tur.", Options);
         switch (stringChoice) {
             case "Slå med terningerne":
                 return 1;
@@ -258,9 +258,9 @@ public class MatadorGui {
         return 0;
     }
 
-    public int getPlayLossActions (String playerName, String[] Options){
+    public int getPlayLossActions(String playerName, String[] Options) {
 
-        stringChoice = gui.getUserButtonPressed(playerName +", du er løbet tør for penge, vælg en af mulighederne for at fortsætte spillet: ",Options);
+        stringChoice = gui.getUserButtonPressed(playerName + ", du er løbet tør for penge, vælg en af mulighederne for at fortsætte spillet: ", Options);
         switch (stringChoice) {
             case "Sælg bygninger":
                 return 1;
@@ -271,13 +271,11 @@ public class MatadorGui {
 
         }
         return 0;
-
-
     }
 
-    public int getBuyField(String fieldName){
-        stringChoice = gui.getUserButtonPressed("Vil du købe "+ fieldName +"?", "Ja", "Nej");
-        switch (stringChoice){
+    public int getBuyField(String fieldName) {
+        stringChoice = gui.getUserButtonPressed("Vil du købe " + fieldName + "?", "Ja", "Nej");
+        switch (stringChoice) {
             case "Ja":
                 return 1;
             case "Nej":
@@ -286,30 +284,28 @@ public class MatadorGui {
         return 0;
     }
 
-    public void setMortgage(int position, int mortgageValues){
+    public void setMortgage(int position, int mortgageValues) {
         fields[position].setSubText("PANTSAT");
-        fields[position].setDescription("Pris: kr. "+ (int)((mortgageValues * 1.1))+",00");
+        fields[position].setDescription("Pris: kr. " + (int) ((mortgageValues * 1.1)) + ",00");
     }
 
-    public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
-        if (!(fieldpropertiesUnsetMortgage.getFields()[position] instanceof Brewery)){
-        fields[position].setSubText("Leje: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getRent() + " kr.");
-        }
-        else {
+    public void UnsetMortgage(int position, FieldController fieldpropertiesUnsetMortgage) {
+        if (!(fieldpropertiesUnsetMortgage.getFields()[position] instanceof Brewery)) {
+            fields[position].setSubText("Leje: " + ((OwnableField) fieldpropertiesUnsetMortgage.getFields()[position]).getRent() + " kr.");
+        } else {
             fields[position].setSubText("");
         }
         fields[position].setDescription(fieldTitles[position]);
     }
 
-    public void RentOnField(FieldController fieldpropertiesRentonField){
-        for (int y = 0; y < 40; y++){
+    public void RentOnField(FieldController fieldpropertiesRentonField) {
+        for (int y = 0; y < 40; y++) {
             if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && !(fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
                 if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
                     fieldpropertiesRentonField.setPosition(y);
-                    fields[y].setSubText("Leje: " + ( fieldpropertiesRentonField.calculateRent(1, false) + " kr."));
+                    fields[y].setSubText("Leje: " + (fieldpropertiesRentonField.calculateRent(1, false) + " kr."));
                 }
-            }
-            else if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && (fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
+            } else if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && (fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
                 if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
                     fieldpropertiesRentonField.setPosition(y);
                     fields[y].setSubText("");
@@ -318,39 +314,36 @@ public class MatadorGui {
         }
     }
 
-
-
     public String getAuction(String fieldName) {
         stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe " + fieldName + "?", "Ja", "Nej");
         if (stringChoice.equals("Ja")) {
             return "Ja";
-        }else
+        } else
             return "No";
     }
 
-
-    public void buyHouse(int position,int housecount, int owner, int playerNumber){
-        if(gui.getFields()[position] instanceof GUI_Street && housecount>0 && housecount < 5 && owner==playerNumber){
+    public void buyHouse(int position, int housecount, int owner, int playerNumber) {
+        if (gui.getFields()[position] instanceof GUI_Street && housecount > 0 && housecount < 5 && owner == playerNumber) {
             ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
         }
-        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner==playerNumber){
+        if (gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner == playerNumber) {
             ((GUI_Street) gui.getFields()[position]).setHotel(true);
         }
     }
 
-    public void sellHouse(int position,int housecount, int owner, int playerNumber){
-        if(gui.getFields()[position] instanceof GUI_Street && housecount>=0 && housecount < 5 && owner==playerNumber){
+    public void sellHouse(int position, int housecount, int owner, int playerNumber) {
+        if (gui.getFields()[position] instanceof GUI_Street && housecount >= 0 && housecount < 5 && owner == playerNumber) {
             ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
         }
-        if(gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner==playerNumber){
+        if (gui.getFields()[position] instanceof GUI_Street && housecount == 5 && owner == playerNumber) {
             ((GUI_Street) gui.getFields()[position]).setHotel(false);
             ((GUI_Street) gui.getFields()[position]).setHouses(housecount);
         }
     }
 
-    public int getIncomeTax(int totalPlayerWorth){
-        stringChoice = gui.getUserButtonPressed("Hvordan vil du betale skat? \n 10 % af dine samlede værdier svarer til: "+ totalPlayerWorth, "200 kr.", "10 % af dine samlede værdier");
-        switch (stringChoice){
+    public int getIncomeTax(int totalPlayerWorth) {
+        stringChoice = gui.getUserButtonPressed("Hvordan vil du betale skat? \n 10 % af dine samlede værdier svarer til: " + totalPlayerWorth, "200 kr.", "10 % af dine samlede værdier");
+        switch (stringChoice) {
             case "200 kr.":
                 return 1;
             case "10 % af dine samlede værdier":

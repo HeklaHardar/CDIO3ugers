@@ -13,7 +13,7 @@ public class Cards {
     private int PositionChange;
     private boolean hasPositionChange = false;
     private boolean Matadorlegat = false;
-    private boolean isChanceCard15or25 = false;          // added line
+    private boolean isChanceCard15or25 = false;
 
     CardPicker cardPicker = new CardPicker();
     TextReader TextforCards = new TextReader("CardText.txt");
@@ -35,9 +35,8 @@ public class Cards {
     }
 
     public void CardPick() {
-
         //Calls cardPicker.DrawCard for a random int.
-        switch (cardPicker.DrawCard()) {                      //
+        switch (cardPicker.DrawCard()) {
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
@@ -200,14 +199,11 @@ public class Cards {
     public int distToNearestShippingLine(int currentPosition) {
         if (currentPosition == 36 || currentPosition == 2) {
             PositionChange = 5;
-        }
-        else if (currentPosition == 7) {
+        } else if (currentPosition == 7) {
             PositionChange = 15;
-        }
-        else if (currentPosition == 17 || currentPosition == 22) {
+        } else if (currentPosition == 17 || currentPosition == 22) {
             PositionChange = 25;
-        }
-        else if (currentPosition == 33) {
+        } else if (currentPosition == 33) {
             PositionChange = 35;
         }
         return PositionChange;

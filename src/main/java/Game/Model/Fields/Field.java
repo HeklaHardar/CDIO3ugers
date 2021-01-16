@@ -12,7 +12,6 @@ public class Field {
         this.name = fieldProperties.getFieldTitles()[position];
     }
 
-
     public int getPosition() {
         return position;
     }
