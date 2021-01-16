@@ -19,7 +19,7 @@ public class MatadorGui {
     private String stringChoice;
     private String[] fieldTitles = {"Rødovrevej", "", "Hvidovre", "", "Øresund A/S", "Roskildevej", "", "Valby \n Langgade", "Allégade", "", "Frederiksberg \n Allé", "Tuborg",
             "Bülowsvej", "Gl. Kongevej", "D. F. D. S.", "Bernstoffsvej", "", "Hellerupvej", "Strandvej", "Helle", "Trianglen", "", "Østerbro-\ngade \n", "Grønningen", "Y. K.",
-            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S Bornholm 1866 \n", "", "Frederiks-\nberggade \n", "", "Rådhus-\npladsen \n"};
+            "Bredgade", "Kg. Nytorv", "Carlsberg", "Østergade", "", "Amagertorv", "Vimmelskaftet", "", "Nygade", "D/S Bornholm 1866 \n", "", "Frederiks-\nberggade \n", "", "Rådhus-\npladsen \n", ""};
 
     public MatadorGui() {
 
@@ -223,14 +223,9 @@ public class MatadorGui {
             o.setBorder(Color.black, Color.black);
             o.setOwnerName("");
             o.setSubText("Pris: " + price + " kr.");
+            o.setDescription("");
         }
-
-
     }
-
-    /*public void RentSubText(int FieldRent){
-
-    }*/
 
     public void displayCard(String cardText) {
         gui.displayChanceCard(cardText);
@@ -289,7 +284,7 @@ public class MatadorGui {
 
     public void setMortgage(int position, int mortgageValues){
         fields[position].setSubText("PANTSAT");
-        fields[position].setDescription("Pris: kr. "+ (mortgageValues * 1.1)+",00");
+        fields[position].setDescription("Pris: kr. "+ (int)((mortgageValues * 1.1))+",00");
     }
 
     public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){

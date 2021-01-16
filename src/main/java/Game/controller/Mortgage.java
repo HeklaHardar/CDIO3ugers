@@ -124,14 +124,17 @@ public class Mortgage {
                 for (Field field:fieldProperties.getFields()
                 ) {
                     if (field instanceof OwnableField) {
-                        if (field.getName().equals(mortgageChoice)) {
+                        if (field.getName().equals(mortgageChoice) && currentPlayer.getBalance() >= (int) (((OwnableField) field).getMortgageValue()*1.1)) {
                             fieldProperties.setPosition(Count);
                             currentPlayer.playerBalanceUpdate(-(int) (((OwnableField) field).getMortgageValue() * 1.1));
                             matadorGUI.updateGuiBalance(playerID, currentPlayer.getBalance());
                             matadorGUI.UnsetMortgage(Count, fieldProperties);
                             fieldProperties.setOwnedFields(playerID + 1);
                             matadorGUI.RentOnField(fieldProperties);
+                        }
 
+                        else if (field.getName().equals(mortgageChoice)) {
+                            matadorGUI.showMessage("Du har ikke råd til at købe pantsætningen tilbage");
                         }
                     }
                     Count += 1;

@@ -69,7 +69,7 @@ public class PrisonConditions {
             }
         }
         else if (PrisonPlayer.getRoundsinprison() < 3) {
-            stringChoice = PrisonGUI.gui.getUserButtonPressed(PrisonPlayer.playerString()+", du har siddet i fængsel i "+ PrisonPlayer.getRoundsinprison() +" slå to ens for at komme ud af fængslet: ", "Slå med terningerne");
+            stringChoice = PrisonGUI.gui.getUserButtonPressed(PrisonPlayer.playerString()+", du har siddet i fængsel i "+ PrisonPlayer.getRoundsinprison() +" runde(r), slå to ens for at komme ud af fængslet: ", "Slå med terningerne");
             switch (stringChoice){
                 case "Slå med terningerne":
                     PrisonGUI.ShowDie(PrisonDices.Die1(), PrisonDices.Die2());
