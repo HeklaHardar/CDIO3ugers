@@ -217,12 +217,14 @@ public class MatadorGui {
         } else return;
     }
 
-    public void unsetField(int currentPlayer, int currentField, String price){
+    public void unsetField(int currentField, String price, int ownable){
         GUI_Field field = gui.getFields()[currentField];
-        GUI_Ownable o = (GUI_Ownable)field;
-        o.setBorder(Color.black);
-        o.setOwnerName("");
-        o.setSubText(price);
+        if (ownable == 1) {
+            GUI_Ownable o = (GUI_Ownable)field;
+            o.setBorder(Color.black);
+            o.setOwnerName("");
+            o.setSubText("Pris: " + price + " kr.");
+        }
 
 
     }
