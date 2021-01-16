@@ -6,7 +6,6 @@ public class OwnableField extends Field {
     protected int value;
     protected int mortgageValue;
 
-
     public OwnableField(int position) {
         super(position);
         value = fieldProperties.getFIELDVALUES()[position];
@@ -15,12 +14,13 @@ public class OwnableField extends Field {
         mortgageValue = fieldProperties.getMORTGAGEVALUES()[position];
         ownable = 1;
     }
+
     public int getOwner() {
         return fieldProperties.getOwner(position);
     }
 
     public void setOwner(int ownerNumber) {
-        fieldProperties.setOwner(position,ownerNumber);
+        fieldProperties.setOwner(position, ownerNumber);
     }
 
     public int getValue() {

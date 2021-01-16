@@ -25,11 +25,12 @@ public class Dices {
                         ", " + die2.getValue();
     }
 
-    public int Die1(){
+    public int Die1() {
         return
                 die1.getValue();
     }
-    public int Die2(){
+
+    public int Die2() {
         return
                 die2.getValue();
     }

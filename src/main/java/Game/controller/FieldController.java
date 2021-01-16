@@ -33,47 +33,31 @@ public class FieldController {
         this.position = position;
     }
 
-    public int[] getAvaiableHousePositions() {
-        int[] avaiableHousePositions = new int[22];
-        int arrayPosition = 0;
-        int oldPosition = position;
-        for (int i = 0; i < 40; i++) {
-            this.position = i;
-            if (hasAllFields(position)) {
-                avaiableHousePositions[arrayPosition] = i;
-                arrayPosition++;
-            }
-        }
-        this.position = oldPosition;
-        return avaiableHousePositions;
-    }
-
     public String buildHouses(Player player, int playerNumber, int buildposition) {
 
         if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() < 5 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
-            if(player.getBalance()<((BuildableField) fields[buildposition]).getHouseCost()){
+            if (player.getBalance() < ((BuildableField) fields[buildposition]).getHouseCost()) {
                 return "noMoney";
             }
             int colorCount = 0;
             int sameHouses = 0;
-            for (Field field:fields){
-                if(field instanceof BuildableField) {
-                    if (((BuildableField) fields[buildposition]).getColor() == ((BuildableField) field).getColor() && ((BuildableField)fields[buildposition]).getOwner()==((BuildableField) field).getOwner()){
+            for (Field field : fields) {
+                if (field instanceof BuildableField) {
+                    if (((BuildableField) fields[buildposition]).getColor() == ((BuildableField) field).getColor() && ((BuildableField) fields[buildposition]).getOwner() == ((BuildableField) field).getOwner()) {
                         colorCount++;
-                        if(((BuildableField) fields[buildposition]).getHouses() <= ((BuildableField) field).getHouses() ){
+                        if (((BuildableField) fields[buildposition]).getHouses() <= ((BuildableField) field).getHouses()) {
                             sameHouses++;
                         }
                     }
                 }
             }
-            if(colorCount==sameHouses) {
+            if (colorCount == sameHouses) {
                 player.playerBalanceUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
                 player.playerWorthUpdate(((BuildableField) fields[buildposition]).getHouseCost());
                 ((BuildableField) fields[buildposition]).buildHouse();
                 ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
                 return "buildable";
-            }
-            else{
+            } else {
                 return "houseRequirements";
             }
         }
@@ -85,30 +69,28 @@ public class FieldController {
         if (fields[buildposition] instanceof BuildableField && ((BuildableField) fields[buildposition]).getHouses() <= 5 && ((BuildableField) fields[buildposition]).getHouses() > 0 && hasAllFields(buildposition) && ((BuildableField) fields[buildposition]).getOwner() == playerNumber) {
             int colorCount = 0;
             int sameHouses = 0;
-            for (Field field:fields){
-                if(field instanceof BuildableField) {
-                    if (((BuildableField) fields[buildposition]).getColor() == ((BuildableField) field).getColor() && ((BuildableField)fields[buildposition]).getOwner()==((BuildableField) field).getOwner()){
+            for (Field field : fields) {
+                if (field instanceof BuildableField) {
+                    if (((BuildableField) fields[buildposition]).getColor() == ((BuildableField) field).getColor() && ((BuildableField) fields[buildposition]).getOwner() == ((BuildableField) field).getOwner()) {
                         colorCount++;
-                        if(((BuildableField) fields[buildposition]).getHouses() >= ((BuildableField) field).getHouses()){
+                        if (((BuildableField) fields[buildposition]).getHouses() >= ((BuildableField) field).getHouses()) {
                             sameHouses++;
                         }
                     }
                 }
             }
-            if(colorCount==sameHouses) {
+            if (colorCount == sameHouses) {
                 player.playerBalanceUpdate(((BuildableField) fields[buildposition]).getHouseCost());
                 player.playerWorthUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
                 ((BuildableField) fields[buildposition]).removeHouse();
                 ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
                 return "buildable";
-            }
-            else{
+            } else {
                 return "houseRequirements";
             }
         }
         return "notbuilable";
     }
-
 
     public Field[] getFields() {
         return fields;
@@ -121,21 +103,18 @@ public class FieldController {
             int colorCount = 0;
             for (int i = 0; i <= 39; i++) {
 
-                    if (fields[i] instanceof OwnableField) {
-                        if (((OwnableField) fields[i]).getColor() == "Ship" && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[i]).getOwner() != 0) {
-                            colorCount = colorCount + 1;
-
-                        }
+                if (fields[i] instanceof OwnableField) {
+                    if (((OwnableField) fields[i]).getColor() == "Ship" && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[i]).getOwner() != 0) {
+                        colorCount = colorCount + 1;
                     }
+                }
             }
             if (!isChanceCard15or25) {
                 ((OwnableField) fields[position]).setRent(multirent[colorCount]);
+            } else if (isChanceCard15or25) {
+                ((OwnableField) fields[position]).setRent(multirent[colorCount] * 2);
             }
-            else if (isChanceCard15or25) {
-                ((OwnableField) fields[position]).setRent(multirent[colorCount]*2);
-            }
-
-            }
+        }
     }
 
     public void countBrewery(int BreweryDices) {
@@ -144,18 +123,16 @@ public class FieldController {
             int breweryCount = 0;
             for (int i = 0; i <= 39; i++) {
 
-
                 if (fields[i] instanceof OwnableField) {
 
-                        if (((OwnableField) fields[i]).getColor() == "Brewery" && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[position]).getOwner() != 0) {
-                            breweryCount = breweryCount + 1;
-                        }
+                    if (((OwnableField) fields[i]).getColor() == "Brewery" && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[position]).getOwner() && ((OwnableField) fields[position]).getOwner() != 0) {
+                        breweryCount = breweryCount + 1;
+                    }
                 }
             }
             if (breweryCount == 1) {
                 ((OwnableField) fields[position]).setRent(BreweryDices * 4);
-            }
-            else if (breweryCount == 2) {
+            } else if (breweryCount == 2) {
                 ((OwnableField) fields[position]).setRent(BreweryDices * 10);
             }
         }
@@ -168,15 +145,14 @@ public class FieldController {
 
                 if (fields[i] instanceof OwnableField) {
 
-                    //Hvis du ejer 2 af blå eller lilla
                     if ((i != testPosition) && ((OwnableField) fields[i]).getColor() == ((OwnableField) fields[testPosition]).getColor()
                             && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[testPosition]).getOwner() && ((OwnableField) fields[i]).getOwner() != 0) {
                         if ((((OwnableField) fields[testPosition]).getColor() == "Purple" || ((OwnableField) fields[testPosition]).getColor() == "Blue")) {
                             return true;
                         } else {
-                                if (((OwnableField) fields[i]).getColor() == ((OwnableField) fields[testPosition]).getColor() && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[testPosition]).getOwner() && ((OwnableField) fields[testPosition]).getOwner() != 0 && i != testPosition) {
-                                    colorCount = colorCount + 1;
-                                }
+                            if (((OwnableField) fields[i]).getColor() == ((OwnableField) fields[testPosition]).getColor() && ((OwnableField) fields[i]).getOwner() == ((OwnableField) fields[testPosition]).getOwner() && ((OwnableField) fields[testPosition]).getOwner() != 0 && i != testPosition) {
+                                colorCount = colorCount + 1;
+                            }
                         }
                     }
                 }
@@ -191,14 +167,13 @@ public class FieldController {
     public int calculateRent(int rentDices, boolean isChanceCard15or25) {
 
         if (fields[position] instanceof OwnableField) {
-            if (fields[position] instanceof ShippingLine){
+            if (fields[position] instanceof ShippingLine) {
                 countShips(isChanceCard15or25);
-            }
-            else if (fields[position] instanceof Brewery){
+            } else if (fields[position] instanceof Brewery) {
                 countBrewery(rentDices);
             }
-            if(fields[position] instanceof BuildableField && ((BuildableField) fields[position]).getHouses()==0 && hasAllFields(position)){
-                return ((BuildableField) fields[position]).getRentPrices()[position][0]*2;
+            if (fields[position] instanceof BuildableField && ((BuildableField) fields[position]).getHouses() == 0 && hasAllFields(position)) {
+                return ((BuildableField) fields[position]).getRentPrices()[position][0] * 2;
             }
             return ((OwnableField) fields[position]).getRent();
         }
@@ -208,11 +183,9 @@ public class FieldController {
     public int getValue() {
         if (fields[position] instanceof OwnableField) {
             return ((OwnableField) fields[position]).getValue();
-        }
-        else if(fields[position] instanceof IncomeTax){
-        return ((IncomeTax) fields[position]).getTax();
-    }
-        else if( fields[position] instanceof ExtraordinaryTax){
+        } else if (fields[position] instanceof IncomeTax) {
+            return ((IncomeTax) fields[position]).getTax();
+        } else if (fields[position] instanceof ExtraordinaryTax) {
             return ((ExtraordinaryTax) fields[position]).getTax();
         }
         return 0;
@@ -242,7 +215,6 @@ public class FieldController {
         }
     }
 
-
     public boolean getdrawCard() {
         boolean drawcard = false;
         if (fields[position] instanceof ChanceCard) {
@@ -253,16 +225,13 @@ public class FieldController {
 
     public void setOwnedFields(int playerNumber) {
         if (fields[position] instanceof OwnableField) {
-            if (((OwnableField) fields[position]).getOwner()==0) {
+            if (((OwnableField) fields[position]).getOwner() == 0) {
                 ((OwnableField) fields[position]).setOwner(playerNumber);
-            }
-            else if (playerNumber>9){
+            } else if (playerNumber > 9) {
                 ((OwnableField) fields[position]).setOwner(playerNumber);
-            }
-            else if (((OwnableField) fields[position]).getOwner() == 0) {
+            } else if (((OwnableField) fields[position]).getOwner() == 0) {
                 ((OwnableField) fields[position]).setOwner(playerNumber);
-            }
-            else if (((OwnableField) fields[position]).getOwner() > 9){
+            } else if (((OwnableField) fields[position]).getOwner() > 9) {
                 ((OwnableField) fields[position]).setOwner(playerNumber);
             }
         }

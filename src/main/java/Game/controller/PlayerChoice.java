@@ -3,7 +3,6 @@ package Game.controller;
 import Game.Model.Fields.BuildableField;
 import Game.Model.Fields.OwnableField;
 import Game.Model.Player;
-import Game.controller.FieldController;
 
 public class PlayerChoice {
 
@@ -16,7 +15,6 @@ public class PlayerChoice {
 
     public PlayerChoice(FieldController fieldProperties) {
         this.fieldProperties = fieldProperties;
-
 
     }
 
