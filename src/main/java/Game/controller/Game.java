@@ -36,7 +36,6 @@ public class Game {
         PrisonConditions prisonproperties = new PrisonConditions();
         rollOfDices rollCheck = new rollOfDices();
         Mortgage mortgage = new Mortgage();
-        LosingConditions losingConditions = new LosingConditions();
 
         GameStart menu = new GameStart();
         matadorGUI.createGui();
@@ -44,8 +43,11 @@ public class Game {
         FieldController fieldProperties = new FieldController();
         PlayerChoice TurnChoices = new PlayerChoice(fieldProperties);
 
+
         player = new Player[menu.getPlayerAmount()];
         BuildingController buildingController = new BuildingController(matadorGUI,fieldProperties,player);
+        LosingConditions losingConditions = new LosingConditions(matadorGUI,TurnChoices,player,mortgage,fieldProperties, buildingController);
+
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
             player[i] = new Player(menu.playernamesToString()[i],i);
@@ -57,6 +59,12 @@ public class Game {
         while (!isWinnerWinnerChickenDinner) {
             round = round + 1;
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
+
+                System.out.println(player[i].isInGame() + " " + player[i].playerString());
+
+                if(!player[i].isInGame()){
+                    continue;
+                }
                 //checks if the player is in prison and releases him if he is.
                 if (player[i].isInPrison()) {
                     prisonproperties.Release(player[i], dices, matadorGUI, i);
@@ -100,7 +108,7 @@ public class Game {
 
                 landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i, dices.getValue());
                 matadorGUI.RentOnField(fieldProperties);
-                losingConditions.CheckPlayerWorth(player[i],matadorGUI,TurnChoices,i,player,mortgage,fieldProperties);
+                losingConditions.CheckPlayerWorth(player[i],i);
 
                 /*if (player[i].getBalance() < 0) {
 

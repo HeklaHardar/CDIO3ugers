@@ -16,24 +16,24 @@ public class GameStart {
 
     private int playerNumber;
 
-    public void startGame(MatadorGui juniorGui) {
+    public void startGame(MatadorGui matadorGUI) {
         while (true) {
             // Input number of players
-            playerNumber = juniorGui.gui.getUserInteger("Velkommen til spillet! \n" +
+            playerNumber = matadorGUI.gui.getUserInteger("Velkommen til spillet! \n" +
                     "Indtast antallet af spillere, mellem " + MinPlayers + " og " + MaxPlayers + " spillere.");
             if (playerNumber <= MaxPlayers && playerNumber >= MinPlayers)
                 break;
             else
-                juniorGui.gui.showMessage("ugyldig antal spillere");
+                matadorGUI.gui.showMessage("ugyldig antal spillere");
         }
         String[] Players = new String[playerNumber];
         this.Players = Players;
         // Youngest player name+rest of player names
         for (int i = 0 ; i < playerNumber; i++) {
             if(i == 0) {
-                Players[i] = juniorGui.gui.getUserString("Indtast navnet på den yngste spiller");
+                Players[i] = matadorGUI.gui.getUserString("Indtast navnet på den yngste spiller");
                 if(Players[i].isEmpty() || Players[i].startsWith(" ")){
-                    juniorGui.gui.showMessage("Ugyldigt navn");
+                    matadorGUI.gui.showMessage("Ugyldigt navn");
                     i--;
                     continue;
                 }
@@ -41,9 +41,9 @@ public class GameStart {
 
             else{
                 boolean removePlayerName = false;
-                Players[i] = juniorGui.gui.getUserString("Indtast navn for spiller " + (i + 1) + ": ");
+                Players[i] = matadorGUI.gui.getUserString("Indtast navn for spiller " + (i + 1) + ": ");
                 if(Players[i].isEmpty() || Players[i].startsWith(" ")){
-                    juniorGui.gui.showMessage("Ugyldigt navn");
+                    matadorGUI.gui.showMessage("Ugyldigt navn");
                     i--;
                     continue;
                 }
@@ -53,7 +53,7 @@ public class GameStart {
                         }
                     }
                 if(removePlayerName){
-                    juniorGui.gui.showMessage("Du hedder det samme som en anden spiller, indtast andet navn");
+                    matadorGUI.gui.showMessage("Du hedder det samme som en anden spiller, indtast andet navn");
                     Players[i]="";
                     i--;
 

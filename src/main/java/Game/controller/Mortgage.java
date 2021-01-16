@@ -1,5 +1,6 @@
 package Game.controller;
 
+import Game.Model.Fields.BuildableField;
 import Game.Model.Fields.Field;
 import Game.Model.Fields.OwnableField;
 import Game.Model.Player;
@@ -11,6 +12,10 @@ public class Mortgage {
     private String temp;
     private String[] OwnedFields;
     private String mortgageChoice;
+    private boolean hasHouses;
+    private String Color = null;
+    private int size;
+    private Field[] fields;
 
     public void SellMortgage(MatadorGui matadorGUI, FieldController fieldProperties, Player currentPlayer, int playerID) {
 
@@ -41,17 +46,41 @@ public class Mortgage {
                 mortgageChoice = matadorGUI.getUserSelection("Vælg hvad du vil pantsætte: ", OwnedFields);
 
                 Count = 0;
+                hasHouses = false;
+                fields = fieldProperties.getFields();
+                size = fieldProperties.getFields().length;
+                Color = null;
+
+
+
+
+
+                for (int i = 0;i<size;i++){
+                    if (fields[i].getName().equals(mortgageChoice) && !(((BuildableField) fields[i]).getColor().equals(Color))){
+                    Color = ((BuildableField) fields[i]).getColor();
+                    i = 0;
+                    continue;
+                }
+                    if (fields[i] instanceof OwnableField && fields[i] instanceof BuildableField) {
+                        if ((((BuildableField) fields[i]).getHouses() > 0) && !(fields[i].getName().equals(mortgageChoice)) && Color == ((BuildableField) fields[i]).getColor()) {
+                            hasHouses = true;
+                        }
+                    }}
 
                 for (Field field : fieldProperties.getFields()
                 ) {
-                    if (field instanceof OwnableField) {
-                        if (field.getName().equals(mortgageChoice)) {
+                    if (field instanceof BuildableField) {
+
+                        if (field.getName().equals(mortgageChoice) && !(((BuildableField) field).getHouses() > 0) && !hasHouses) {
                             fieldProperties.setPosition(Count);
                             currentPlayer.playerBalanceUpdate(((OwnableField) field).getMortgageValue());
                             matadorGUI.updateGuiBalance(playerID, currentPlayer.getBalance());
                             matadorGUI.setMortgage(Count, ((OwnableField) field).getMortgageValue());
                             fieldProperties.setOwnedFields(playerID + 10);
 
+                        }
+                        else if (field.getName().equals(mortgageChoice) && (((BuildableField) field).getHouses() > 0) || hasHouses && field.getName().equals(mortgageChoice)) {
+                            matadorGUI.showMessage("Du har huse som du skal sælge før du kan pantsætte");
                         }
                     }
                     Count += 1;

@@ -181,12 +181,16 @@ public class MatadorGui {
     }
 
     public void ShowDie(int DieGui, int Die2Gui) {
-        gui.setDice(DieGui, Die2Gui);
+        gui.setDice(DieGui,0,1,7, Die2Gui,0,2,7);
     }
 
     public void moveCars(int currentPlayer, int currentPosition, int newPosition) {
         fields[currentPosition].setCar(player[currentPlayer], false);
         fields[newPosition].setCar(player[currentPlayer], true);
+    }
+
+    public void removeCar(int currentPlayer, int currentPosition){
+        fields[currentPosition].setCar(player[currentPlayer],false);
     }
 
     public void moveToPrison(int currentPlayer, int currentPosition) {
@@ -211,6 +215,16 @@ public class MatadorGui {
            /* o.setSubText();*/
 
         } else return;
+    }
+
+    public void unsetField(int currentPlayer, int currentField, String price){
+        GUI_Field field = gui.getFields()[currentField];
+        GUI_Ownable o = (GUI_Ownable)field;
+        o.setBorder(Color.black);
+        o.setOwnerName("");
+        o.setSubText(price);
+
+
     }
 
     /*public void RentSubText(int FieldRent){
@@ -242,6 +256,23 @@ public class MatadorGui {
                 return 6;
         }
         return 0;
+    }
+
+    public int getPlayLossActions (String playerName, String[] Options){
+
+        stringChoice = gui.getUserButtonPressed(playerName +", du er løbet tør for penge, vælg en af mulighederne for at fortsætte spillet: ",Options);
+        switch (stringChoice) {
+            case "Sælg bygninger":
+                return 1;
+            case "Giv op":
+                return 2;
+            case "Pantsæt":
+                return 3;
+
+        }
+        return 0;
+
+
     }
 
     public int getBuyField(String fieldName){
@@ -278,13 +309,14 @@ public class MatadorGui {
         }
     }
 
-    public String getAuction(String[] players, String fieldName){
-        stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe " + fieldName +"?","Ja","Nej");
-        if (stringChoice.equals("Ja")){
-            stringChoice = gui.getUserSelection("Vælg hvilken spiller der vil købe "+ fieldName +"? ",players);
-            return stringChoice;
+
+
+    public String getAuction(String fieldName) {
+        stringChoice = gui.getUserButtonPressed("Er der en anden spiller der vil købe " + fieldName + "?", "Ja", "Nej");
+        if (stringChoice.equals("Ja")) {
+            return "Ja";
         }else
-            return null;
+            return "No";
     }
 
 
