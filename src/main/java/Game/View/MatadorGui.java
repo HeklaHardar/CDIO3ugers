@@ -91,7 +91,7 @@ public class MatadorGui {
                         "Street " + i,
                         "Price: " + (i * 50),
                         "This is a street",
-                        "100",
+                        "",
                         Color.RED,
                         Color.BLACK
                 );
@@ -206,14 +206,13 @@ public class MatadorGui {
         gui.showMessage(message);
     }
 
-    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner) {
+    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner, FieldController landOnFieldController) {
         GUI_Field field = gui.getFields()[currentField];
         if (ownable == 1 && owner == 0) {
             GUI_Ownable o = (GUI_Ownable) field;
             o.setBorder(colors[currentPlayer]);
             o.setOwnerName(playerName);
-           /* o.setSubText();*/
-
+            o.setRent(String.valueOf((landOnFieldController.calculateRent(1)))+",00 kr.");
         } else return;
     }
 
@@ -289,13 +288,11 @@ public class MatadorGui {
     }
 
     public void setMortgage(int position, int mortgageValues){
-
         fields[position].setSubText("PANTSAT");
         fields[position].setDescription("Pris: kr. "+ (mortgageValues * 1.1)+",00");
     }
 
     public void UnsetMortgage(int position,FieldController fieldpropertiesUnsetMortgage){
-
         fields[position].setSubText("Leje: " + ((OwnableField)fieldpropertiesUnsetMortgage.getFields()[position]).getRent() + " kr.");
         fields[position].setDescription(fieldTitles[position]);
     }
