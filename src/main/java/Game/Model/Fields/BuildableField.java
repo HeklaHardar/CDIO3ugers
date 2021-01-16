@@ -6,7 +6,7 @@ public class BuildableField extends OwnableField{
 
     public BuildableField(int position) {
         super(position);
-        this.houseCost = fieldProperties.getHouseCosts()[position];
+        this.houseCost = fieldProperties.getHOUSECOSTS()[position];
     }
 
     public int getHouseCost() {
@@ -18,7 +18,7 @@ public class BuildableField extends OwnableField{
     }
 
     public int[][] getRentPrices(){
-        return fieldProperties.getRentPrices();
+        return fieldProperties.getRENTPRICES();
     }
 
     public void buildHouse(){

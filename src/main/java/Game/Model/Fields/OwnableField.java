@@ -9,10 +9,10 @@ public class OwnableField extends Field {
 
     public OwnableField(int position) {
         super(position);
-        value = fieldProperties.getFieldValues()[position];
-        rent = fieldProperties.getRentPrices()[position][0];
-        color = fieldProperties.getFieldColors()[position];
-        mortgageValue = fieldProperties.getMortgageValues()[position];
+        value = fieldProperties.getFIELDVALUES()[position];
+        rent = fieldProperties.getRENTPRICES()[position][0];
+        color = fieldProperties.getFIELDCOLORS()[position];
+        mortgageValue = fieldProperties.getMORTGAGEVALUES()[position];
         ownable = 1;
     }
     public int getOwner() {
