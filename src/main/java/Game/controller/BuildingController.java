@@ -45,7 +45,7 @@ public class BuildingController {
             }
         }
     }
-    public void SellHouses(int playerID){
+    public void     SellHouses(int playerID){
 
         String selection = BuildingGUI.getUserSelection("Vælg hvad du vil sælge", "Rødovrevej", "Hvidovre", "Roskildevej", "Valby  Langgade", "Allégade", "Frederiksberg  Allé",
                 "Bülowsvej", "Gl. Kongevej", "Bernstoffsvej", "Hellerupvej", "Strandvej", "Trianglen", "Østerbro-gade ", "Grønningen",
