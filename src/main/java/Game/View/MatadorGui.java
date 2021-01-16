@@ -206,6 +206,10 @@ public class MatadorGui {
         gui.showMessage(message);
     }
 
+    public void setName (String playerName, int playerID){
+        player[playerID].setName(playerName +" - Udgået fra spillet");
+    }
+
     public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner, FieldController landOnFieldController) {
         GUI_Field field = gui.getFields()[currentField];
         if (ownable == 1 && owner == 0) {

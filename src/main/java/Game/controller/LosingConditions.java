@@ -43,6 +43,8 @@ public class LosingConditions {
 
                         currentPlayer.setInGame(false);
                         losingConditionsGUI.removeCar(playerID, currentPlayer.getCurrentPosition());
+                        losingConditionsGUI.setName(currentPlayer.playerString(), playerID);
+                        losingConditionsGUI.updateGuiBalance(playerID,0);
                         for (Field field : losingController.getFields()
                         ) {
                             if (field instanceof OwnableField) {

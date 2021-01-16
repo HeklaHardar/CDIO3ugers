@@ -62,7 +62,7 @@ public class BuildingController {
                     BuildingGUI.showMessage("Du skal have lige mange huse på grunde af samme farve");
                 }
                 else {
-                    BuildingGUI.showMessage("Du kan ikke bygge her");
+                    BuildingGUI.showMessage("Du kan ikke sælge noget her");
                 }
             }
         }
