@@ -37,7 +37,6 @@ public class Mortgage {
                     if (fieldProperties.getFields()[u] instanceof OwnableField) {
                         if (((OwnableField) fieldProperties.getFields()[u]).getOwner() == playerID + 1) {
                             OwnedFields[Count] = fieldProperties.getFields()[u].getName();
-                            System.out.println(OwnedFields[Count]);
                             Count += 1;
                         }
                     }
@@ -109,7 +108,6 @@ public class Mortgage {
                     if (fieldProperties.getFields()[u] instanceof OwnableField) {
                         if (((OwnableField) fieldProperties.getFields()[u]).getOwner() == playerID + 10) {
                             OwnedFields[Count] = fieldProperties.getFields()[u].getName();
-                            System.out.println(OwnedFields[Count]);
                             Count += 1;
                         }
                     }
