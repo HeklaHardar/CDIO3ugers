@@ -58,4 +58,14 @@ public class TextReader {
     }
 
     public String[] getText(){return Text;}
+
+    public int[] getInts(){
+
+        int size = Text.length;
+        int[] arr = new int[size];
+        for(int i = 0; i<size;i++){
+            arr[i] = Integer.parseInt(Text[i]);
+        }
+        return arr;
+    }
 }

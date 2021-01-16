@@ -15,6 +15,8 @@ public class Game {
     private int balanceid;
     private int finalbalanceid;
     private int round = 0;
+    private int tempID = 20;
+    private int remainingPlayers;
 
     public static void main(String[] args){
         //Instantiating game object
@@ -36,7 +38,6 @@ public class Game {
         PrisonConditions prisonproperties = new PrisonConditions();
         rollOfDices rollCheck = new rollOfDices();
         Mortgage mortgage = new Mortgage();
-        LosingConditions losingConditions = new LosingConditions();
 
         GameStart menu = new GameStart();
         matadorGUI.createGui();
@@ -44,19 +45,35 @@ public class Game {
         FieldController fieldProperties = new FieldController();
         PlayerChoice TurnChoices = new PlayerChoice(fieldProperties);
 
+
         player = new Player[menu.getPlayerAmount()];
         BuildingController buildingController = new BuildingController(matadorGUI,fieldProperties,player);
+        LosingConditions losingConditions = new LosingConditions(matadorGUI,TurnChoices,player,mortgage,fieldProperties, buildingController);
+
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
             player[i] = new Player(menu.playernamesToString()[i],i);
             matadorGUI.guiPlayers(player[i].playerString(), player[i].getBalance(), i);
         }
 
+        remainingPlayers = menu.getPlayerAmount();
         LandOnField landOnField = new LandOnField(matadorGUI, fieldProperties, cards, menu.getPlayerAmount(), player, menu.playernamesToString());
 
         while (!isWinnerWinnerChickenDinner) {
+
             round = round + 1;
             for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
+
+                if(tempID == i){
+                    matadorGUI.showMessage(player[i].playerString() + " du har VUNDET spillet!");
+                }
+
+
+                if(!player[i].isInGame()){
+                    continue;
+                }
+
+
                 //checks if the player is in prison and releases him if he is.
                 if (player[i].isInPrison()) {
                     prisonproperties.Release(player[i], dices, matadorGUI, i);
@@ -100,7 +117,7 @@ public class Game {
 
                 landOnField.FieldPosition(player[i].getCurrentPosition(),player[i],i, dices.getValue());
                 matadorGUI.RentOnField(fieldProperties);
-                losingConditions.CheckPlayerWorth(player[i],matadorGUI,TurnChoices,i,player,mortgage,fieldProperties);
+                losingConditions.CheckPlayerWorth(player[i],i);
 
                 /*if (player[i].getBalance() < 0) {
 
@@ -126,11 +143,15 @@ public class Game {
                     isWinnerWinnerChickenDinner = true;
                     break;
                 }*/
+                if(player[i].isInGame()) {
 
-                if(rollCheck.twoOfTheSame(dices.Die1(), dices.Die2())) {
-                    i = i - 1;
-                    matadorGUI.showMessage("Du slog to ens og får en ekstra tur");
+                    if (rollCheck.twoOfTheSame(dices.Die1(), dices.Die2())) {
+                        i = i - 1;
+                        matadorGUI.showMessage("Du slog to ens og får en ekstra tur");
+                    }
+                    tempID = i;
                 }
+
             }
         }
     }
