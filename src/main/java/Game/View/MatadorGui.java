@@ -272,7 +272,7 @@ public class MatadorGui {
             if (fieldpropertiesRentonField.getFields()[y] instanceof OwnableField && !(fieldpropertiesRentonField.getFields()[y] instanceof Brewery)) {
                 if (((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() < 10 && ((OwnableField) fieldpropertiesRentonField.getFields()[y]).getOwner() != 0) {
                     fieldpropertiesRentonField.setPosition(y);
-                    fields[y].setSubText("Leje: " + ( fieldpropertiesRentonField.calculateRent(1) + " kr."));
+                    fields[y].setSubText("Leje: " + ( fieldpropertiesRentonField.calculateRent(1, false) + " kr."));
                 }
             }
         }

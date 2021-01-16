@@ -32,13 +32,12 @@ public class Cards {
         isSammenskudsgilde = false;
         hasPositionChange = false;
         PrisonChance = false;
-        isChanceCard15or25 = false;                      // added line
     }
 
     public void CardPick() {
 
         //Calls cardPicker.DrawCard for a random int.
-        switch (14) {                      //
+        switch (15) {                      //
             case 1:
                 cardText = TextforCards.getText()[0];
                 PositionChange = 39;
@@ -200,6 +199,10 @@ public class Cards {
 
     public boolean isChanceCard15or25() {
         return isChanceCard15or25;
+    }
+
+    public void setChanceCard15or25(boolean chanceCard15or25) {
+        isChanceCard15or25 = chanceCard15or25;
     }
 
     public int distToNearestShippingLine(int currentPosition) {
