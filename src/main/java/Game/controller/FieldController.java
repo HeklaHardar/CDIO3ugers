@@ -92,6 +92,15 @@ public class FieldController {
         return "notbuilable";
     }
 
+    public void destroyHouses(int buildPosition){
+
+        ((BuildableField) fields[buildPosition]).destroyHouses();
+        ((BuildableField) fields[buildPosition]).setRent(((BuildableField) fields[buildPosition]).getRentPrices()[buildPosition][((BuildableField) fields[buildPosition]).getHouses()]);
+
+
+
+    }
+
     public Field[] getFields() {
         return fields;
     }

@@ -28,4 +28,8 @@ public class BuildableField extends OwnableField {
     public void removeHouse() {
         fieldProperties.removeHouses(position);
     }
+
+    public void destroyHouses(){
+        fieldProperties.destroyHouses(position);
+    }
 }

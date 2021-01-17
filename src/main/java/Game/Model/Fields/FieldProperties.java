@@ -61,6 +61,9 @@ public class FieldProperties {
     public void removeHouses(int position) {
         Houses[position] = Houses[position] - 1;
     }
+    public void destroyHouses(int position){
+        Houses[position] = 0;
+    }
 
     public int[] getHOUSECOSTS() {
         return HOUSECOSTS;
