@@ -1,5 +1,6 @@
 package Game.controller;
 
+import Game.Model.Fields.BuildableField;
 import Game.Model.Fields.Field;
 import Game.Model.Fields.OwnableField;
 import Game.Model.Player;
@@ -46,8 +47,14 @@ public class LosingConditions {
                         if (field instanceof OwnableField) {
                             if (((OwnableField) field).getOwner() == playerID + 1 || ((OwnableField) field).getOwner() == playerID + 10) {
 
+
+                                if(field instanceof BuildableField) {
+                                    losingController.destroyHouses(Counter);
+                                    losingConditionsGUI.sellHouse(field.getPosition(), 0, ((BuildableField) field).getOwner(), playerID + 1);
+                                }
                                 ((OwnableField) field).setOwner(0);
                                 losingConditionsGUI.unsetField(Counter, String.valueOf(((OwnableField) field).getValue()), field.isOwnable());
+
                             }
                         }
                         Counter++;

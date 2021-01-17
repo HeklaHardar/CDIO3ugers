@@ -174,6 +174,12 @@ public class MatadorGui {
 
     }
 
+/*    public int getMoveDebug(){
+
+        return gui.getUserInteger("Hvor mange felter vil du rykke?");
+
+    }*/
+
     public void ShowDie(int DieGui, int Die2Gui) {
         gui.setDice(DieGui, 0, 1, 7, Die2Gui, 0, 2, 7);
     }
