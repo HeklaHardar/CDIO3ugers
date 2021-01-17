@@ -235,12 +235,16 @@ public class MatadorGui {
         gui.displayChanceCard(cardText);
     }
 
+    public void drawCardButton(){
+        gui.getUserButtonPressed("Du er landet på et chancekort felt","Træk chancekort");
+    }
+
     public String getUserSelection(String msg, String... options) {
         return gui.getUserSelection(msg, options);
     }
 
     public int getPlayerAction(String playerName, String[] Options) {
-        stringChoice = gui.getUserButtonPressed("Det er spiller " + playerName + " s tur.", Options);
+        stringChoice = gui.getUserButtonPressed("Det er " + playerName + "'s tur.", Options);
         switch (stringChoice) {
             case "Slå med terningerne":
                 return 1;

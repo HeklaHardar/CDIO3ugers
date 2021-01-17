@@ -97,7 +97,7 @@ public class Cards {
             case 25:
                 cardText = TextforCards.getText()[24];
                 isChanceCard15or25 = true;
-                hasPositionChange = true;                    // added line
+                hasPositionChange = true;
                 break;
             case 16:
                 cardText = TextforCards.getText()[15];

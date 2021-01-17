@@ -40,7 +40,6 @@ public class LandOnNotOwned {
                             break;
                         } else if (s.playerString().toLowerCase().equals(playerName.toLowerCase()) && s.getBalance() < properties.getValue() && s.isInGame()) {
                             matadorGUI.showMessage(s.playerString() + ", du har ikke nok penge til at købe feltet.");
-
                         } else if (s.playerString().toLowerCase().equals(playerName.toLowerCase()) && !s.isInGame()) {
                             matadorGUI.showMessage(s.playerString() + ", du er ikke med i spillet mere");
                         }

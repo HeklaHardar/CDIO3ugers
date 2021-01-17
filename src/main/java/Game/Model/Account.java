@@ -6,7 +6,7 @@ public class Account {
     private int totalWorth;
 
     public Account() {
-        points = 1500;
+        points =1500;
     }
 
     // Updates player score

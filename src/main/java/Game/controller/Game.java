@@ -23,7 +23,7 @@ public class Game {
         Cards cards = new Cards();
         MatadorGui matadorGUI = new MatadorGui();
         Dices dices = new Dices();
-        PrisonConditions prisonproperties = new PrisonConditions();
+        PrisonConditions prisonproperties = new PrisonConditions(matadorGUI,dices);
         rollOfDices rollCheck = new rollOfDices();
         Mortgage mortgage = new Mortgage();
 
@@ -36,6 +36,8 @@ public class Game {
         player = new Player[menu.getPlayerAmount()];
         BuildingController buildingController = new BuildingController(matadorGUI, fieldProperties, player);
         LosingConditions losingConditions = new LosingConditions(matadorGUI, TurnChoices, player, mortgage, fieldProperties, buildingController);
+
+
 
         for (int i = 0; i <= menu.getPlayerAmount() - 1; i++) {
             player[i] = new Player(menu.playernamesToString()[i], i);
@@ -68,34 +70,42 @@ public class Game {
                     }
                 }
 
-                //checks if the player is in prison and releases him if he is.
+                //checks if the player is in prison and provides him options for release
                 if (player[i].isInPrison()) {
-                    prisonproperties.Release(player[i], dices, matadorGUI, i);
+                    prisonproperties.Release(player[i], i);
                     if (player[i].isInPrison()) {
                         player[i].InPrison();
                         continue;
                     }
-                }
-                while (true) {
-                    int playerAction = matadorGUI.getPlayerAction(player[i].playerString(), TurnChoices.PlayerChoices(i, player[i], player));
-
-                    if (playerAction == 1) {
-                        break;
-                    }
-                    if (playerAction == 3) {
-                        mortgage.SellMortgage(matadorGUI, fieldProperties, player[i], i);
-                    }
-                    if (playerAction == 4) {
-                        mortgage.BuyMortgage(matadorGUI, fieldProperties, player[i], i);
-
-                    }
-                    if (playerAction == 2) {
-                        buildingController.BuildingChoice(i);
-
+                    if(prisonproperties.isPayRelease()){
+                        losingConditions.CheckPlayerWorth(player[i],i);
+                        i-=1;
+                        continue;
                     }
                 }
-                dices.roll();
-                matadorGUI.ShowDie(dices.Die1(), dices.Die2());
+                else {
+                    while (true) {
+                        int playerAction = matadorGUI.getPlayerAction(player[i].playerString(), TurnChoices.PlayerChoices(i, player[i], player));
+
+                        if (playerAction == 1) {
+                            break;
+                        }
+                        if (playerAction == 3) {
+                            mortgage.SellMortgage(matadorGUI, fieldProperties, player[i], i);
+                        }
+                        if (playerAction == 4) {
+                            mortgage.BuyMortgage(matadorGUI, fieldProperties, player[i], i);
+
+                        }
+                        if (playerAction == 2) {
+                            buildingController.BuildingChoice(i);
+
+                        }
+                    }
+                    dices.roll();
+                    matadorGUI.ShowDie(dices.Die1(), dices.Die2());
+
+                }
 
                 if (rollCheck.twoOfTheSameThreeTimes(dices.Die1(), dices.Die2(), i, player[i], matadorGUI)) {
                     matadorGUI.showMessage("Du slog to ens tre gange i træk, og rykker til gå i fængsel");
@@ -104,7 +114,7 @@ public class Game {
                     continue;
                 }
                 //Moves the car on the GUI and checks if player is over start.
-                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(matadorGUI.getMoveDebug()));
+                matadorGUI.moveCars(i, player[i].getCurrentPosition(), player[i].updatePosition(dices.getValue()));
                 matadorGUI.updateGuiBalance(i, player[i].getBalance());
                 fieldProperties.setPosition(player[i].getCurrentPosition());
 
