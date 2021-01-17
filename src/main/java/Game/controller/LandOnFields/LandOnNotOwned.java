@@ -17,7 +17,7 @@ public class LandOnNotOwned {
 
             if (decision == 1 && currentPlayer.getBalance() >= properties.getValue()) {
                 currentPlayer.playerBalanceUpdate(-properties.getValue());
-                matadorGUI.landOnField(playerID, currentPlayer.getCurrentPosition(), currentPlayer.playerString(), properties.isOwnable(), ((OwnableField) properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner(), properties);
+                matadorGUI.landOnField(playerID, currentPlayer.getCurrentPosition(), currentPlayer.playerString(), properties.isOwnable(), ((OwnableField) properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner());
                 properties.setOwnedFields(playerID + 1);
                 currentPlayer.playerWorthUpdate(properties.getValue());
                 break;
@@ -33,7 +33,7 @@ public class LandOnNotOwned {
                     ) {
                         if (s.playerString().toLowerCase().equals(playerName.toLowerCase()) && s.getBalance() >= properties.getValue()) {
                             s.playerBalanceUpdate(-properties.getValue());
-                            matadorGUI.landOnField(s.getPlayerID(), currentPlayer.getCurrentPosition(), s.playerString(), properties.isOwnable(), ((OwnableField) properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner(), properties);
+                            matadorGUI.landOnField(s.getPlayerID(), currentPlayer.getCurrentPosition(), s.playerString(), properties.isOwnable(), ((OwnableField) properties.getFields()[currentPlayer.getCurrentPosition()]).getOwner());
                             properties.setOwnedFields(s.getPlayerID() + 1);
                             matadorGUI.updateGuiBalance(s.getPlayerID(), s.getBalance());
                             s.playerWorthUpdate(properties.getValue());

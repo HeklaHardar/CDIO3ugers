@@ -46,6 +46,8 @@ public class Game {
 
         remainingPlayers = menu.getPlayerAmount();
         LandOnField landOnField = new LandOnField(matadorGUI, fieldProperties, cards, menu.getPlayerAmount(), player, menu.playernamesToString());
+        FieldTrading fieldTrading = new FieldTrading(matadorGUI,fieldProperties,player);
+
 
         while (!isWinnerWinnerChickenDinner) {
 
@@ -99,7 +101,10 @@ public class Game {
                         }
                         if (playerAction == 2) {
                             buildingController.BuildingChoice(i);
-
+                        }
+                        if(playerAction == 7) {
+                            fieldTrading.Trade(i, player[i]);
+                            continue;
                         }
                     }
                     dices.roll();

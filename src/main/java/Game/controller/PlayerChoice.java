@@ -40,17 +40,17 @@ public class PlayerChoice {
             }
         }
         if (hasOwnedAllFields && hasOwnedMortgageField && hasOwnedField) {
-            return Options = new String[]{"Pantsæt", "Køb pantsætning tilbage", "Bygninger", "Slå med terningerne"};
+            return Options = new String[]{"Pantsæt", "Køb pantsætning tilbage", "Bygninger", "Sælg grund til en anden spiller", "Slå med terningerne"};
         } else if (hasOwnedMortgageField && hasOwnedField) {
-            return Options = new String[]{"Pantsæt", "Køb pantsætning tilbage", "Slå med terningerne"};
+            return Options = new String[]{"Pantsæt", "Køb pantsætning tilbage", "Sælg grund til en anden spiller", "Slå med terningerne"};
         } else if (hasOwnedAllFields && hasOwnedField) {
-            return Options = new String[]{"Pantsæt", "Bygninger", "Slå med terningerne"};
+            return Options = new String[]{"Pantsæt", "Bygninger", "Sælg grund til en anden spiller", "Slå med terningerne"};
         } else if (hasOwnedMortgageField) {
             return Options = new String[]{"Køb pantsætning tilbage", "Slå med terningerne"};
         } else if (hasOwnedAllFields) {
-            return Options = new String[]{"Pantsæt", "Bygninger", "Slå med terningerne"};
+            return Options = new String[]{"Pantsæt", "Bygninger", "Sælg grund til en anden spiller", "Slå med terningerne"};
         } else if (hasOwnedField) {
-            return Options = new String[]{"Pantsæt", "Slå med terningerne"};
+            return Options = new String[]{"Pantsæt", "Sælg grund til en anden spiller", "Slå med terningerne"};
         } else {
             return Options = new String[]{"Slå med terningerne"};
         }

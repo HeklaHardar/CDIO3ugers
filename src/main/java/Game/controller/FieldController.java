@@ -80,7 +80,7 @@ public class FieldController {
                 }
             }
             if (colorCount == sameHouses) {
-                player.playerBalanceUpdate(((BuildableField) fields[buildposition]).getHouseCost());
+                player.playerBalanceUpdate(((BuildableField) fields[buildposition]).getHouseCost()/2);
                 player.playerWorthUpdate(-((BuildableField) fields[buildposition]).getHouseCost());
                 ((BuildableField) fields[buildposition]).removeHouse();
                 ((BuildableField) fields[buildposition]).setRent(((BuildableField) fields[buildposition]).getRentPrices()[buildposition][((BuildableField) fields[buildposition]).getHouses()]);
@@ -235,5 +235,11 @@ public class FieldController {
                 ((OwnableField) fields[position]).setOwner(playerNumber);
             }
         }
+    }
+
+    public void tradeOwnedField(int playerNumber){
+
+        ((OwnableField) fields[position]).setOwner(playerNumber);
+
     }
 }

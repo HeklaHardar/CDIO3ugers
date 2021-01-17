@@ -174,12 +174,6 @@ public class MatadorGui {
 
     }
 
-    public int getMoveDebug() {
-
-        return gui.getUserInteger("Hvor mange felter vil du rykke?");
-
-    }
-
     public void ShowDie(int DieGui, int Die2Gui) {
         gui.setDice(DieGui, 0, 1, 7, Die2Gui, 0, 2, 7);
     }
@@ -210,7 +204,7 @@ public class MatadorGui {
         player[playerID].setName(playerName + " - Udgået fra spillet");
     }
 
-    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner, FieldController landOnFieldController) {
+    public void landOnField(int currentPlayer, int currentField, String playerName, int ownable, int owner) {
         GUI_Field field = gui.getFields()[currentField];
         if (ownable == 1 && owner == 0) {
             GUI_Ownable o = (GUI_Ownable) field;
@@ -218,6 +212,15 @@ public class MatadorGui {
             o.setOwnerName(playerName);
             o.setRent("");
         } else return;
+    }
+
+    public void tradeField(int currentPlayer, int currentField, String playerName,int ownable){
+        GUI_Field field = gui.getFields()[currentField];
+        if(ownable == 1) {
+            GUI_Ownable o = (GUI_Ownable) field;
+            o.setBorder(colors[currentPlayer]);
+            o.setOwnerName(playerName);
+        }
     }
 
     public void unsetField(int currentField, String price, int ownable) {
@@ -258,6 +261,8 @@ public class MatadorGui {
                 return 5;
             case "Byg hus/hotel":
                 return 6;
+            case "Sælg grund til en anden spiller":
+                return 7;
         }
         return 0;
     }
