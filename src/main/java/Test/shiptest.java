@@ -1,4 +1,4 @@
-/*
+
 package Test;
 
 import Game.controller.FieldController;
@@ -28,8 +28,9 @@ class shiptest {
         field.setPosition(35);
         field.setOwnedFields(1);
         field.setPosition(5);
-        field.countShips();
+        field.countShips(false);
+        System.out.println(field.calculateRent(4,false));
 
 
     }
-}*/
+}
