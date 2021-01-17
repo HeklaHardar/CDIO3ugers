@@ -11,7 +11,10 @@ public class Die {
     // Determines the maximum value of the die and rolls it
     public Die(int maximum) {
         max = maximum + 1;
-        roll();
+    }
+
+    public void setValue(int value) {
+        Value = value;
     }
 
     public int getValue() {
