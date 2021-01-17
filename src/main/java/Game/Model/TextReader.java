@@ -1,9 +1,8 @@
 package Game.Model;
 
+
 import java.io.*;
 import java.nio.file.FileSystemNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class TextReader {
 
@@ -14,26 +13,18 @@ public class TextReader {
     //Provide FileName to find the files path **FILE MUST BE IN THE TextFiles FOLDER**
     public TextReader(String FileName) {
 
-        //Finds the filepath from the folders it is held within, and its name
-        try {
-
-            Path path = Paths.get("", "src", "main", "resources", FileName);
-
-
-         //   Path path = Paths.get(FileName);
-
-            filePath = String.valueOf(path.toAbsolutePath());
-        } catch (FileSystemNotFoundException e) {
-            e.printStackTrace();
-        }
 
         BufferedReader reader1;
         BufferedReader reader2;
         int counter = 1;
 
         try {
+
+
             //Reads the file and checks how many lines are present to make an array appropriate for the file length
-            reader1 = new BufferedReader(new FileReader((String.valueOf(filePath))));
+            // reader1 = new BufferedReader(new FileReader((String.valueOf(filePath))));
+            reader1 = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/resources/CardText.txt")));
+
             String Line = "";
             while (Line != null) {
                 Line = reader1.readLine();
@@ -45,7 +36,8 @@ public class TextReader {
             String[] textLines = new String[Counter];
 
             //Reads the file and puts each line into it's own place in the array
-            reader2 = new BufferedReader(new FileReader(String.valueOf(filePath)));
+            //reader2 = new BufferedReader(new FileReader(String.valueOf(filePath)));
+            reader2 = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/resources/CardText.txt")));
             String TextLine = reader2.readLine();
             textLines[0] = TextLine;
             while (TextLine != null) {

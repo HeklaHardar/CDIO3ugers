@@ -1,11 +1,8 @@
 package Test;
 
 import Game.Model.Fields.BuildableField;
-import Game.Model.Fields.OwnableField;
 import Game.Model.Player;
 import Game.controller.FieldController;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
