@@ -107,7 +107,7 @@ public class FieldTrading {
                     }
                 }
                 if (field.getName().equals(tradeChoice) && (field instanceof ShippingLine || field instanceof Brewery)) {
-                    playerChoice = matadorGUI.gui.getUserString("Indtast navnet på spilleren, som vil købe feltet: ");
+                    playerChoice = matadorGUI.gui.getUserString("Prisen på feltet er: kr. " + ((OwnableField) field).getValue() + ". Indtast navnet på spilleren, som vil købe feltet: ");
 
                     for (Player player : player) {
                         if (playerChoice.toLowerCase().equals(player.playerString().toLowerCase()) && player.getBalance() >= ((OwnableField) field).getValue()) {
