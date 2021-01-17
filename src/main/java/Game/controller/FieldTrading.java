@@ -78,7 +78,7 @@ public class FieldTrading {
             ) {
                 if (field instanceof BuildableField) {
                     if (field.getName().equals(tradeChoice) && !(((BuildableField) field).getHouses() > 0) && !hasHouses) {
-                        playerChoice = matadorGUI.gui.getUserString("Prisen på feltet er: kr. " + ((BuildableField) field).getValue() + ". Indtast navnet på spilleren, som vil købe feltet: " );
+                        playerChoice = matadorGUI.gui.getUserString("Prisen på feltet er: kr. " + ((BuildableField) field).getValue() + ". Indtast navnet på spilleren, som vil købe feltet: ");
                         for (Player player : player
                         ) {
                             if (playerChoice.toLowerCase().equals(player.playerString().toLowerCase()) && player.getBalance() >= ((BuildableField) field).getValue()) {
@@ -100,10 +100,10 @@ public class FieldTrading {
                                 matadorGUI.tradeField(player.getPlayerID(), count, player.playerString(), fieldProperties.isOwnable());
                                 matadorGUI.RentOnField(fieldProperties);
 
-                            } else if (field.getName().equals(tradeChoice) && (((BuildableField) field).getHouses() > 0) || hasHouses && field.getName().equals(tradeChoice)) {
-                                matadorGUI.showMessage("Du har huse som du skal sælge før du kan sælge denne grund");
                             }
                         }
+                    } else if (field.getName().equals(tradeChoice) && (((BuildableField) field).getHouses() > 0) || hasHouses && field.getName().equals(tradeChoice)) {
+                        matadorGUI.showMessage("Du har huse som du skal sælge før du kan sælge denne grund");
                     }
                 }
                 if (field.getName().equals(tradeChoice) && (field instanceof ShippingLine || field instanceof Brewery)) {
@@ -132,10 +132,6 @@ public class FieldTrading {
         }
 
     }
-
-
-
-
 }
 
 

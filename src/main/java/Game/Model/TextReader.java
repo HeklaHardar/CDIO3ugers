@@ -16,7 +16,12 @@ public class TextReader {
 
         //Finds the filepath from the folders it is held within, and its name
         try {
+
             Path path = Paths.get("", "src", "main", "resources", FileName);
+
+
+         //   Path path = Paths.get(FileName);
+
             filePath = String.valueOf(path.toAbsolutePath());
         } catch (FileSystemNotFoundException e) {
             e.printStackTrace();
