@@ -12,7 +12,6 @@ public class Cards {
     private boolean isSammenskudsgilde = false;
     private int PositionChange;
     private boolean hasPositionChange = false;
-    private boolean Matadorlegat = false;
     private boolean isChanceCard15or25 = false;
 
     CardPicker cardPicker = new CardPicker();
@@ -23,7 +22,7 @@ public class Cards {
         cardPicker.CardScrambler();
     }
 
-    //Resets booleans for all the cards, so that they dont interfeer with one another
+    //Resets booleans for all the cards, so that they dont interfere with one another
     public void resetStats() {
         hasExtraMoves = false;
 
@@ -76,14 +75,6 @@ public class Cards {
                 cardText = TextforCards.getText()[9];
                 PositionChange = 0;
                 hasPositionChange = true;
-                break;
-            case 11:
-                // HUSE OG HOTELLER SKAL LAVE FØRST
-                cardText = TextforCards.getText()[10];
-                break;
-            case 12:
-                // HUSE OG HOTELLER SKAL LAVE FØRST
-                cardText = TextforCards.getText()[11];
                 break;
             case 13:
                 cardText = TextforCards.getText()[12];
